@@ -1,0 +1,28 @@
+# Violet Figueroa
+{{ basics.location }} | {{ basics.phone }} | {{ basics.email }}
+[LinkedIn]({{ basics.linkedin }}) | [GitHub]({{ basics.github }}) | [Portfolio]({{ basics.portfolio }})
+
+---
+
+**Date:** {{ date }}
+
+**Re:** Application for {{ role_title }} Position
+
+Dear Hiring Manager,
+
+I am writing to express my strong interest in the {{ role_title }} position. As a {{ basics.label }} with a background in {{ background_context }}, I am excited about the opportunity to contribute to your team's security posture.
+
+{{ summary }}
+
+In my recent work, I have focused heavily on practical, hands-on security operations:
+{% for project in projects[:2] %}
+- **{{ project.title }}:** {{ project.bullets[0] }}
+{% endfor %}
+
+My technical foundation in {{ skills.security_tools[:3]|join(', ') }} and {{ skills.programming[:2]|join(', ') }} allows me to bridge the gap between theoretical security concepts and real-world implementation. I am particularly drawn to this role because it aligns with my passion for proactive defense and continuous improvement.
+
+I would welcome the opportunity to discuss how my skills and experience align with your needs. Thank you for your time and consideration.
+
+Sincerely,
+
+Violet Figueroa

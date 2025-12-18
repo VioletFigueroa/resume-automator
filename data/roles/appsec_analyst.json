@@ -1,0 +1,12 @@
+{
+  "role_title": "Application Security Analyst",
+  "summary_type": "appsec",
+  "project_ids": [
+    "tinyapp",
+    "lightbnb",
+    "tweeter",
+    "p6",
+    "p3",
+    "perplexport"
+  ]
+}

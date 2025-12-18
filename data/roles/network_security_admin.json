@@ -1,0 +1,11 @@
+{
+  "role_title": "Network Security Administrator",
+  "summary_type": "general",
+  "project_ids": [
+    "p1",
+    "p11",
+    "p8",
+    "homelab",
+    "p3"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "role_title": "Penetration Tester",
+  "summary_type": "general",
+  "project_ids": [
+    "p6",
+    "p2",
+    "p1",
+    "capstone",
+    "tinyapp"
+  ]
+}

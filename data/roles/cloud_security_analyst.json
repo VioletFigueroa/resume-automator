@@ -1,0 +1,11 @@
+{
+  "role_title": "Cloud Security Analyst",
+  "summary_type": "general",
+  "project_ids": [
+    "homelab",
+    "p11",
+    "p1",
+    "p8",
+    "tinyapp"
+  ]
+}

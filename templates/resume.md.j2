@@ -1,0 +1,46 @@
+# {{ basics.name }}
+**{{ basics.label }}**
+{{ basics.location }} | {{ basics.phone }} | {{ basics.email }}
+[LinkedIn]({{ basics.linkedin }}) | [GitHub]({{ basics.github }}) | [Portfolio]({{ basics.portfolio }})
+
+---
+
+## Professional Summary
+{{ summary }}
+
+## Technical Skills
+{% for category, skills in skills.items() %}
+**{{ category|title }}:** {{ skills|join(', ') }}
+{% endfor %}
+
+## Work Experience
+{% for job in experience %}
+### {{ job.role }} | {{ job.company }}
+*{{ job.location }} | {{ job.date }}*
+{{ job.summary }}
+{% for bullet in job.bullets %}
+- {{ bullet }}
+{% endfor %}
+{% endfor %}
+
+## Projects
+{% for project in projects %}
+### {{ project.title }} | *{{ project.date or project.context }}*
+{% for bullet in project.bullets %}
+- {{ bullet }}
+{% endfor %}
+{% endfor %}
+
+## Education
+{% for edu in education %}
+### {{ edu.program }} | {{ edu.institution }}
+*{{ edu.date }}*
+{% for bullet in edu.bullets %}
+- {{ bullet }}
+{% endfor %}
+{% endfor %}
+
+## Certifications
+{% for cert in certifications %}
+- {{ cert }}
+{% endfor %}
