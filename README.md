@@ -17,19 +17,28 @@ A Python-based tool to generate tailored resumes and cover letters from a master
     sudo apt-get install pandoc texlive-latex-base texlive-fonts-recommended texlive-extra-utils texlive-latex-extra
     ```
 
-2.  **Run:**
+2.  **Personalize (Optional):**
+    To use your own data without committing it, create a `private/` folder and add your `master_profile.json` there. The script will prioritize this file over the example data.
+    ```bash
+    mkdir private
+    cp data/master_profile.json private/master_profile.json
+    # Edit private/master_profile.json with your real details
+    ```
+
+3.  **Run:**
     ```bash
     python3 src/generate.py
     ```
 
-3.  **Output:**
+4.  **Output:**
     Check the `output/` directory for generated files.
 
 ## Directory Structure
-- `data/`: Contains `master_profile.json` and `roles/` configurations.
+- `data/`: Contains example `master_profile.json` and `roles/` configurations.
+- `private/`: (Ignored by Git) Place your real `master_profile.json` here.
 - `templates/`: Jinja2 templates for resumes and cover letters.
 - `src/`: Python source code.
-- `output/`: Generated artifacts.
+- `output/`: (Ignored by Git) Generated artifacts.
 
 ## Author
 Violet Figueroa

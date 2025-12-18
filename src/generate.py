@@ -27,7 +27,14 @@ def convert_to_pdf(md_file):
 
 def generate_resume(role_config_path=None):
     # 1. Load Master Data
-    master_data = load_json(os.path.join(DATA_DIR, 'master_profile.json'))
+    # Check for private data first, otherwise use example data
+    private_data_path = os.path.join('private', 'master_profile.json')
+    if os.path.exists(private_data_path):
+        print(f"Using private data from {private_data_path}")
+        master_data = load_json(private_data_path)
+    else:
+        print(f"Using example data from {os.path.join(DATA_DIR, 'master_profile.json')}")
+        master_data = load_json(os.path.join(DATA_DIR, 'master_profile.json'))
     
     # 2. Load Role Config (if provided)
     role_config = {}
