@@ -1,34 +1,116 @@
 import json
 import os
 import subprocess
+import argparse
+import sys
 from datetime import date
+from typing import Dict, Any, Optional
 from jinja2 import Environment, FileSystemLoader
 
 # Configuration
 DATA_DIR = 'data'
 TEMPLATE_DIR = 'templates'
 OUTPUT_DIR = 'output'
+PRIVATE_DIR = 'private'
 
-def load_json(filepath):
-    with open(filepath, 'r') as f:
-        return json.load(f)
+def load_json(filepath: str) -> Dict[str, Any]:
+    """
+    Loads JSON data from a file.
+    
+    Args:
+        filepath (str): Path to the JSON file.
+        
+    Returns:
+        dict: The loaded JSON data, or an empty dict if loading fails.
+    """
+    if not os.path.exists(filepath):
+        print(f"Warning: File not found at {filepath}")
+        return {}
+        
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except json.JSONDecodeError as e:
+        print(f"Error: Invalid JSON in {filepath}: {e}")
+        return {}
+    except Exception as e:
+        print(f"Error reading {filepath}: {e}")
+        return {}
 
-def convert_to_pdf(md_file):
+def convert_to_pdf(md_file: str) -> None:
+    """
+    Converts a Markdown file to PDF using pandoc.
+    
+    Args:
+        md_file (str): Path to the Markdown file.
+    """
     pdf_file = md_file.replace('.md', '.pdf')
     try:
         # Basic pandoc conversion
         # Using -V geometry:margin=1in for better margins
-        subprocess.run(['pandoc', md_file, '-o', pdf_file, '-V', 'geometry:margin=1in'], check=True)
-        print(f"Generated PDF: {pdf_file}")
+        subprocess.run(
+            ['pandoc', md_file, '-o', pdf_file, '-V', 'geometry:margin=1in'], 
+            check=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE
+        )
+        print(f"  [PDF] Generated: {pdf_file}")
     except subprocess.CalledProcessError:
-        print(f"Failed to convert {md_file} to PDF. Ensure pandoc is installed.")
+        print(f"  [PDF] Failed to convert {md_file}. Ensure pandoc is installed.")
     except FileNotFoundError:
-        print("Pandoc not found. Skipping PDF conversion.")
+        print("  [PDF] Pandoc not found. Skipping PDF conversion.")
 
-def generate_resume(role_config_path=None):
+def tailor_data(master: Dict[str, Any], config: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Filters and sorts the master data based on the role configuration.
+    
+    Args:
+        master (dict): The master profile data.
+        config (dict): The role-specific configuration.
+        
+    Returns:
+        dict: A new dictionary with tailored data.
+    """
+    tailored = master.copy()
+    
+    # 1. Set Label/Title
+    if 'role_title' in config:
+        tailored['basics']['label'] = config['role_title']
+        
+    # 2. Select Summary
+    summary_key = config.get('summary_type', 'general')
+    tailored['summary'] = master['summaries'].get(summary_key, master['summaries']['general'])
+    
+    # 3. Filter Projects
+    # Combine all projects into a flat list for easier filtering
+    all_projects = (
+        master['projects'].get('cyber', []) + 
+        master['projects'].get('web', []) + 
+        master['projects'].get('personal', [])
+    )
+    
+    if 'project_ids' in config:
+        # Filter by ID and preserve order defined in config
+        tailored['projects'] = [
+            p for pid in config['project_ids'] 
+            for p in all_projects if p.get('id') == pid
+        ]
+    else:
+        # Default: Show top 5 cyber projects if no config provided
+        tailored['projects'] = master['projects'].get('cyber', [])[:5]
+
+    return tailored
+
+def generate_resume(role_config_path: Optional[str] = None) -> None:
+    """
+    Generates a resume and cover letter based on the provided role configuration.
+    
+    Args:
+        role_config_path (str, optional): Path to the role configuration JSON file.
+    """
     # 1. Load Master Data
     # Check for private data first, otherwise use example data
-    private_data_path = os.path.join('private', 'master_profile.json')
+    private_data_path = os.path.join(PRIVATE_DIR, 'master_profile.json')
     if os.path.exists(private_data_path):
         print(f"Using private data from {private_data_path}")
         master_data = load_json(private_data_path)
@@ -36,26 +118,39 @@ def generate_resume(role_config_path=None):
         print(f"Using example data from {os.path.join(DATA_DIR, 'master_profile.json')}")
         master_data = load_json(os.path.join(DATA_DIR, 'master_profile.json'))
     
+    if not master_data:
+        print("Error: Could not load master profile data. Aborting.")
+        return
+
     # 2. Load Role Config (if provided)
     role_config = {}
     if role_config_path:
         role_config = load_json(role_config_path)
+        if not role_config:
+             print(f"Error: Could not load role config from {role_config_path}. Skipping.")
+             return
     
     # 3. Tailor Data
     context = tailor_data(master_data, role_config)
     
     # 4. Render Resume Template
     env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))
-    resume_template = env.get_template('resume.md.j2')
-    resume_content = resume_template.render(context)
+    try:
+        resume_template = env.get_template('resume.md.j2')
+        resume_content = resume_template.render(context)
+    except Exception as e:
+        print(f"Error rendering resume template: {e}")
+        return
     
     # 5. Save Resume Output
     role_name = role_config.get('role_title', 'General').replace(' ', '_')
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    
     resume_file = os.path.join(OUTPUT_DIR, f'Resume_{role_name}.md')
-    with open(resume_file, 'w') as f:
+    with open(resume_file, 'w', encoding='utf-8') as f:
         f.write(resume_content)
     
-    print(f"Generated resume: {resume_file}")
+    print(f"Generated Resume: {resume_file}")
     convert_to_pdf(resume_file)
 
     # 6. Render Cover Letter Template (if role specific)
@@ -72,55 +167,51 @@ def generate_resume(role_config_path=None):
         else:
             context['background_context'] = "incident response and vulnerability management"
 
-        cl_template = env.get_template('cover_letter.md.j2')
-        cl_content = cl_template.render(context)
-        
-        cl_file = os.path.join(OUTPUT_DIR, f'Cover_Letter_{role_name}.md')
-        with open(cl_file, 'w') as f:
-            f.write(cl_content)
-        print(f"Generated cover letter: {cl_file}")
-        convert_to_pdf(cl_file)
+        try:
+            cl_template = env.get_template('cover_letter.md.j2')
+            cl_content = cl_template.render(context)
+            
+            cl_file = os.path.join(OUTPUT_DIR, f'Cover_Letter_{role_name}.md')
+            with open(cl_file, 'w', encoding='utf-8') as f:
+                f.write(cl_content)
+            print(f"Generated Cover Letter: {cl_file}")
+            convert_to_pdf(cl_file)
+        except Exception as e:
+            print(f"Error rendering cover letter template: {e}")
 
-def tailor_data(master, config):
-    """
-    Filters and sorts the master data based on the role configuration.
-    """
-    tailored = master.copy()
-    
-    # 1. Set Label/Title
-    if 'role_title' in config:
-        tailored['basics']['label'] = config['role_title']
-        
-    # 2. Select Summary
-    summary_key = config.get('summary_type', 'general')
-    tailored['summary'] = master['summaries'].get(summary_key, master['summaries']['general'])
-    
-    # 3. Filter Projects
-    # Combine all projects into a flat list for easier filtering
-    all_projects = master['projects']['cyber'] + master['projects']['web'] + master['projects']['personal']
-    
-    if 'project_ids' in config:
-        # Filter by ID and preserve order defined in config
-        tailored['projects'] = [p for pid in config['project_ids'] for p in all_projects if p.get('id') == pid]
+def main():
+    parser = argparse.ArgumentParser(description="Generate tailored resumes and cover letters.")
+    parser.add_argument('--role', help="Generate for a specific role configuration file (e.g., 'soc_analyst.json').")
+    args = parser.parse_args()
+
+    if args.role:
+        # Generate for specific role
+        # Check if the user provided a full path or just a filename
+        if os.path.exists(args.role):
+            config_path = args.role
+        else:
+            config_path = os.path.join(DATA_DIR, 'roles', args.role)
+            
+        if os.path.exists(config_path):
+            print(f"Generating resume for config: {config_path}...")
+            generate_resume(config_path)
+        else:
+            print(f"Error: Role configuration file '{args.role}' not found.")
     else:
-        # Default: Show top 5 cyber projects
-        tailored['projects'] = master['projects']['cyber'][:5]
+        # 1. Generate General Resume
+        print("--- Generating General Resume ---")
+        generate_resume()
 
-    # 4. Reorder Skills (Optional - simple implementation)
-    # Could be expanded to filter specific skills
-    
-    return tailored
+        # 2. Generate Tailored Resumes from roles directory
+        roles_dir = os.path.join(DATA_DIR, 'roles')
+        if os.path.exists(roles_dir):
+            print("\n--- Generating Tailored Resumes ---")
+            for filename in os.listdir(roles_dir):
+                if filename.endswith('.json'):
+                    config_path = os.path.join(roles_dir, filename)
+                    print(f"Processing: {filename}")
+                    generate_resume(config_path)
+                    print("-" * 30)
 
 if __name__ == "__main__":
-    # 1. Generate General Resume
-    print("Generating General Resume...")
-    generate_resume()
-
-    # 2. Generate Tailored Resumes from roles directory
-    roles_dir = os.path.join(DATA_DIR, 'roles')
-    if os.path.exists(roles_dir):
-        for filename in os.listdir(roles_dir):
-            if filename.endswith('.json'):
-                config_path = os.path.join(roles_dir, filename)
-                print(f"Generating resume for config: {filename}...")
-                generate_resume(config_path)
+    main()
