@@ -60,18 +60,18 @@ def convert_to_pdf(md_file: str) -> None:
     except FileNotFoundError:
         print("  [PDF] Pandoc not found. Skipping PDF conversion.")
 
-def tailor_data(master: Dict[str, Any], config: Dict[str, Any]) -> Dict[str, Any]:
+def tailor_data(profile_data: Dict[str, Any], config: Dict[str, Any]) -> Dict[str, Any]:
     """
-    Filters and sorts the master data based on the role configuration.
+    Filters and sorts the profile data based on the role configuration.
     
     Args:
-        master (dict): The master profile data.
+        profile_data (dict): The main profile data.
         config (dict): The role-specific configuration.
         
     Returns:
         dict: A new dictionary with tailored data.
     """
-    tailored = master.copy()
+    tailored = profile_data.copy()
     
     # 1. Set Label/Title
     if 'role_title' in config:
@@ -79,14 +79,14 @@ def tailor_data(master: Dict[str, Any], config: Dict[str, Any]) -> Dict[str, Any
         
     # 2. Select Summary
     summary_key = config.get('summary_type', 'general')
-    tailored['summary'] = master['summaries'].get(summary_key, master['summaries']['general'])
+    tailored['summary'] = profile_data['summaries'].get(summary_key, profile_data['summaries']['general'])
     
     # 3. Filter Projects
     # Combine all projects into a flat list for easier filtering
     all_projects = (
-        master['projects'].get('cyber', []) + 
-        master['projects'].get('web', []) + 
-        master['projects'].get('personal', [])
+        profile_data['projects'].get('cyber', []) + 
+        profile_data['projects'].get('web', []) + 
+        profile_data['projects'].get('personal', [])
     )
     
     if 'project_ids' in config:
@@ -97,7 +97,7 @@ def tailor_data(master: Dict[str, Any], config: Dict[str, Any]) -> Dict[str, Any
         ]
     else:
         # Default: Show top 5 cyber projects if no config provided
-        tailored['projects'] = master['projects'].get('cyber', [])[:5]
+        tailored['projects'] = profile_data['projects'].get('cyber', [])[:5]
 
     return tailored
 
@@ -108,18 +108,18 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
     Args:
         role_config_path (str, optional): Path to the role configuration JSON file.
     """
-    # 1. Load Master Data
+    # 1. Load Main Data
     # Check for private data first, otherwise use example data
-    private_data_path = os.path.join(PRIVATE_DIR, 'master_profile.json')
+    private_data_path = os.path.join(PRIVATE_DIR, 'main_profile.json')
     if os.path.exists(private_data_path):
         print(f"Using private data from {private_data_path}")
-        master_data = load_json(private_data_path)
+        profile_data = load_json(private_data_path)
     else:
-        print(f"Using example data from {os.path.join(DATA_DIR, 'master_profile.json')}")
-        master_data = load_json(os.path.join(DATA_DIR, 'master_profile.json'))
+        print(f"Using example data from {os.path.join(DATA_DIR, 'main_profile.json')}")
+        profile_data = load_json(os.path.join(DATA_DIR, 'main_profile.json'))
     
-    if not master_data:
-        print("Error: Could not load master profile data. Aborting.")
+    if not profile_data:
+        print("Error: Could not load main profile data. Aborting.")
         return
 
     # 2. Load Role Config (if provided)
@@ -131,7 +131,7 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
              return
     
     # 3. Tailor Data
-    context = tailor_data(master_data, role_config)
+    context = tailor_data(profile_data, role_config)
     
     # 4. Render Resume Template
     env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))

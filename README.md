@@ -1,9 +1,9 @@
 # Resume Automator
 
-A Python-based tool to generate tailored resumes and cover letters from a master profile database.
+A Python-based tool to generate tailored resumes and cover letters from a main profile database.
 
 ## Features
-- **Master Data Source:** Single JSON file (`data/master_profile.json`) containing all career history.
+- **Main Data Source:** Single JSON file (`data/main_profile.json`) containing all career history.
 - **Role-Based Tailoring:** JSON configurations define which projects and summaries to use for specific job roles.
 - **Automated Generation:** Generates Markdown resumes and cover letters for all configured roles in seconds.
 - **PDF Conversion:** Supports converting Markdown to PDF using `pandoc` (requires pandoc installed).
@@ -18,11 +18,11 @@ A Python-based tool to generate tailored resumes and cover letters from a master
     ```
 
 2.  **Personalize (Optional):**
-    To use your own data without committing it, create a `private/` folder and add your `master_profile.json` there. The script will prioritize this file over the example data.
+    To use your own data without committing it, create a `private/` folder and add your `main_profile.json` there. The script will prioritize this file over the example data.
     ```bash
     mkdir private
-    cp data/master_profile.json private/master_profile.json
-    # Edit private/master_profile.json with your real details
+    cp data/main_profile.json private/main_profile.json
+    # Edit private/main_profile.json with your real details
     ```
 
 3.  **Run:**
@@ -34,8 +34,8 @@ A Python-based tool to generate tailored resumes and cover letters from a master
     Check the `output/` directory for generated files.
 
 ## Directory Structure
-- `data/`: Contains example `master_profile.json` and `roles/` configurations.
-- `private/`: (Ignored by Git) Place your real `master_profile.json` here.
+- `data/`: Contains example `main_profile.json` and `roles/` configurations.
+- `private/`: (Ignored by Git) Place your real `main_profile.json` here.
 - `templates/`: Jinja2 templates for resumes and cover letters.
 - `src/`: Python source code.
 - `output/`: (Ignored by Git) Generated artifacts.
