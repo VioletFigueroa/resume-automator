@@ -16,13 +16,46 @@
   },
   "skills": {
     "security_tools": [
-      "Splunk", "QRadar", "Wireshark", "Log Analysis", "IDS/IPS", "EDR", "WAF", "Firewalls", "OpenVAS", "MITRE ATT&CK", "NIST 800-53", "OWASP Top 10", "ISO 27001", "Volatility", "Autopsy"
+      "Splunk",
+      "QRadar",
+      "Wireshark",
+      "Log Analysis",
+      "IDS/IPS",
+      "EDR",
+      "WAF",
+      "Firewalls",
+      "OpenVAS",
+      "MITRE ATT&CK",
+      "NIST 800-53",
+      "OWASP Top 10",
+      "ISO 27001",
+      "Volatility",
+      "Autopsy"
     ],
     "programming": [
-      "Python", "JavaScript (ES6+)", "Bash", "SQL", "HTML5", "CSS3", "Node.js", "Express", "React", "PostgreSQL", "Git", "Docker", "Linux (Debian/Kali)"
+      "Python",
+      "JavaScript (ES6+)",
+      "Bash",
+      "SQL",
+      "HTML5",
+      "CSS3",
+      "Node.js",
+      "Express",
+      "React",
+      "PostgreSQL",
+      "Git",
+      "Docker",
+      "Linux (Debian/Kali)"
     ],
     "analysis": [
-      "Vulnerability Assessment", "Threat Hunting", "Gap Analysis", "Risk Management", "Executive Briefs", "Technical Documentation", "Incident Reports", "Playbooks"
+      "Vulnerability Assessment",
+      "Threat Hunting",
+      "Gap Analysis",
+      "Risk Management",
+      "Executive Briefs",
+      "Technical Documentation",
+      "Incident Reports",
+      "Playbooks"
     ]
   },
   "experience": [
@@ -32,6 +65,8 @@
       "location": "Remote, Greater Vancouver Area",
       "date": "Sept 2022 - Jan 2024",
       "summary": "Led cybersecurity, IT support, and web development for a distributed remote team of 30 endpoints.",
+      "executive_summary": "Served as the primary technical lead for a distributed organization, securing remote endpoints and ensuring business continuity.",
+      "business_impact": "Eliminated malware incidents and account compromises through the implementation of strict firewall rules and MFA, safeguarding sensitive organizational data.",
       "bullets": [
         "Configured advanced firewall rules, reducing malware incidents by 100%.",
         "Implemented multi-factor authentication (MFA) across all accounts, reducing account compromise cases to zero.",
@@ -45,6 +80,8 @@
       "location": "Greater Vancouver Area",
       "date": "June 2022 - Sept 2022",
       "summary": "Supported SMBs and individuals in network security, recovery, and privacy consulting.",
+      "executive_summary": "Provided rapid-response IT and security consulting to small businesses, minimizing downtime and data loss.",
+      "business_impact": "Restored critical business operations for multiple clients by resolving security incidents and implementing robust recovery strategies.",
       "bullets": [
         "Supported network security, system hardening, and digital hygiene across client environments.",
         "Delivered remote/onsite IT assistance, OS installs, system recovery, and privacy consulting.",
@@ -56,8 +93,10 @@
     "cyber": [
       {
         "id": "capstone",
-        "title": "Capstone: Premium House Lights Forensi",
+        "title": "Capstone: Premium House Lights Forensics",
         "date": "May 2025",
+        "executive_summary": "Led a full-scale incident response simulation for a ransomware attack, coordinating forensic analysis and regulatory compliance.",
+        "business_impact": "Delivered a legal-grade remediation plan that addressed GDPR/PCI liabilities and provided a roadmap to restore business continuity.",
         "bullets": [
           "Led a simulated ransomware/extortion response, performing forensic analysis using Splunk, Wireshark, and Volatility.",
           "Mapped 8-12 attacker movement paths using MITRE ATT&CK and determined regulatory impacts (GDPR, PCI).",
@@ -66,8 +105,10 @@
       },
       {
         "id": "p3",
-        "title": "P3: LogHawk – Log Hunting Tool",
+        "title": "P3: LogHawk \u2013 Log Hunting Tool",
         "date": "Dec 2024",
+        "executive_summary": "Developed an automated threat detection tool to accelerate log analysis and identify indicators of compromise.",
+        "business_impact": "Reduced manual log review time by automating the detection of suspicious patterns, enabling faster incident response.",
         "bullets": [
           "Developed \"LogHawk\", a script-based log analysis tool to automate detection of suspicious activity.",
           "Utilized Python and Bash to parse system logs and identify potential threats.",
@@ -78,6 +119,8 @@
         "id": "p11",
         "title": "P11: Secure Architecture Report",
         "date": "Apr/May 2025",
+        "executive_summary": "Designed a defense-in-depth network architecture for an enterprise environment, aligning with industry security standards.",
+        "business_impact": "Created a blueprint for a resilient infrastructure that minimizes attack surface and ensures business operations resilience.",
         "bullets": [
           "Designed and documented a secure network architecture for a simulated enterprise.",
           "Recommended security controls and architectural improvements to mitigate identified risks."
@@ -87,6 +130,8 @@
         "id": "p10",
         "title": "P10: Forensics Report",
         "date": "Apr 2025",
+        "executive_summary": "Conducted a forensic investigation on a compromised system to reconstruct the attack timeline.",
+        "business_impact": "Provided actionable intelligence on the breach method, enabling the organization to close security gaps and prevent recurrence.",
         "bullets": [
           "Conducted a forensic investigation on a compromised system, analyzing logs and artifacts.",
           "Reconstructed the incident timeline and documented findings in a legal-grade report."
@@ -96,6 +141,8 @@
         "id": "p9",
         "title": "P9: Investigation & Research Report",
         "date": "Mar 2025",
+        "executive_summary": "Produced a detailed threat intelligence report analyzing specific threat actor TTPs (Tactics, Techniques, and Procedures).",
+        "business_impact": "Enhanced organizational threat awareness by mapping potential attacks to the Cyber Kill Chain, informing proactive defense strategies.",
         "bullets": [
           "Produced a detailed investigation report on threat actors using the Cyber Kill Chain and Diamond Model."
         ]
@@ -104,6 +151,8 @@
         "id": "p7",
         "title": "P7: IR Plan, Playbook and Policy",
         "date": "Feb 2025",
+        "executive_summary": "Developed a comprehensive Incident Response framework to guide organizational reaction to cyber threats.",
+        "business_impact": "Standardized the response process, reducing chaos during incidents and ensuring compliance with regulatory reporting requirements.",
         "bullets": [
           "Developed a complete Incident Response Plan, including policies, playbooks, and escalation paths."
         ]
@@ -112,6 +161,8 @@
         "id": "p6",
         "title": "P6: Cat's Company Vulnerabilities",
         "date": "Feb 2025",
+        "executive_summary": "Conducted a vulnerability assessment to identify and prioritize security weaknesses in the infrastructure.",
+        "business_impact": "Prioritized critical patches and configuration changes, directly reducing the organization's exposure to known exploits.",
         "bullets": [
           "Conducted a vulnerability assessment, identified CVEs, and recommended remediation strategies."
         ]
@@ -120,6 +171,8 @@
         "id": "p5",
         "title": "P5: Risk Management Case Study",
         "date": "Jan 2025",
+        "executive_summary": "Performed a risk management analysis to evaluate compliance with regulatory standards.",
+        "business_impact": "Identified compliance gaps and proposed mitigation strategies to avoid regulatory fines and reputational damage.",
         "bullets": [
           "Performed a comprehensive risk management case study analyzing regulatory drivers and compliance."
         ]
@@ -128,6 +181,8 @@
         "id": "p4",
         "title": "P4: Playbook for Cat & Box Scenario",
         "date": "Jan 2025",
+        "executive_summary": "Created custom incident response playbooks for high-probability threat scenarios like phishing and ransomware.",
+        "business_impact": "Empowered the SOC team with step-by-step guides, ensuring consistent and effective handling of common security incidents.",
         "bullets": [
           "Created custom incident response playbooks based on NIST and CISA guidelines for phishing and ransomware."
         ]
@@ -136,6 +191,8 @@
         "id": "p2",
         "title": "P2: Report on Risks & Vulnerabilities",
         "date": "Dec 2024",
+        "executive_summary": "Conducted a risk and vulnerability assessment to baseline the organization's security posture.",
+        "business_impact": "Provided management with a clear view of security risks, facilitating informed decision-making for security budget allocation.",
         "bullets": [
           "Conducted a risk and vulnerability assessment, producing a professional report on security gaps."
         ]
@@ -144,6 +201,8 @@
         "id": "p1",
         "title": "P1: Network Administration",
         "date": "Nov 2024",
+        "executive_summary": "Configured and secured network infrastructure to ensure visibility and control.",
+        "business_impact": "Established a secure baseline for network operations, enabling effective monitoring and unauthorized access detection.",
         "bullets": [
           "Configured and secured network infrastructure using Nmap and Wireshark for discovery and documentation."
         ]
@@ -154,6 +213,8 @@
         "id": "tinyapp",
         "title": "TinyApp",
         "context": "Lighthouse Labs",
+        "executive_summary": "Built a secure URL shortening service with robust authentication and authorization controls.",
+        "business_impact": "Demonstrated secure user management and data protection practices compliant with OWASP standards (A07: Identification & Authentication Failures).",
         "bullets": [
           "Built a full-stack URL shortener with secure user authentication (bcrypt, cookie-session).",
           "Implemented OWASP A07 (Identification and Authentication Failures) mitigation strategies."
@@ -163,6 +224,8 @@
         "id": "tweeter",
         "title": "Tweeter",
         "context": "Lighthouse Labs",
+        "executive_summary": "Developed a social media platform with strict input validation to prevent Cross-Site Scripting (XSS).",
+        "business_impact": "Mitigated client-side attacks by implementing rigorous input sanitization, protecting user sessions and data integrity (OWASP A03: Injection).",
         "bullets": [
           "Developed a single-page Twitter clone with strict input validation to prevent XSS (OWASP A03)."
         ]
@@ -171,6 +234,8 @@
         "id": "lightbnb",
         "title": "LightBnB",
         "context": "Lighthouse Labs",
+        "executive_summary": "Designed a property rental platform with a focus on database security and query safety.",
+        "business_impact": "Prevented data breaches and unauthorized database manipulation by using parameterized queries to block SQL Injection attacks.",
         "bullets": [
           "Designed a property rental platform using parameterized queries to prevent SQL Injection."
         ]
@@ -179,6 +244,8 @@
         "id": "scheduler",
         "title": "Interview Scheduler",
         "context": "Lighthouse Labs",
+        "executive_summary": "Built a real-time scheduling application with comprehensive automated testing.",
+        "business_impact": "Ensured application reliability and security through rigorous testing (Jest, Cypress) and CI/CD integration, reducing deployment risks.",
         "bullets": [
           "Built a real-time React app with comprehensive testing (Jest, Cypress) and CI/CD integration."
         ]
@@ -189,6 +256,8 @@
         "id": "perplexport",
         "title": "Perplexport",
         "date": "2024/2025",
+        "executive_summary": "Built a custom CLI tool to automate the backup of research data from AI platforms.",
+        "business_impact": "Ensured data sovereignty and availability by creating local, offline-accessible archives of critical research and intellectual property.",
         "bullets": [
           "Built a TypeScript/Puppeteer CLI tool to scrape and export Perplexity AI conversations.",
           "Bypasses API rate limits to create full JSON/Markdown backups of research data."
@@ -198,6 +267,8 @@
         "id": "homelab",
         "title": "Debian Homelab Setup",
         "date": "Oct 2024 - Present",
+        "executive_summary": "Deployed a self-hosted server environment to practice secure system administration.",
+        "business_impact": "Created a safe, isolated sandbox for testing security tools and configurations without risking production environments.",
         "bullets": [
           "Deployed a Debian-based server with Nextcloud and Docker Compose for secure self-hosting."
         ]
@@ -206,6 +277,8 @@
         "id": "pkm",
         "title": "Knowledge Pipeline (PKM)",
         "date": "Ongoing",
+        "executive_summary": "Integrating a locally hosted LLM API with a knowledge base for secure information retrieval.",
+        "business_impact": "Demonstrated the ability to leverage AI for productivity while maintaining strict data privacy by keeping data processing local.",
         "bullets": [
           "Integrating a locally hosted LLM API with Logseq for a cybersecurity-focused knowledge base."
         ]
