@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ basics.name }} - Cover Letter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --text-color: #333333;
+            --light-text: #666666;
+            --link-color: #2980b9;
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: var(--text-color);
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            background-color: #ffffff;
+        }
+
+        /* Header / Letterhead */
+        .header {
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.2em;
+            margin: 0;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .contact-info {
+            font-family: 'Roboto', sans-serif;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: var(--light-text);
+        }
+
+        .contact-separator {
+            margin: 0 8px;
+            color: #ccc;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        /* Letter Content */
+        .meta-info {
+            margin-bottom: 30px;
+        }
+
+        .date {
+            margin-bottom: 15px;
+        }
+
+        .recipient {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .subject {
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-decoration: underline;
+        }
+
+        .content p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .content ul {
+            margin-bottom: 15px;
+        }
+
+        .signature {
+            margin-top: 40px;
+        }
+
+        .signature-name {
+            font-weight: bold;
+            margin-top: 10px;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ basics.name }}</h1>
+        <div class="contact-info">
+            {{ basics.location }}
+            <span class="contact-separator">|</span>
+            {{ basics.phone }}
+            <span class="contact-separator">|</span>
+            <a href="mailto:{{ basics.email }}">{{ basics.email }}</a>
+        </div>
+        <div class="contact-info">
+            <a href="https://{{ basics.linkedin }}">LinkedIn</a>
+            <span class="contact-separator">|</span>
+            <a href="https://{{ basics.github }}">GitHub</a>
+            <span class="contact-separator">|</span>
+            <a href="https://{{ basics.portfolio }}">Portfolio</a>
+        </div>
+    </div>
+
+    <div class="meta-info">
+        <div class="date">{{ date }}</div>
+        <div class="recipient">Hiring Manager</div>
+        <div class="subject">Re: Application for {{ role_title }} Position</div>
+    </div>
+
+    <div class="content">
+        <p>Dear Hiring Manager,</p>
+
+        <p>I am writing to express my strong interest in the {{ role_title }} position. As a {{ basics.label }} with a background in {{ background_context }}, I am excited about the opportunity to contribute to your team's security posture.</p>
+
+        <p>{{ summary }}</p>
+
+        <p>In my recent work, I have focused heavily on practical, hands-on security operations:</p>
+        <ul>
+            {% for project in projects[:2] %}
+            <li>
+                <strong>
+                    {% if project.url %}
+                    <a href="{{ project.url }}" target="_blank">{{ project.title }}</a>
+                    {% else %}
+                    {{ project.title }}
+                    {% endif %}
+                </strong>: {{ project.bullets[0] }}
+            </li>
+            {% endfor %}
+        </ul>
+
+        <p>My technical foundation in {{ skills.security_tools[:3]|join(', ') }} and {{ skills.programming[:2]|join(', ') }} allows me to bridge the gap between theoretical security concepts and real-world implementation. I am particularly drawn to this role because it aligns with my passion for proactive defense and continuous improvement.</p>
+
+        <p>I would welcome the opportunity to discuss how my skills and experience align with your needs. Thank you for your time and consideration.</p>
+    </div>
+
+    <div class="signature">
+        <p>Sincerely,</p>
+        <div class="signature-name">{{ basics.name }}</div>
+    </div>
+</body>
+</html>

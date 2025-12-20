@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ basics.name }} - Resume</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #34495e;
+            --text-color: #333333;
+            --light-text: #666666;
+            --link-color: #2980b9;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            font-size: 10pt;
+            line-height: 1.6;
+            color: var(--text-color);
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #ffffff;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.2em;
+            margin: 0;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.1em;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 3px;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1em;
+            margin: 0;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        p {
+            margin: 3px 0;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Layout Components */
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .role-title {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.1em;
+            color: var(--light-text);
+            font-weight: 400;
+            margin-top: 5px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-info {
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.9em;
+            color: var(--light-text);
+        }
+
+        .contact-separator {
+            margin: 0 8px;
+            color: var(--border-color);
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        /* Experience & Projects */
+        .entry {
+            margin-bottom: 15px;
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .entry-title {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            font-size: 1em;
+        }
+
+        .entry-subtitle {
+            font-style: italic;
+            color: var(--light-text);
+        }
+
+        .entry-date {
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.85em;
+            color: var(--light-text);
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .entry-summary {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        ul {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 3px;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 10px 20px;
+        }
+
+        .skill-category {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        /* Print Optimization */
+        @media print {
+            body {
+                padding: 0;
+                max-width: 100%;
+            }
+            a {
+                text-decoration: none;
+                color: #000;
+            }
+            /* Ensure links are still usable if saved as PDF */
+            a[href^="http"]:after {
+                content: ""; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ basics.name }}</h1>
+        <div class="role-title">{{ basics.label }}</div>
+        <div class="contact-info">
+            {{ basics.location }}
+            <span class="contact-separator">|</span>
+            {{ basics.phone }}
+            <span class="contact-separator">|</span>
+            <a href="mailto:{{ basics.email }}">{{ basics.email }}</a>
+        </div>
+        <div class="contact-info" style="margin-top: 5px;">
+            <a href="https://{{ basics.linkedin }}">LinkedIn</a>
+            <span class="contact-separator">|</span>
+            <a href="https://{{ basics.github }}">GitHub</a>
+            <span class="contact-separator">|</span>
+            <a href="https://{{ basics.portfolio }}">Portfolio</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Professional Summary</h2>
+        <p>{{ summary }}</p>
+    </div>
+
+    <div class="section">
+        <h2>Technical Skills</h2>
+        <div class="skills-grid">
+            {% for category, skills in skills.items() %}
+            <div class="skill-category">{{ category|replace('_', ' ')|title }}:</div>
+            <div class="skill-list">{{ skills|join(', ') }}</div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Work Experience</h2>
+        {% for job in experience %}
+        <div class="entry">
+            <div class="entry-header">
+                <div class="entry-title">{{ job.role }} | {{ job.company }}</div>
+                <div class="entry-date">{{ job.date }}</div>
+            </div>
+            <div class="entry-subtitle">{{ job.location }}</div>
+            <div class="entry-summary">{{ job.summary }}</div>
+            <ul>
+                {% for bullet in job.bullets %}
+                <li>{{ bullet }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="section">
+        <h2>Projects</h2>
+        {% for project in projects %}
+        <div class="entry">
+            <div class="entry-header">
+                <div class="entry-title">
+                    {% if project.url %}
+                    <a href="{{ project.url }}" target="_blank">{{ project.title }}</a>
+                    {% else %}
+                    {{ project.title }}
+                    {% endif %}
+                </div>
+                <div class="entry-date">{{ project.date or project.context }}</div>
+            </div>
+            <ul>
+                {% for bullet in project.bullets %}
+                <li>{{ bullet }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="section">
+        <h2>Education</h2>
+        {% for edu in education %}
+        <div class="entry">
+            <div class="entry-header">
+                <div class="entry-title">{{ edu.program }}</div>
+                <div class="entry-date">{{ edu.date }}</div>
+            </div>
+            <div class="entry-subtitle">{{ edu.institution }}</div>
+            <ul>
+                {% for bullet in edu.bullets %}
+                <li>{{ bullet }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="section">
+        <h2>Certifications</h2>
+        <ul>
+            {% for cert in certifications %}
+            <li>{{ cert }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

@@ -136,8 +136,13 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
     # 4. Render Resume Template
     env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))
     try:
+        # Markdown
         resume_template = env.get_template('resume.md.j2')
         resume_content = resume_template.render(context)
+        
+        # HTML
+        html_template = env.get_template('resume.html.j2')
+        html_content = html_template.render(context)
     except Exception as e:
         print(f"Error rendering resume template: {e}")
         return
@@ -150,7 +155,12 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
     with open(resume_file, 'w', encoding='utf-8') as f:
         f.write(resume_content)
     
+    html_file = os.path.join(OUTPUT_DIR, f'Resume_{role_name}.html')
+    with open(html_file, 'w', encoding='utf-8') as f:
+        f.write(html_content)
+    
     print(f"Generated Resume: {resume_file}")
+    print(f"Generated HTML Resume: {html_file}")
     convert_to_pdf(resume_file)
 
     # 6. Render Cover Letter Template (if role specific)
@@ -171,10 +181,19 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
             cl_template = env.get_template('cover_letter.md.j2')
             cl_content = cl_template.render(context)
             
+            cl_html_template = env.get_template('cover_letter.html.j2')
+            cl_html_content = cl_html_template.render(context)
+            
             cl_file = os.path.join(OUTPUT_DIR, f'Cover_Letter_{role_name}.md')
             with open(cl_file, 'w', encoding='utf-8') as f:
                 f.write(cl_content)
+                
+            cl_html_file = os.path.join(OUTPUT_DIR, f'Cover_Letter_{role_name}.html')
+            with open(cl_html_file, 'w', encoding='utf-8') as f:
+                f.write(cl_html_content)
+                
             print(f"Generated Cover Letter: {cl_file}")
+            print(f"Generated HTML Cover Letter: {cl_html_file}")
             convert_to_pdf(cl_file)
         except Exception as e:
             print(f"Error rendering cover letter template: {e}")
