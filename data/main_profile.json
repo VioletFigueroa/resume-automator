@@ -325,11 +325,13 @@
   ],
   "certifications": [
     "CompTIA Security+ (SY0-701) | Aug 2025",
-    "Cyber Security Bootcamp Diploma | Lighthouse Labs | May 2025",
+    "Cyber Security Bootcamp Diploma | Lighthouse Labs | May 2025"
+  ],
+  "certifications_extended": [
+    "Google Cybersecurity Specialization | Coursera | Ongoing",
     "Cyber Security 101 Certificate | TryHackMe | Aug 2025",
     "Pre Security Learning Path | TryHackMe | July 2025",
     "Introduction to Cyber Security | TryHackMe | Feb 2023",
-    "Google Cybersecurity Specialization | Coursera | Ongoing",
     "JavaScript Algorithms and Data Structures | freeCodeCamp | Jan 2019"
   ],
   "awards": [
