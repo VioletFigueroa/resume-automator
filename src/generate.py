@@ -147,14 +147,17 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
         return
     
     # 5. Save Resume Output
-    role_name = role_config.get('role_title', 'General').replace(' ', '_')
+    candidate_name = context['basics']['name']
+    role_title = context['basics']['label']
+    base_filename_resume = f"{candidate_name} - {role_title} - Resume"
+    
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     
-    resume_file = os.path.join(OUTPUT_DIR, f'Resume_{role_name}.md')
+    resume_file = os.path.join(OUTPUT_DIR, f'{base_filename_resume}.md')
     with open(resume_file, 'w', encoding='utf-8') as f:
         f.write(resume_content)
     
-    html_file = os.path.join(OUTPUT_DIR, f'Resume_{role_name}.html')
+    html_file = os.path.join(OUTPUT_DIR, f'{base_filename_resume}.html')
     with open(html_file, 'w', encoding='utf-8') as f:
         f.write(html_content)
     
@@ -183,11 +186,13 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
             cl_html_template = env.get_template('cover_letter.html.j2')
             cl_html_content = cl_html_template.render(context)
             
-            cl_file = os.path.join(OUTPUT_DIR, f'Cover_Letter_{role_name}.md')
+            base_filename_cl = f"{candidate_name} - {role_title} - Cover Letter"
+            
+            cl_file = os.path.join(OUTPUT_DIR, f'{base_filename_cl}.md')
             with open(cl_file, 'w', encoding='utf-8') as f:
                 f.write(cl_content)
                 
-            cl_html_file = os.path.join(OUTPUT_DIR, f'Cover_Letter_{role_name}.html')
+            cl_html_file = os.path.join(OUTPUT_DIR, f'{base_filename_cl}.html')
             with open(cl_html_file, 'w', encoding='utf-8') as f:
                 f.write(cl_html_content)
                 
