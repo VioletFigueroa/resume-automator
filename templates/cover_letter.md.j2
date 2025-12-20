@@ -16,7 +16,7 @@ I am writing to express my strong interest in the {{ role_title }} position. As 
 
 In my recent work, I have focused heavily on practical, hands-on security operations:
 {% for project in projects[:2] %}
-- **{{ project.title }}:** {{ project.bullets[0] }}
+- **{% if project.url %}[{{ project.title }}]({{ project.url }}){% else %}{{ project.title }}{% endif %}:** {{ project.bullets[0] }}
 {% endfor %}
 
 My technical foundation in {{ skills.security_tools[:3]|join(', ') }} and {{ skills.programming[:2]|join(', ') }} allows me to bridge the gap between theoretical security concepts and real-world implementation. I am particularly drawn to this role because it aligns with my passion for proactive defense and continuous improvement.

@@ -101,7 +101,8 @@
           "Led a simulated ransomware/extortion response, performing forensic analysis using Splunk, Wireshark, and Volatility.",
           "Mapped 8-12 attacker movement paths using MITRE ATT&CK and determined regulatory impacts (GDPR, PCI).",
           "Authored executive remediation plan with multi-phase security recommendations."
-        ]
+        ],
+        "url": "https://github.com/VioletFigueroa/Premium-House-Lights"
       },
       {
         "id": "p3",
@@ -113,7 +114,8 @@
           "Developed \"LogHawk\", a script-based log analysis tool to automate detection of suspicious activity.",
           "Utilized Python and Bash to parse system logs and identify potential threats.",
           "Published as open-source code on GitHub, demonstrating secure coding and automation skills."
-        ]
+        ],
+        "url": "https://github.com/VioletFigueroa/log-analysis-monitoring-automation"
       },
       {
         "id": "p11",
@@ -124,7 +126,8 @@
         "bullets": [
           "Designed and documented a secure network architecture for a simulated enterprise.",
           "Recommended security controls and architectural improvements to mitigate identified risks."
-        ]
+        ],
+        "url": "https://github.com/VioletFigueroa/Security-Architecture-Assessment"
       },
       {
         "id": "p10",
@@ -135,7 +138,8 @@
         "bullets": [
           "Conducted a forensic investigation on a compromised system, analyzing logs and artifacts.",
           "Reconstructed the incident timeline and documented findings in a legal-grade report."
-        ]
+        ],
+        "url": "https://github.com/VioletFigueroa/data-breach-investigation-forensics"
       },
       {
         "id": "p9",
@@ -145,7 +149,8 @@
         "business_impact": "Enhanced organizational threat awareness by mapping potential attacks to the Cyber Kill Chain, informing proactive defense strategies.",
         "bullets": [
           "Produced a detailed investigation report on threat actors using the Cyber Kill Chain and Diamond Model."
-        ]
+        ],
+        "url": "https://github.com/VioletFigueroa/Digital-Forensics-Case-Study"
       },
       {
         "id": "p7",
@@ -155,7 +160,8 @@
         "business_impact": "Standardized the response process, reducing chaos during incidents and ensuring compliance with regulatory reporting requirements.",
         "bullets": [
           "Developed a complete Incident Response Plan, including policies, playbooks, and escalation paths."
-        ]
+        ],
+        "url": "https://github.com/VioletFigueroa/security-policies-procedures-tlp"
       },
       {
         "id": "p6",
@@ -165,7 +171,8 @@
         "business_impact": "Prioritized critical patches and configuration changes, directly reducing the organization's exposure to known exploits.",
         "bullets": [
           "Conducted a vulnerability assessment, identified CVEs, and recommended remediation strategies."
-        ]
+        ],
+        "url": "https://github.com/VioletFigueroa/vulnerability-assessment-framework"
       },
       {
         "id": "p5",
@@ -175,7 +182,8 @@
         "business_impact": "Identified compliance gaps and proposed mitigation strategies to avoid regulatory fines and reputational damage.",
         "bullets": [
           "Performed a comprehensive risk management case study analyzing regulatory drivers and compliance."
-        ]
+        ],
+        "url": "https://github.com/VioletFigueroa/iso27001-risk-management-framework"
       },
       {
         "id": "p4",
@@ -185,7 +193,8 @@
         "business_impact": "Empowered the SOC team with step-by-step guides, ensuring consistent and effective handling of common security incidents.",
         "bullets": [
           "Created custom incident response playbooks based on NIST and CISA guidelines for phishing and ransomware."
-        ]
+        ],
+        "url": "https://github.com/VioletFigueroa/incident-response-playbooks-procedures"
       },
       {
         "id": "p2",
@@ -195,7 +204,8 @@
         "business_impact": "Provided management with a clear view of security risks, facilitating informed decision-making for security budget allocation.",
         "bullets": [
           "Conducted a risk and vulnerability assessment, producing a professional report on security gaps."
-        ]
+        ],
+        "url": "https://github.com/VioletFigueroa/vulnerability-assessment-report"
       },
       {
         "id": "p1",
@@ -205,7 +215,8 @@
         "business_impact": "Established a secure baseline for network operations, enabling effective monitoring and unauthorized access detection.",
         "bullets": [
           "Configured and secured network infrastructure using Nmap and Wireshark for discovery and documentation."
-        ]
+        ],
+        "url": "https://github.com/VioletFigueroa/network-scanning-analysis-security"
       }
     ],
     "web": [
@@ -218,7 +229,8 @@
         "bullets": [
           "Built a full-stack URL shortener with secure user authentication (bcrypt, cookie-session).",
           "Implemented OWASP A07 (Identification and Authentication Failures) mitigation strategies."
-        ]
+        ],
+        "url": "https://github.com/VioletFigueroa/tinyapp"
       },
       {
         "id": "tweeter",
@@ -228,7 +240,8 @@
         "business_impact": "Mitigated client-side attacks by implementing rigorous input sanitization, protecting user sessions and data integrity (OWASP A03: Injection).",
         "bullets": [
           "Developed a single-page Twitter clone with strict input validation to prevent XSS (OWASP A03)."
-        ]
+        ],
+        "url": "https://github.com/VioletFigueroa/tweeter"
       },
       {
         "id": "lightbnb",
@@ -238,7 +251,8 @@
         "business_impact": "Prevented data breaches and unauthorized database manipulation by using parameterized queries to block SQL Injection attacks.",
         "bullets": [
           "Designed a property rental platform using parameterized queries to prevent SQL Injection."
-        ]
+        ],
+        "url": "https://github.com/VioletFigueroa/lightBnB"
       },
       {
         "id": "scheduler",
@@ -248,7 +262,8 @@
         "business_impact": "Ensured application reliability and security through rigorous testing (Jest, Cypress) and CI/CD integration, reducing deployment risks.",
         "bullets": [
           "Built a real-time React app with comprehensive testing (Jest, Cypress) and CI/CD integration."
-        ]
+        ],
+        "url": "https://github.com/VioletFigueroa/interview-scheduler"
       }
     ],
     "personal": [
@@ -261,7 +276,8 @@
         "bullets": [
           "Built a TypeScript/Puppeteer CLI tool to scrape and export Perplexity AI conversations.",
           "Bypasses API rate limits to create full JSON/Markdown backups of research data."
-        ]
+        ],
+        "url": "https://github.com/VioletFigueroa/perplexport"
       },
       {
         "id": "homelab",
@@ -271,7 +287,8 @@
         "business_impact": "Created a safe, isolated sandbox for testing security tools and configurations without risking production environments.",
         "bullets": [
           "Deployed a Debian-based server with Nextcloud and Docker Compose for secure self-hosting."
-        ]
+        ],
+        "url": "https://github.com/VioletFigueroa/knowledge-pipeline"
       },
       {
         "id": "pkm",
@@ -281,7 +298,8 @@
         "business_impact": "Demonstrated the ability to leverage AI for productivity while maintaining strict data privacy by keeping data processing local.",
         "bullets": [
           "Integrating a locally hosted LLM API with Logseq for a cybersecurity-focused knowledge base."
-        ]
+        ],
+        "url": "https://github.com/VioletFigueroa/knowledge-pipeline"
       }
     ]
   },
