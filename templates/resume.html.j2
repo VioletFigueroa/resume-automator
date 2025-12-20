@@ -8,6 +8,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <style>
+        @page {
+            size: Letter;
+            margin: 0.5in;
+        }
+
         :root {
             --primary-color: #6A1B9A; /* Violet Highlight */
             --accent-color: #4A148C;
@@ -19,19 +24,18 @@
 
         body {
             font-family: 'Merriweather', serif;
-            font-size: 11pt;
-            line-height: 1.6;
+            font-size: 9.5pt; /* Scaled down to fit 2 pages */
+            line-height: 1.45;
             color: var(--text-color);
-            max-width: 850px;
-            margin: 0 auto;
-            padding: 40px;
+            margin: 0;
+            padding: 0;
             background-color: #ffffff;
         }
 
         /* Typography */
         h1 {
             font-family: 'Roboto', sans-serif;
-            font-size: 2.2em;
+            font-size: 2em;
             margin: 0;
             color: var(--primary-color);
             text-transform: uppercase;
@@ -45,8 +49,8 @@
             color: var(--primary-color);
             border-bottom: 2px solid var(--primary-color);
             padding-bottom: 3px;
-            margin-top: 20px;
-            margin-bottom: 12px;
+            margin-top: 15px;
+            margin-bottom: 8px;
             text-transform: uppercase;
             font-weight: 700;
         }

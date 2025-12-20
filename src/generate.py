@@ -37,28 +37,27 @@ def load_json(filepath: str) -> Dict[str, Any]:
         print(f"Error reading {filepath}: {e}")
         return {}
 
-def convert_to_pdf(md_file: str) -> None:
+def convert_to_pdf(html_file: str) -> None:
     """
-    Converts a Markdown file to PDF using pandoc.
+    Converts an HTML file to PDF using WeasyPrint.
     
     Args:
-        md_file (str): Path to the Markdown file.
+        html_file (str): Path to the HTML file.
     """
-    pdf_file = md_file.replace('.md', '.pdf')
+    pdf_file = html_file.replace('.html', '.pdf')
     try:
-        # Basic pandoc conversion
-        # Using -V geometry:margin=1in for better margins
+        # Use WeasyPrint via command line
         subprocess.run(
-            ['pandoc', md_file, '-o', pdf_file, '-V', 'geometry:margin=1in'], 
+            ['weasyprint', html_file, pdf_file], 
             check=True,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.PIPE
         )
         print(f"  [PDF] Generated: {pdf_file}")
-    except subprocess.CalledProcessError:
-        print(f"  [PDF] Failed to convert {md_file}. Ensure pandoc is installed.")
+    except subprocess.CalledProcessError as e:
+        print(f"  [PDF] Failed to convert {html_file}. Error: {e}")
     except FileNotFoundError:
-        print("  [PDF] Pandoc not found. Skipping PDF conversion.")
+        print("  [PDF] WeasyPrint not found. Skipping PDF conversion.")
 
 def tailor_data(profile_data: Dict[str, Any], config: Dict[str, Any]) -> Dict[str, Any]:
     """
@@ -161,7 +160,7 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
     
     print(f"Generated Resume: {resume_file}")
     print(f"Generated HTML Resume: {html_file}")
-    convert_to_pdf(resume_file)
+    convert_to_pdf(html_file)
 
     # 6. Render Cover Letter Template (if role specific)
     if role_config_path:
@@ -194,7 +193,7 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
                 
             print(f"Generated Cover Letter: {cl_file}")
             print(f"Generated HTML Cover Letter: {cl_html_file}")
-            convert_to_pdf(cl_file)
+            convert_to_pdf(cl_html_file)
         except Exception as e:
             print(f"Error rendering cover letter template: {e}")
 
