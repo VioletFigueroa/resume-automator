@@ -95,7 +95,7 @@
         "id": "capstone",
         "title": "Premium House Lights: The Heist",
         "date": "May 2025",
-        "executive_summary": "Led incident response and forensic investigation of a real-world data breach.",
+        "executive_summary": "Led incident response and forensic investigation of a simulated data breach.",
         "business_impact": "Resulted in company-wide adoption of network segmentation and improved access controls.",
         "bullets": [
           "Identified root causes (unrestricted file upload, flat network architecture, excessive privileges).",
