@@ -93,25 +93,23 @@
     "cyber": [
       {
         "id": "capstone",
-        "title": "Capstone: Premium House Lights Forensics",
+        "title": "Premium House Lights: The Heist",
         "date": "May 2025",
-        "executive_summary": "Led a full-scale incident response simulation for a ransomware attack, coordinating forensic analysis and regulatory compliance.",
-        "business_impact": "Delivered a legal-grade remediation plan that addressed GDPR/PCI liabilities and provided a roadmap to restore business continuity.",
+        "executive_summary": "Led incident response and forensic investigation of a real-world data breach.",
+        "business_impact": "Resulted in company-wide adoption of network segmentation and improved access controls.",
         "bullets": [
-          "Led a simulated ransomware/extortion response, performing forensic analysis using Splunk, Wireshark, and Volatility.",
-          "Mapped 8-12 attacker movement paths using MITRE ATT&CK and determined regulatory impacts (GDPR, PCI).",
-          "Authored executive remediation plan with multi-phase security recommendations."
+          "Identified root causes (unrestricted file upload, flat network architecture, excessive privileges).",
+          "Performed log and network analysis, and delivered actionable security recommendations to executive leadership."
         ],
         "url": "https://github.com/VioletFigueroa/Premium-House-Lights"
       },
       {
         "id": "p3",
-        "title": "P3: LogHawk \u2013 Log Hunting Tool",
+        "title": "LogHawk \u2013 Security Log Monitoring Tool",
         "date": "Dec 2024",
-        "executive_summary": "Developed an automated threat detection tool to accelerate log analysis and identify indicators of compromise.",
-        "business_impact": "Reduced manual log review time by automating the detection of suspicious patterns, enabling faster incident response.",
+        "executive_summary": "Developed a custom log monitoring tool for detecting suspicious activity in enterprise environments.",
+        "business_impact": "Automated detection of anomalies and potential threats, improving incident response times and reducing false positives.",
         "bullets": [
-          "Developed \"LogHawk\", a script-based log analysis tool to automate detection of suspicious activity.",
           "Utilized Python and Bash to parse system logs and identify potential threats.",
           "Published as open-source code on GitHub, demonstrating secure coding and automation skills."
         ],
@@ -143,12 +141,12 @@
       },
       {
         "id": "p9",
-        "title": "P9: Investigation & Research Report",
+        "title": "Intellectual Property Theft Investigation",
         "date": "Mar 2025",
-        "executive_summary": "Produced a detailed threat intelligence report analyzing specific threat actor TTPs (Tactics, Techniques, and Procedures).",
-        "business_impact": "Enhanced organizational threat awareness by mapping potential attacks to the Cyber Kill Chain, informing proactive defense strategies.",
+        "executive_summary": "Conducted full-scope digital forensics investigation of IP theft.",
+        "business_impact": "Delivered comprehensive report with step-by-step methodology and remediation plan, strengthening organizational incident response.",
         "bullets": [
-          "Produced a detailed investigation report on threat actors using the Cyber Kill Chain and Diamond Model."
+          "Used memory analysis, event log review, and network traffic analysis to uncover brute-force attack, malware deployment, and data exfiltration."
         ],
         "url": "https://github.com/VioletFigueroa/Digital-Forensics-Case-Study"
       },
