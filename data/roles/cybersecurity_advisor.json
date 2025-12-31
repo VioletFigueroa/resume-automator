@@ -1,0 +1,20 @@
+{
+  "role_title": "Cybersecurity Advisor",
+  "summary_type": "general",
+  "recipient": {
+    "name": "Victor A Som",
+    "title": "CEO",
+    "company": "SCM Syscorman, Inc.",
+    "address": "Danville, CA 94506, USA"
+  },
+  "project_ids": [
+    "p11",
+    "p7",
+    "p5",
+    "p6",
+    "capstone",
+    "p9",
+    "p2",
+    "p4"
+  ]
+}

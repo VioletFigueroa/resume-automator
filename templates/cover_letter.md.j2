@@ -8,7 +8,12 @@
 
 **Re:** Application for {{ role_title }} Position
 
-Dear Hiring Manager,
+**To:** {{ recipient.name }}{% if recipient.title %}, {{ recipient.title }}{% endif %}
+{% if recipient.company %}{{ recipient.company }}
+{% endif %}{% if recipient.address %}{{ recipient.address }}
+{% endif %}
+
+Dear {{ recipient.name }},
 
 I am writing to express my strong interest in the {{ role_title }} position. As a {{ basics.label }} with a background in {{ background_context }}, I am excited about the opportunity to contribute to your team's security posture.
 

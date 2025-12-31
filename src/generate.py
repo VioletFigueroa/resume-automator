@@ -131,6 +131,13 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
     
     # 3. Tailor Data
     context = tailor_data(profile_data, role_config)
+    recipient = role_config.get('recipient', {}) if role_config else {}
+    context['recipient'] = {
+        'name': recipient.get('name', 'Hiring Manager'),
+        'title': recipient.get('title', ''),
+        'company': recipient.get('company', ''),
+        'address': recipient.get('address', ''),
+    }
     
     # 4. Render Resume Template
     env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))

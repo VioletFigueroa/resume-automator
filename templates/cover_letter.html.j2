@@ -123,12 +123,17 @@
 
     <div class="meta-info">
         <div class="date">{{ date }}</div>
-        <div class="recipient">Hiring Manager</div>
+        <div class="recipient">
+            {{ recipient.name }}
+            {% if recipient.title %}<br>{{ recipient.title }}{% endif %}
+            {% if recipient.company %}<br>{{ recipient.company }}{% endif %}
+            {% if recipient.address %}<br>{{ recipient.address }}{% endif %}
+        </div>
         <div class="subject">Re: Application for {{ role_title }} Position</div>
     </div>
 
     <div class="content">
-        <p>Dear Hiring Manager,</p>
+        <p>Dear {{ recipient.name }},</p>
 
         <p>I am writing to express my strong interest in the {{ role_title }} position. As a {{ basics.label }} with a background in {{ background_context }}, I am excited about the opportunity to contribute to your team's security posture.</p>
 
