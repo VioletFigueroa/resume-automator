@@ -1,55 +1,183 @@
 # Resume Automator
 
-A Python-based tool to generate tailored resumes and cover letters from a main profile database.
+Generate tailored resumes and cover letters from a single profile database.
 
 ## Features
-- **Main Data Source:** Single JSON file (`data/main_profile.json`) containing all career history.
-- **Role-Based Tailoring:** JSON configurations define which projects and summaries to use for specific job roles.
-- **Automated Generation:** Generates Markdown resumes and cover letters for all configured roles in seconds.
-- **PDF Conversion:** Supports converting HTML to PDF using `WeasyPrint` for high-fidelity styling.
-- **PII Protection:** Built-in support for separating public template data from private personal information.
 
-## Data Privacy & Security
-This project is designed with security in mind to prevent accidental leakage of Personally Identifiable Information (PII) such as phone numbers and email addresses.
+- ✅ Single source of truth (JSON profile)
+- ✅ Role-based customization
+- ✅ Markdown + PDF output
+- ✅ PII protection built-in
+- ✅ Fast generation
+- ✅ Template-based
 
-- **Public Data (`data/main_profile.json`):** This file is committed to the repository and should only contain placeholder or redacted information (e.g., `email@example.com`).
-- **Private Data (`private/main_profile.json`):** The generator looks for this file first. It is added to `.gitignore` by default.
-- **Workflow:**
-    1. Copy the template: `cp data/main_profile.json private/main_profile.json`
-    2. Add your real contact details to the file in `private/`.
-    3. Run the generator. It will use your private data for the local files, but your secrets remain safe from `git push`.
+## Quick Start
+
+```bash
+# 1. Install dependencies
+pip install jinja2 weasyprint
+
+# 2. Setup private data
+mkdir private
+cp data/main_profile.json private/main_profile.json
+
+# 3. Edit with your details
+# Edit private/main_profile.json
+
+# 4. Generate
+python3 src/generate.py
+
+# 5. Find outputs
+# Check output/ directory
+```
+
+## How It Works
+
+1. Loads your profile from `private/main_profile.json`
+2. Reads role configurations from `data/roles/`
+3. Uses Jinja2 templates to generate documents
+4. Creates markdown and PDF versions
+5. Saves to `output/` directory
+
+## Security
+
+- **Public Data** (`data/`): Example/placeholder data only
+- **Private Data** (`private/`): Your real information (git-ignored)
+- **Workflow**: Tool uses private data locally, keeps secrets safe
+
+## Installation
+
+### Prerequisites
+
+- Python 3.8+
+- WeasyPrint (requires system dependencies)
+
+### Setup
+
+```bash
+# Clone
+git clone https://github.com/VioletFigueroa/resume-automator.git
+cd resume-automator
+
+# Install
+pip install -r requirements.txt
+
+# Configure
+mkdir private
+cp data/main_profile.json private/main_profile.json
+# Edit private/main_profile.json with your real details
+```
 
 ## Usage
 
-1.  **Setup:**
-    ```bash
-    pip install jinja2 weasyprint
-    # Note: WeasyPrint requires additional system dependencies (e.g., pango, cairo)
-    # On Arch Linux: sudo pacman -S python-weasyprint
-    ```
+```bash
+# Generate all configured resumes
+python3 src/generate.py
 
-2.  **Personalize:**
-    To use your own data without committing it, create a `private/` folder and add your `main_profile.json` there. The script will prioritize this file over the example data.
-    ```bash
-    mkdir private
-    cp data/main_profile.json private/main_profile.json
-    # Edit private/main_profile.json with your real details
-    ```
-
-3.  **Run:**
-    ```bash
-    python3 src/generate.py
-    ```
-
-4.  **Output:**
-    Check the `output/` directory for generated files.
+# Output files
+# resume_RoleName.md
+# resume_RoleName.html
+# cover_letter_RoleName.md
+# cover_letter_RoleName.html
+```
 
 ## Directory Structure
-- `data/`: Contains example `main_profile.json` and `roles/` configurations.
-- `private/`: (Ignored by Git) Place your real `main_profile.json` here.
-- `templates/`: Jinja2 templates for resumes and cover letters.
-- `src/`: Python source code.
-- `output/`: (Ignored by Git) Generated artifacts.
+
+```
+resume-automator/
+├── data/                    # Public example data
+│   ├── main_profile.json   # Profile template
+│   └── roles/              # Role configurations
+├── private/                # Private data (git-ignored)
+│   └── main_profile.json   # Your real profile
+├── templates/              # Jinja2 templates
+│   ├── resume.md
+│   ├── resume.html
+│   ├── cover_letter.md
+│   └── cover_letter.html
+├── src/                    # Python source code
+│   ├── generate.py         # Main generator
+│   └── ...
+├── output/                 # Generated files (git-ignored)
+└── README.md
+```
+
+## Configuration
+
+### Profile Format
+
+`data/main_profile.json`:
+```json
+{
+  "name": "Your Name",
+  "email": "your@example.com",
+  "phone": "+1-555-0000",
+  "experience": [
+    {
+      "title": "Role Title",
+      "company": "Company",
+      "period": "2020-2023",
+      "description": "What you did"
+    }
+  ],
+  "skills": ["Python", "JavaScript", ...]
+}
+```
+
+### Role Configuration
+
+`data/roles/job_title.json`:
+```json
+{
+  "name": "Job Title",
+  "include_projects": ["project1", "project2"],
+  "include_summaries": ["summary1"],
+  "highlight_skills": ["python", "devops"]
+}
+```
+
+## PDF Generation
+
+WeasyPrint requires system dependencies:
+
+```bash
+# macOS
+brew install python-weasyprint
+
+# Ubuntu/Debian
+sudo apt install python3-weasyprint
+
+# Arch
+sudo pacman -S python-weasyprint
+```
+
+## Troubleshooting
+
+**PDF generation fails:**
+- Install WeasyPrint system dependencies
+- Check PDF permission in output directory
+
+**Missing data:**
+- Ensure `private/main_profile.json` exists
+- Check JSON formatting is valid
+- Verify paths in role configs
+
+**Generation is slow:**
+- PDF generation takes time
+- Use dry-run mode to skip PDF
+
+## Development
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for development guidelines.
+
+## License
+
+MIT License - see [LICENSE](./LICENSE)
 
 ## Author
-Violet Figueroa
+
+[Violet Figueroa](https://github.com/VioletFigueroa)
+
+---
+
+**Questions?** Check [docs/](./docs/) or open an issue.
