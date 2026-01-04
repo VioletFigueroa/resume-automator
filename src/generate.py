@@ -177,6 +177,10 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
         context['date'] = date.today().strftime("%B %d, %Y")
         context['role_title'] = role_config.get('role_title', 'Cyber Security Analyst')
         
+        # Add cover_letter_context to template context if present
+        if 'cover_letter_context' in role_config:
+            context['cover_letter_context'] = role_config['cover_letter_context']
+        
         # Determine background context based on summary type
         summary_type = role_config.get('summary_type', 'general')
         if summary_type == 'appsec':
@@ -187,10 +191,13 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
             context['background_context'] = "incident response and vulnerability management"
 
         try:
-            cl_template = env.get_template('cover_letter.md.j2')
+            # Allow custom template selection from role config
+            cl_template_name = role_config.get('cover_letter_template', 'cover_letter.md.j2')
+            cl_template = env.get_template(cl_template_name)
             cl_content = cl_template.render(context)
             
-            cl_html_template = env.get_template('cover_letter.html.j2')
+            cl_html_template_name = role_config.get('cover_letter_html_template', 'cover_letter.html.j2')
+            cl_html_template = env.get_template(cl_html_template_name)
             cl_html_content = cl_html_template.render(context)
             
             base_filename_cl = f"{candidate_name} - {role_title} - Cover Letter"

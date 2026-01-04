@@ -1,0 +1,72 @@
+# Violet Figueroa
+{{ basics.location }} | {{ basics.phone }} | {{ basics.email }}
+[LinkedIn]({{ basics.linkedin }}) | [GitHub]({{ basics.github }}) | [Portfolio]({{ basics.portfolio }})
+
+---
+
+**Date:** {{ date }}
+
+**Re:** Application for {{ role_title }} Position
+
+**To:** {{ recipient.name }}{% if recipient.title %}, {{ recipient.title }}{% endif %}
+{% if recipient.company %}
+{{ recipient.company }}
+{% endif %}{% if recipient.address %}
+{{ recipient.address }}
+{% endif %}
+
+Dear {{ recipient.name }},
+
+I am writing to express my strong interest in the {{ role_title }} position at WorkSafeBC. {% if cover_letter_context and cover_letter_context.connection_statement %}{{ cover_letter_context.connection_statement }}{% endif %}
+
+As a {{ basics.label }} with a background in {{ cover_letter_context.background_context if cover_letter_context else background_context }}, I bring both practical security experience and strong development fundamentals that directly support this role's requirements.
+
+## Why I'm a Strong Candidate
+
+{{ summary }}
+
+{% if cover_letter_context and cover_letter_context.key_strengths %}
+My relevant experience includes:
+
+{% for strength in cover_letter_context.key_strengths %}
+- {{ strength }}
+{% endfor %}
+{% endif %}
+
+## Relevant Projects & Experience
+
+In my recent work, I have focused on building secure applications and understanding security from both defensive and development perspectives:
+
+{% for project in projects[:3] %}
+- **{% if project.url %}[{{ project.title }}]({{ project.url }}){% else %}{{ project.title }}{% endif %}:** {{ project.bullets[0] }}
+{% endfor %}
+
+{% if cover_letter_context and cover_letter_context.alignment_points %}
+## How I Align with WorkSafeBC's Needs
+
+{% for point in cover_letter_context.alignment_points %}
+- {{ point }}
+{% endfor %}
+{% endif %}
+
+{% if cover_letter_context and cover_letter_context.transparency_framing %}
+## Transparency About My Experience
+
+{{ cover_letter_context.transparency_framing }}
+
+{% if cover_letter_context.learning_areas %}
+Specifically, I recognize growth opportunities in:
+
+{% for area in cover_letter_context.learning_areas %}
+- {{ area }}
+{% endfor %}
+{% endif %}
+{% endif %}
+
+I am drawn to this Security Engineer I role because it represents the perfect balance: leveraging my existing security knowledge and development skills while growing into enterprise application security practices under experienced mentorship. My track record of rapid skill acquisition, combined with genuine enthusiasm for WorkSafeBC's mission, positions me to contribute meaningfully while developing into the full scope of this position.
+
+I would welcome the opportunity to discuss how my combination of practical security experience, development background, and commitment to continuous learning can serve WorkSafeBC's application security needs. Thank you for your consideration.
+
+Sincerely,
+
+Violet Figueroa

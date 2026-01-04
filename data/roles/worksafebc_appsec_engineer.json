@@ -1,0 +1,49 @@
+{
+  "role_title": "Security Engineer I (Application Security Engineer)",
+  "summary_type": "appsec",
+  "cover_letter_template": "cover_letter_worksafebc.md.j2",
+  "project_ids": [
+    "tinyapp",
+    "lightbnb",
+    "tweeter",
+    "p11",
+    "p6",
+    "p3",
+    "perplexport",
+    "debian_homelab"
+  ],
+  "company": "WorkSafeBC",
+  "recipient": {
+    "name": "Hiring Manager",
+    "company": "WorkSafeBC",
+    "address": "Richmond, BC"
+  },
+  "cover_letter_context": {
+    "background_context": "secure application development, threat modeling, and security testing",
+    "connection_statement": "As someone who has directly benefited from WorkSafeBC's support during my time working at SFU Dining Hall, I have a deep personal appreciation for the organization's mission to protect British Columbia's workers. This connection drives my enthusiasm to contribute to the security of systems that serve such a critical purpose.",
+    "key_strengths": [
+      "Strong foundation in secure coding practices (OWASP Top 10) through hands-on web development",
+      "Hands-on experience with web security testing tools including BurpSuite and OWASP ZAP through TryHackMe Cyber Security 101 certification (45+ hours)",
+      "Experience with SAST concepts through projects like TinyApp and LightBnB that prioritize input validation and SQL injection prevention",
+      "Practical understanding of application security testing methodologies from cybersecurity bootcamp labs",
+      "Completed threat modeling exercise for AI technologies through TryHackMe Advent of Cyber 2025",
+      "Strong network analysis skills with Nmap and Wireshark demonstrated across multiple projects",
+      "Self-taught Python and JavaScript developer with continuous learning mindset",
+      "Experience with Docker, Linux systems, and cloud technologies through personal homelab projects"
+    ],
+    "learning_areas": [
+      "While I have foundational hands-on experience with BurpSuite and web security testing from TryHackMe labs, I am eager to develop deeper expertise in enterprise-level usage including advanced features, automated scanning, and integration into CI/CD pipelines",
+      "I am eager to expand my practical experience with SonarQube and Mend for comprehensive SAST and SCA in enterprise environments",
+      "I am committed to growing my knowledge of Azure cloud security configurations and policies, building on my Docker and Linux experience",
+      "I have completed an AI threat modeling exercise through Advent of Cyber 2025 and am eager to deepen my expertise in threat modeling for complex AI technologies and enterprise applications",
+      "I have strong motivation to develop penetration testing skills under senior engineers' mentorship, building on my foundation in web security testing"
+    ],
+    "alignment_points": [
+      "My work at Accessible Places demonstrates my ability to implement security controls and work with distributed teams in a remote environment",
+      "My experience building secure web applications with input validation, authentication, and parameterized queries directly supports secure coding standards development",
+      "My familiarity with NIST, OWASP Top 10, and MITRE ATT&CK frameworks provides a strong foundation for reviewing designs and conducting threat modeling",
+      "My background in both development and security positions me to effectively communicate with cross-functional teams and provide practical guidance to developers"
+    ],
+    "transparency_framing": "I want to be transparent about where my experience stands: I meet the educational requirements and have built a strong foundation in application security principles through hands-on projects, certifications, and 45+ hours of practical tool training including BurpSuite through TryHackMe. While I may not have 4 years of focused information security work experience in a traditional enterprise setting, I bring 1.5 years of practical cybersecurity work, extensive self-directed learning with tools directly relevant to this role (BurpSuite, OWASP ZAP, Nmap, Wireshark), and proven ability to rapidly acquire new technical skills. I have hands-on experience with web application testing and threat modeling concepts, including AI threat modeling from Advent of Cyber 2025. I am eager to grow into the full scope of this role under the guidance of your senior engineers, bringing enthusiasm, strong fundamentals, and a commitment to continuous learning."
+  }
+}
