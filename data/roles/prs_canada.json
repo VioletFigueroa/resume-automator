@@ -2,6 +2,8 @@
   "role_title": "IT Asset Management & Data Security Specialist",
   "summary_type": "prs_canada",
   "company_focus": "secure data destruction, IT asset remarketing, and sustainable electronics recycling",
+  "prospective_outreach": false,
+  "sanitization_standard": "NIST 800-88",
   "project_ids": [
     "capstone",
     "lightbnb",

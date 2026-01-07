@@ -6,7 +6,7 @@
 
 **Date:** {{ date }}
 
-**Re:** Application for {{ role_title }} Position
+**Re:** {% if prospective_outreach %}Exploring Opportunities in {{ role_title }}{% else %}Application for {{ role_title }} Position{% endif %}
 
 **To:** {{ recipient.name }}{% if recipient.title %}, {{ recipient.title }}{% endif %}
 {% if recipient.company %}{{ recipient.company }}
@@ -15,18 +15,38 @@
 
 Dear {{ recipient.name }},
 
+{% if prospective_outreach %}
+I’m reaching out to express interest in upcoming opportunities at {{ recipient.company or 'your organization' }}. As a {{ basics.label }} and a PRS customer, I value your commitment to {{ company_focus or 'secure operations and environmental stewardship' }}. I’d welcome a brief conversation to explore where my background in forensic data handling and chain-of-custody could support your team.
+{% else %}
 I am writing to express my strong interest in the {{ role_title }} position. As a {{ basics.label }} with a background in {{ background_context }}, I am excited about the opportunity to contribute to your team's security posture.
+{% endif %}
 
 {{ summary }}
+
+{% if summary_type == 'prs_canada' or company_focus %}
+**Why {{ recipient.company or 'your company' }}?**
+
+Your company’s commitment to {{ company_focus or 'secure operations and responsible technology practices' }} aligns with my experience in forensic data handling, {{ sanitization_standard }}-aligned data-wiping protocols, and chain-of-custody procedures.
+
+**How I can help**
+- Codify documented, auditable {{ sanitization_standard }}-aligned sanitization SOPs and verification checklists.
+- Tighten chain-of-custody logging with clearer handoff points and tamper-evident documentation.
+- Create simple client-facing destruction/remarketing reports (before/after device state, certs, wipe IDs).
+- Produce short privacy/sustainability explainer content for customers and partners.
+{% endif %}
 
 In my recent work, I have focused heavily on practical, hands-on security operations:
 {% for project in projects[:2] %}
 - **{% if project.url %}[{{ project.title }}]({{ project.url }}){% else %}{{ project.title }}{% endif %}:** {{ project.bullets[0] }}
 {% endfor %}
 
-My technical foundation in {{ skills.security_tools[:3]|join(', ') }} and {{ skills.programming[:2]|join(', ') }} allows me to bridge the gap between theoretical security concepts and real-world implementation. I am particularly drawn to this role because it aligns with my passion for proactive defense and continuous improvement.
+My technical foundation in {{ skills.security_tools[:3]|join(', ') }} and {{ skills.programming[:2]|join(', ') }} allows me to bridge the gap between theoretical security concepts and real-world implementation.
 
+{% if prospective_outreach %}
+If helpful, I’m available for a 15–20 minute chat this week or next. Thank you for your time—I’m excited about {{ recipient.company or 'your organization' }}’s mission and how I can contribute.
+{% else %}
 I would welcome the opportunity to discuss how my skills and experience align with your needs. Thank you for your time and consideration.
+{% endif %}
 
 Sincerely,
 

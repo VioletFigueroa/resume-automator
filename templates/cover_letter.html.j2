@@ -135,24 +135,36 @@
             {% if recipient.company %}<br>{{ recipient.company }}{% endif %}
             {% if recipient.address %}<br>{{ recipient.address }}{% endif %}
         </div>
-        <div class="subject">Re: Application for {{ role_title }} Position</div>
+        <div class="subject">{% if prospective_outreach %}Re: Exploring Opportunities in {{ role_title }}{% else %}Re: Application for {{ role_title }} Position{% endif %}</div>
     </div>
 
     <div class="content">
         <p>Dear {{ recipient.name }},</p>
 
+        {% if prospective_outreach %}
+        <p>I’m reaching out to express interest in upcoming opportunities at {{ recipient.company or 'your organization' }}. As a {{ basics.label }} and a PRS customer, I value your commitment to {{ company_focus or 'secure operations and environmental stewardship' }}. I’d welcome a brief conversation to explore where my background in forensic data handling and chain‑of‑custody could support your team.</p>
+        {% else %}
         <p>I am writing to express my strong interest in the {{ role_title }} position. As a {{ basics.label }} with a background in {{ background_context }}, I am excited about the opportunity to contribute to your team's security posture.</p>
+        {% endif %}
 
         <p>{{ summary }}</p>
 
         {% if summary_type == 'prs_canada' or company_focus %}
         <h3>Why {{ recipient.company or 'your company' }}?</h3>
-        <p>Your company's commitment to {{ company_focus or 'secure operations and responsible technology practices' }} directly aligns with my experience in forensic data handling, certified data-wiping protocols, and chain-of-custody procedures. I value environmentally responsible asset remarketing and privacy-first data practices, and I am eager to support these priorities.</p>
+        <p>Your company's commitment to {{ company_focus or 'secure operations and responsible technology practices' }} directly aligns with my experience in forensic data handling, {{ sanitization_standard }}‑aligned data‑wiping protocols, and chain‑of‑custody procedures. I value environmentally responsible asset remarketing and privacy‑first data practices, and I am eager to support these priorities.</p>
+
+        <h3>How I Can Help</h3>
+        <ul>
+            <li>Codify documented, auditable {{ sanitization_standard }}‑aligned sanitization SOPs and verification checklists.</li>
+            <li>Tighten chain‑of‑custody logging with clearer handoff points and tamper‑evident documentation.</li>
+            <li>Create simple client‑facing destruction/remarketing reports (before/after device state, certs, wipe IDs).</li>
+            <li>Produce short privacy/sustainability explainer content for customers and partners.</li>
+        </ul>
 
         <h3>Relevant Expertise</h3>
         <ul>
             <li><strong>Forensic Data Handling & Security Analysis:</strong> Experienced with {{ skills.security_tools[:3]|join(', ') }} and reporting practices that protect confidentiality and integrity.</li>
-            <li><strong>Certified Data Wiping & Chain of Custody:</strong> Hands-on work with verification, documentation, and lifecycle controls to ensure secure sanitization throughout asset handling.</li>
+            <li><strong>Certified Data Wiping & Chain of Custody:</strong> Hands‑on work with verification, documentation, and lifecycle controls to ensure secure sanitization throughout asset handling.</li>
             {% if 'Shopify' in skills.programming %}
             <li><strong>Ecommerce/Web Security:</strong> Full‑stack experience ({{ (skills.programming|select('in', ['Node.js','React','PostgreSQL','Shopify'])|list)|join(', ') }}) with OWASP‑aligned secure coding, including SQL injection prevention and XSS protection.</li>
             {% endif %}
@@ -174,9 +186,13 @@
             {% endfor %}
         </ul>
 
-        <p>My technical foundation in {{ skills.security_tools[:3]|join(', ') }} and {{ skills.programming[:2]|join(', ') }} allows me to bridge the gap between theoretical security concepts and real-world implementation. I am particularly drawn to this role because it aligns with my passion for proactive defense and continuous improvement.</p>
+        <p>My technical foundation in {{ skills.security_tools[:3]|join(', ') }} and {{ skills.programming[:2]|join(', ') }} allows me to bridge the gap between theoretical security concepts and real‑world implementation.</p>
 
+        {% if prospective_outreach %}
+        <p>If helpful, I’m available for a 15–20 minute chat this week or next. Thank you for your time—I’m excited about {{ recipient.company or 'your organization' }}’s mission and how I can contribute.</p>
+        {% else %}
         <p>I would welcome the opportunity to discuss how my skills and experience align with your needs. Thank you for your time and consideration.</p>
+        {% endif %}
     </div>
 
     <div class="signature">

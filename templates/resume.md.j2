@@ -7,6 +7,10 @@
 
 ## Professional Summary
 {{ summary }}
+{% if summary_type == 'prs_canada' %}
+
+**Focus:** {{ sanitization_standard }}–aligned data sanitization, auditable chain-of-custody controls, and client-ready destruction/remarketing documentation; bridges ops security with OWASP-based web/ecommerce practices.
+{% endif %}
 
 ## Technical Skills
 {% for category, skills in skills.items() %}
