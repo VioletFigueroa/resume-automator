@@ -131,6 +131,10 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
     
     # 3. Tailor Data
     context = tailor_data(profile_data, role_config)
+    # Include role-specific flags for templates
+    if role_config_path:
+        context['summary_type'] = role_config.get('summary_type', 'general')
+        context['company_focus'] = role_config.get('company_focus', '')
     recipient = role_config.get('recipient', {}) if role_config else {}
     context['recipient'] = {
         'name': recipient.get('name', 'Hiring Manager'),
@@ -187,6 +191,8 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
             context['background_context'] = "full-stack development and application security"
         elif summary_type == 'healthcare':
             context['background_context'] = "healthcare compliance and secure system administration"
+        elif summary_type == 'prs_canada':
+            context['background_context'] = "forensic data destruction, chain of custody, and IT asset security"
         else:
             context['background_context'] = "incident response and vulnerability management"
 

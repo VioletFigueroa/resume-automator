@@ -97,6 +97,11 @@
             font-family: 'Roboto', sans-serif;
             font-size: 0.9em;
             color: var(--light-text);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            white-space: nowrap; /* prevent breaking email/links */
         }
 
         .contact-separator {
@@ -146,6 +151,7 @@
         ul {
             margin-top: 5px;
             margin-bottom: 5px;
+            word-break: keep-all; /* avoid breaking addresses */
             padding-left: 20px;
         }
 

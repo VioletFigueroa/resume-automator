@@ -52,6 +52,11 @@
             margin-top: 10px;
             font-size: 0.95em;
             color: var(--light-text);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            white-space: nowrap; /* prevent breaking email/links */
         }
 
         .contact-separator {
@@ -62,6 +67,7 @@
         a {
             color: var(--link-color);
             text-decoration: none;
+            word-break: keep-all; /* avoid breaking addresses */
         }
 
         /* Letter Content */
@@ -138,6 +144,20 @@
         <p>I am writing to express my strong interest in the {{ role_title }} position. As a {{ basics.label }} with a background in {{ background_context }}, I am excited about the opportunity to contribute to your team's security posture.</p>
 
         <p>{{ summary }}</p>
+
+        {% if summary_type == 'prs_canada' or company_focus %}
+        <h3>Why {{ recipient.company or 'your company' }}?</h3>
+        <p>Your company's commitment to {{ company_focus or 'secure operations and responsible technology practices' }} directly aligns with my experience in forensic data handling, certified data-wiping protocols, and chain-of-custody procedures. I value environmentally responsible asset remarketing and privacy-first data practices, and I am eager to support these priorities.</p>
+
+        <h3>Relevant Expertise</h3>
+        <ul>
+            <li><strong>Forensic Data Handling & Security Analysis:</strong> Experienced with {{ skills.security_tools[:3]|join(', ') }} and reporting practices that protect confidentiality and integrity.</li>
+            <li><strong>Certified Data Wiping & Chain of Custody:</strong> Hands-on work with verification, documentation, and lifecycle controls to ensure secure sanitization throughout asset handling.</li>
+            {% if 'Shopify' in skills.programming %}
+            <li><strong>Ecommerce/Web Security:</strong> Full‑stack experience ({{ (skills.programming|select('in', ['Node.js','React','PostgreSQL','Shopify'])|list)|join(', ') }}) with OWASP‑aligned secure coding, including SQL injection prevention and XSS protection.</li>
+            {% endif %}
+        </ul>
+        {% endif %}
 
         <p>In my recent work, I have focused heavily on practical, hands-on security operations:</p>
         <ul>

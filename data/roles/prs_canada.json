@@ -1,0 +1,38 @@
+{
+  "role_title": "IT Asset Management & Data Security Specialist",
+  "summary_type": "prs_canada",
+  "company_focus": "secure data destruction, IT asset remarketing, and sustainable electronics recycling",
+  "project_ids": [
+    "capstone",
+    "lightbnb",
+    "p6",
+    "p2",
+    "tweeter",
+    "p10"
+  ],
+  "recipient": {
+    "name": "PRS Canada Hiring Team",
+    "company": "PRS Canada",
+    "address": "Vancouver, BC"
+  },
+  "skills_emphasis": [
+    "Python",
+    "Bash",
+    "Forensics",
+    "Data Destruction",
+    "Chain of Custody",
+    "Linux",
+    "Autopsy",
+    "Volatility",
+    "Wireshark",
+    "Log Analysis",
+    "Risk Management",
+    "Compliance"
+  ],
+  "experience_emphasis": [
+    "Security",
+    "IT Support",
+    "Network Security",
+    "System Hardening"
+  ]
+}
