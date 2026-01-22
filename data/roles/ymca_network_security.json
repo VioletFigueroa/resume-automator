@@ -1,0 +1,40 @@
+{
+  "role_title": "IT Network and Security Analyst",
+  "summary_type": "ymca_network_security",
+  "company_focus": "network infrastructure security, SIEM monitoring, incident response, and regulatory compliance",
+  "prospective_outreach": false,
+  "project_ids": [
+    "capstone",
+    "p6",
+    "p2",
+    "p10",
+    "lightbnb"
+  ],
+  "recipient": {
+    "name": "Hiring Manager",
+    "company": "YMCA BC",
+    "address": "Royal Avenue YMCA, 620 Royal Avenue, New Westminster"
+  },
+  "skills_emphasis": [
+    "Network Security",
+    "SIEM",
+    "Firewalls",
+    "IDS/IPS",
+    "Incident Response",
+    "Vulnerability Management",
+    "Cloud Security",
+    "Azure",
+    "VPN",
+    "Endpoint Protection",
+    "Compliance",
+    "Log Analysis",
+    "Security Monitoring"
+  ],
+  "experience_emphasis": [
+    "Network Administration",
+    "Security Operations",
+    "Incident Response",
+    "Vulnerability Assessment",
+    "Compliance"
+  ]
+}

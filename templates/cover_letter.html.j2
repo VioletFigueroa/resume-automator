@@ -151,6 +151,7 @@
 
         {% if summary_type == 'prs_canada' or company_focus %}
         <h3>Why {{ recipient.company or 'your company' }}?</h3>
+        {% if summary_type == 'prs_canada' %}
         <p>Your company's commitment to {{ company_focus or 'secure operations and responsible technology practices' }} directly aligns with my experience in forensic data handling, {{ sanitization_standard }}‑aligned data‑wiping protocols, and chain‑of‑custody procedures. I value environmentally responsible asset remarketing and privacy‑first data practices, and I am eager to support these priorities.</p>
 
         <h3>How I Can Help</h3>
@@ -169,6 +170,20 @@
             <li><strong>Ecommerce/Web Security:</strong> Full‑stack experience ({{ (skills.programming|select('in', ['Node.js','React','PostgreSQL','Shopify'])|list)|join(', ') }}) with OWASP‑aligned secure coding, including SQL injection prevention and XSS protection.</li>
             {% endif %}
         </ul>
+        {% elif summary_type == 'ymca_network_security' %}
+        <p>YMCA BC's mission to strengthen community foundations through health equity and belonging resonates deeply with my commitment to security as an enabler—not a barrier—to organizational success. I'm drawn to your collaborative, mission-driven culture and excited to help safeguard the systems that support vital community services.</p>
+
+        <h3>How I Can Contribute</h3>
+        <ul>
+            <li>Monitor and maintain network infrastructure (firewalls, VPN, wireless, cloud) ensuring uptime and performance</li>
+            <li>Proactively detect and respond to security incidents using SIEM tools and threat intelligence</li>
+            <li>Perform regular vulnerability assessments and implement remediation strategies aligned with CIS/NIST frameworks</li>
+            <li>Maintain clear documentation and communicate security findings to technical and non-technical stakeholders</li>
+            <li>Support compliance initiatives (PCI-DSS, regulatory requirements) while enabling operational flexibility</li>
+        </ul>
+        {% else %}
+        <p>Your company's commitment to {{ company_focus }} directly aligns with my experience in security operations, risk management, and building robust security controls.</p>
+        {% endif %}
         {% endif %}
 
         <p>In my recent work, I have focused heavily on practical, hands-on security operations:</p>

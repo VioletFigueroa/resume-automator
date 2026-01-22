@@ -26,13 +26,26 @@ I am writing to express my strong interest in the {{ role_title }} position. As 
 {% if summary_type == 'prs_canada' or company_focus %}
 **Why {{ recipient.company or 'your company' }}?**
 
-Your company’s commitment to {{ company_focus or 'secure operations and responsible technology practices' }} aligns with my experience in forensic data handling, {{ sanitization_standard }}-aligned data-wiping protocols, and chain-of-custody procedures.
+{% if summary_type == 'prs_canada' %}
+Your company's commitment to {{ company_focus or 'secure operations and responsible technology practices' }} aligns with my experience in forensic data handling, {{ sanitization_standard }}-aligned data-wiping protocols, and chain-of-custody procedures.
 
 **How I can help**
 - Codify documented, auditable {{ sanitization_standard }}-aligned sanitization SOPs and verification checklists.
 - Tighten chain-of-custody logging with clearer handoff points and tamper-evident documentation.
 - Create simple client-facing destruction/remarketing reports (before/after device state, certs, wipe IDs).
 - Produce short privacy/sustainability explainer content for customers and partners.
+{% elif summary_type == 'ymca_network_security' %}
+YMCA BC's mission to strengthen community foundations through health equity and belonging resonates deeply with my commitment to security as an enabler—not a barrier—to organizational success. I'm drawn to your collaborative, mission-driven culture and excited to help safeguard the systems that support vital community services.
+
+**How I can contribute:**
+- Monitor and maintain network infrastructure (firewalls, VPN, wireless, cloud) ensuring uptime and performance
+- Proactively detect and respond to security incidents using SIEM tools and threat intelligence
+- Perform regular vulnerability assessments and implement remediation strategies aligned with CIS/NIST frameworks
+- Maintain clear documentation and communicate security findings to technical and non-technical stakeholders
+- Support compliance initiatives (PCI-DSS, regulatory requirements) while enabling operational flexibility
+{% else %}
+Your company's commitment to {{ company_focus }} aligns with my experience in security operations, risk management, and building robust security controls.
+{% endif %}
 {% endif %}
 
 In my recent work, I have focused heavily on practical, hands-on security operations:

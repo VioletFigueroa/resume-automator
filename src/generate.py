@@ -195,6 +195,8 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
             context['background_context'] = "healthcare compliance and secure system administration"
         elif summary_type == 'prs_canada':
             context['background_context'] = "forensic data destruction, chain of custody, and IT asset security"
+        elif summary_type == 'ymca_network_security':
+            context['background_context'] = "network security operations, SIEM monitoring, and incident response"
         else:
             context['background_context'] = "incident response and vulnerability management"
 
