@@ -1,0 +1,18 @@
+{
+  "role_title": "SOC Analyst II - Splunk SIEM",
+  "specialization": "Splunk Expert",
+  "summary_type": "general",
+  "job_description": "We are seeking a SOC Analyst II with strong experience in Splunk SIEM platform, threat hunting, log analysis, incident response, and MITRE ATT&CK framework. You will be responsible for monitoring security events, conducting threat hunting investigations, and responding to security incidents. Experience with Splunk queries, field extractions, and data model development is essential. Must have strong knowledge of NIST 800-53 and ability to communicate security findings to executive leadership.",
+  "recipient": {
+    "name": "Hiring Manager",
+    "title": "Security Operations Director",
+    "company": "Example Security Company",
+    "address": "123 Security Street, Vancouver, BC V6B 1A1"
+  },
+  "project_ids": [
+    "capstone",
+    "p3",
+    "p11"
+  ],
+  "cover_letter_context": "My experience leading forensic investigations and implementing security monitoring systems makes me well-suited for this SOC analyst role. I'm particularly interested in your organization's commitment to proactive threat hunting and continuous security improvement."
+}
