@@ -1,0 +1,59 @@
+{
+  "role_title": "Incident Response Analyst",
+  "specialization": "Threat Hunter",
+  "job_description": "We are seeking an Incident Response Analyst with 3+ years of hands-on IR experience. Responsibilities include leading incident investigations, coordinating response efforts across teams, training junior analysts on forensics techniques, and reducing mean time to detect/respond. Strong knowledge of MITRE ATT&CK, forensic analysis, and threat hunting required. Team collaboration skills essential.",
+  "recipient": {
+    "name": "Security Leadership",
+    "title": "Security Operations Director",
+    "company": "TechSec Corp",
+    "address": "500 Security Ave, Toronto, ON"
+  },
+  "project_ids": ["capstone", "p6", "p8"],
+  "achievements_with_metrics": [
+    {
+      "responsibility": "Led forensic investigations and incident response across enterprise infrastructure",
+      "metrics": {
+        "incidents_resolved": "50+",
+        "mttd_improvement": "65%",
+        "scope": "enterprise infrastructure",
+        "team_size": 8,
+        "awareness_improvement": "50%",
+        "root_causes_identified": 50,
+        "recurrence_rate": "0%"
+      }
+    },
+    {
+      "responsibility": "Implemented threat hunting program using MITRE ATT&CK framework",
+      "metrics": {
+        "threats_detected_early": "30+",
+        "detection_rate": "95%",
+        "false_positive_reduction": "80%",
+        "hunting_hours_saved": "20 hours",
+        "automation_percent": "70%",
+        "junior_analysts_trained": 6
+      }
+    },
+    {
+      "responsibility": "Trained incident response team on forensic analysis and containment procedures",
+      "metrics": {
+        "team_members_trained": 12,
+        "certification_rate": "75%",
+        "response_time_improvement": "45%",
+        "team_satisfaction": "92%",
+        "promotions_enabled": 3
+      }
+    },
+    {
+      "responsibility": "Coordinated cross-functional response to critical security breach",
+      "metrics": {
+        "containment_time_hours": 4,
+        "systems_protected": 500,
+        "data_breaches_prevented": 1,
+        "recovery_time_hours": 12,
+        "cost_avoided": "$5M+",
+        "team_size": 15,
+        "communication_improvement": "60%"
+      }
+    }
+  ]
+}

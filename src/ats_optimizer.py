@@ -5,31 +5,36 @@ Provides functions to enhance resume quality for ATS systems:
 - Skills reordering by relevance
 - Keyword extraction from job descriptions
 - Impact metrics formatting
+- Impact bullet variants (Phase 2)
 """
 
 import re
 from typing import Dict, List, Any, Optional, Tuple
 from collections import Counter
 
-# ACTION VERBS FOR RESUME BULLETS
-STRONG_ACTION_VERBS = {
+# ACTION VERBS FOR RESUME BULLETS - ORGANIZED BY IMPACT TYPE
+ACTION_VERBS_BY_IMPACT = {
     'security': [
         'Implemented', 'Configured', 'Deployed', 'Established', 'Secured',
         'Detected', 'Investigated', 'Analyzed', 'Identified', 'Mitigated',
         'Patched', 'Hardened', 'Monitored', 'Audited', 'Remediated',
-        'Eliminated', 'Reduced', 'Prevented', 'Fortified', 'Strengthened'
+        'Eliminated', 'Reduced', 'Prevented', 'Fortified', 'Strengthened',
+        'Responded', 'Contained', 'Closed', 'Isolated', 'Resolved'
     ],
     'efficiency': [
         'Automated', 'Streamlined', 'Optimized', 'Accelerated', 'Reduced',
-        'Eliminated', 'Decreased', 'Saved', 'Improved', 'Enhanced'
+        'Eliminated', 'Decreased', 'Saved', 'Improved', 'Enhanced',
+        'Scaled', 'Maximized', 'Minimized', 'Simplified', 'Consolidated'
     ],
     'team': [
         'Trained', 'Mentored', 'Led', 'Coordinated', 'Managed', 'Directed',
-        'Guided', 'Coached', 'Collaborated', 'Facilitated', 'Supported'
+        'Guided', 'Coached', 'Collaborated', 'Facilitated', 'Supported',
+        'Organized', 'Developed', 'Established', 'Built', 'Fostered'
     ],
-    'development': [
-        'Built', 'Developed', 'Created', 'Designed', 'Engineered',
-        'Architected', 'Implemented', 'Deployed', 'Released', 'Launched'
+    'business': [
+        'Increased', 'Enhanced', 'Improved', 'Boosted', 'Maximized',
+        'Achieved', 'Surpassed', 'Delivered', 'Generated', 'Captured',
+        'Reduced', 'Saved', 'Cut', 'Decreased', 'Minimized'
     ]
 }
 
@@ -64,6 +69,30 @@ JOB_KEYWORD_MAPPINGS = {
         'tools': ['AWS Security', 'Azure Security', 'Google Cloud Security', 'CloudTrail'],
         'concepts': ['cloud security', 'infrastructure security', 'cloud compliance', 'identity management'],
         'frameworks': ['CIS Benchmarks', 'Cloud Security Alliance', 'ISO 27001']
+    }
+}
+
+# IMPACT ANGLE TEMPLATES
+IMPACT_TEMPLATES = {
+    'security': {
+        'template': "Implemented {responsibility} across {scope}, reducing security incidents by {metric} and {outcome}.",
+        'keywords': ['secure', 'incident', 'threat', 'vulnerability', 'protection', 'detection', 'response'],
+        'verbs': ACTION_VERBS_BY_IMPACT['security'][:5]
+    },
+    'efficiency': {
+        'template': "Automated {responsibility} across {scope}, reducing manual work by {metric} and increasing efficiency by {outcome}.",
+        'keywords': ['automated', 'streamlined', 'optimized', 'faster', 'improved', 'reduced'],
+        'verbs': ACTION_VERBS_BY_IMPACT['efficiency'][:5]
+    },
+    'team': {
+        'template': "Trained {num_people} team members on {responsibility}, increasing awareness by {metric} and {outcome}.",
+        'keywords': ['trained', 'team', 'people', 'collaboration', 'knowledge', 'culture'],
+        'verbs': ACTION_VERBS_BY_IMPACT['team'][:5]
+    },
+    'business': {
+        'template': "Delivered {responsibility} achieving {metric} improvement in {outcome} and business value.",
+        'keywords': ['achieved', 'delivered', 'generated', 'increased', 'improved', 'value'],
+        'verbs': ACTION_VERBS_BY_IMPACT['business'][:5]
     }
 }
 
@@ -234,77 +263,100 @@ def reorder_skills_by_job(
     return [skill for skill, score in sorted_skills[:max_skills]]
 
 
-def generate_impact_bullets(
+def generate_impact_variants(
     responsibility: str,
     metrics: Dict[str, Any] = None,
-    impact_type: str = 'security'
-) -> List[str]:
+    job_description: str = None,
+    context: str = None
+) -> Dict[str, Any]:
     """
-    Generate multiple bullet point variants for a single responsibility.
+    Generate multiple bullet point variants with different impact angles.
     
-    Creates 3-4 variants emphasizing different impact angles:
-    - Security impact (for security roles)
-    - Efficiency impact (for ops/IT roles)
-    - Team/process impact (for leadership roles)
-    - Business impact (for executive-facing roles)
+    NEW IN PHASE 2: Creates 3-4 variants emphasizing:
+    - Security impact (risks eliminated, incidents prevented)
+    - Efficiency impact (time saved, processes automated)
+    - Team impact (people trained, collaboration improved)
+    - Business impact (value delivered, metrics improved)
     
     Args:
         responsibility (str): The main responsibility/achievement
-        metrics (Dict[str, Any]): Optional metrics (percentage, count, time saved, etc.)
-        impact_type (str): Primary impact type ('security', 'efficiency', 'team', 'business')
+        metrics (Dict[str, Any]): Optional metrics (percentage, count, time, etc.)
+        job_description (str): Optional job posting for keyword matching
+        context (str): Optional additional context
     
     Returns:
-        List[str]: 3-4 bullet variants
+        Dict[str, Any]: Contains 'variants' list and 'scores' for each angle
     
     Example:
-        >>> bullets = generate_impact_bullets(
+        >>> impact = generate_impact_variants(
         ...     "Configured firewall and MFA across 30 endpoints",
-        ...     {'incidents_reduced': '100%', 'endpoints': 30},
-        ...     'security'
+        ...     {'incidents_reduced': '100%', 'endpoints': 30, 'team_size': 30},
+        ...     "SOC analyst role with security focus"
         ... )
-        >>> for bullet in bullets:
-        ...     print(f"- {bullet}")
+        >>> for angle, bullet in impact['variants'].items():
+        ...     print(f"{angle}: {bullet}")
     """
     metrics = metrics or {}
-    variants = []
+    job_lower = (job_description or '').lower()
     
-    # Variant 1: Security Impact
-    if impact_type == 'security' or 'incidents_reduced' in metrics:
-        reduction = metrics.get('incidents_reduced', 'X%')
-        endpoints = metrics.get('endpoints', 'all')
-        bullet = f"Implemented advanced security controls across {endpoints} endpoints, "
-        bullet += f"reducing security incidents by {reduction} and eliminating compromise risks."
-        variants.append(bullet)
+    # Determine which angles are most relevant
+    angles_to_generate = ['security', 'efficiency', 'team', 'business']
     
-    # Variant 2: Efficiency/Process Impact
-    if 'time_saved' in metrics or 'automation_percent' in metrics:
-        time = metrics.get('time_saved', 'X hours')
-        autom = metrics.get('automation_percent', 'X%')
-        bullet = f"Automated security operations across {metrics.get('scope', 'the infrastructure')}, "
-        bullet += f"reducing manual work by {time} per week and increasing automation to {autom}."
-        variants.append(bullet)
+    variants = {}
+    scores = {}
     
-    # Variant 3: Team/Training Impact
-    if 'team_size' in metrics or 'awareness_improvement' in metrics:
-        team = metrics.get('team_size', 'X')
-        awareness = metrics.get('awareness_improvement', 'X%')
-        bullet = f"Trained {team} team members on security best practices, "
-        bullet += f"increasing phishing awareness scores by {awareness} and reducing user-based incidents."
-        variants.append(bullet)
+    # SECURITY ANGLE
+    if 'incidents' in metrics or 'risks' in metrics or 'vulnerabilities' in metrics or 'incident' in job_lower:
+        incidents = metrics.get('incidents_reduced', metrics.get('risks_mitigated', 'X%'))
+        scope = metrics.get('scope', metrics.get('endpoints', 'systems'))
+        verb = ACTION_VERBS_BY_IMPACT['security'][0]
+        bullet = f"{verb} {responsibility} affecting {scope}, reducing security incidents by {incidents}."
+        variants['security'] = bullet
+        scores['security'] = 1.0 if 'incident' in job_lower else 0.8
     
-    # Variant 4: General (always included)
-    # Extract first strong action verb and enhance with metrics
-    action_verb = next((v for v in STRONG_ACTION_VERBS['security'] if v.lower() in responsibility.lower()), 'Implemented')
-    scope = metrics.get('scope', 'across the organization')
-    outcome = metrics.get('outcome', 'resulting in measurable security improvements')
-    bullet = f"{action_verb} {responsibility}, {outcome}."
-    variants.append(bullet)
+    # EFFICIENCY ANGLE
+    if 'time_saved' in metrics or 'automated' in job_lower or 'automation' in responsibility.lower():
+        time_saved = metrics.get('time_saved', 'X hours')
+        scope = metrics.get('scope', 'operations')
+        percent = metrics.get('automation_percent', metrics.get('efficiency_gain', 'X%'))
+        verb = ACTION_VERBS_BY_IMPACT['efficiency'][0]
+        bullet = f"{verb} {responsibility} across {scope}, reducing manual work by {time_saved} per week."
+        variants['efficiency'] = bullet
+        scores['efficiency'] = 1.0 if 'automated' in job_lower or 'streamline' in job_lower else 0.7
     
-    # Ensure we have at least one variant
+    # TEAM IMPACT ANGLE
+    if 'team_size' in metrics or 'people_trained' in metrics or 'trained' in responsibility.lower():
+        team = metrics.get('team_size', metrics.get('people_trained', 'X'))
+        awareness = metrics.get('awareness_improvement', metrics.get('knowledge_gain', 'X%'))
+        topic = context or responsibility.split()[2:] if len(responsibility.split()) > 2 else 'security practices'
+        verb = ACTION_VERBS_BY_IMPACT['team'][0]
+        bullet = f"{verb} {team} team members on {responsibility}, increasing awareness by {awareness}."
+        variants['team'] = bullet
+        scores['team'] = 1.0 if 'team' in job_lower or 'trained' in job_lower else 0.6
+    
+    # BUSINESS/VALUE ANGLE
+    if any(k in metrics for k in ['cost_savings', 'revenue', 'value', 'roi']):
+        value = metrics.get('cost_savings', metrics.get('revenue', 'X'))
+        outcome = metrics.get('outcome', 'business value')
+        verb = ACTION_VERBS_BY_IMPACT['business'][0]
+        bullet = f"{verb} {responsibility}, delivering {value} in {outcome}."
+        variants['business'] = bullet
+        scores['business'] = 1.0
+    
+    # Always include a general impact variant
     if not variants:
-        variants = [responsibility]
+        verb = ACTION_VERBS_BY_IMPACT['security'][0]
+        metric_str = ' (' + ', '.join([f"{k}: {v}" for k, v in metrics.items()][:2]) + ')' if metrics else ''
+        bullet = f"{verb} {responsibility}{metric_str}."
+        variants['general'] = bullet
+        scores['general'] = 0.5
     
-    return variants
+    return {
+        'variants': variants,
+        'scores': scores,
+        'recommended': max(scores, key=scores.get) if scores else 'general',
+        'count': len(variants)
+    }
 
 
 def validate_keyword_density(text: str, keywords: List[str], max_density: float = 0.15) -> Tuple[bool, float]:
