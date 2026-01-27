@@ -1,0 +1,9 @@
+{
+  "role_title": "IT Support Specialist",
+  "summary_type": "it_support",
+  "project_ids": [
+    "homelab",
+    "p1",
+    "p2"
+  ]
+}

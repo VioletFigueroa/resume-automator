@@ -45,6 +45,7 @@ Longer explanation if needed
 Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
 
 Examples:
+
 - `feat: add PDF generation`
 - `fix: handle special characters in names`
 - `docs: update setup instructions`
@@ -107,6 +108,7 @@ Examples:
 ## Security & Privacy
 
 When contributing:
+
 - Never commit real PII or sensitive data
 - Keep public data as examples/placeholders
 - Document security considerations
@@ -115,6 +117,7 @@ When contributing:
 ## Reporting Issues
 
 Include:
+
 - Description of the issue
 - Steps to reproduce
 - Expected behavior
@@ -135,6 +138,7 @@ By contributing, you agree your contributions are licensed under MIT License.
 ## Recognition
 
 Contributors will be:
+
 - Added to acknowledgments in README
 - Mentioned in release notes
 - Credited in git history

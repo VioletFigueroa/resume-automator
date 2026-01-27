@@ -107,6 +107,7 @@ resume-automator/
 ### Profile Format
 
 `data/main_profile.json`:
+
 ```json
 {
   "name": "Your Name",
@@ -127,6 +128,7 @@ resume-automator/
 ### Role Configuration
 
 `data/roles/job_title.json`:
+
 ```json
 {
   "name": "Job Title",
@@ -154,15 +156,18 @@ sudo pacman -S python-weasyprint
 ## Troubleshooting
 
 **PDF generation fails:**
+
 - Install WeasyPrint system dependencies
 - Check PDF permission in output directory
 
 **Missing data:**
+
 - Ensure `private/main_profile.json` exists
 - Check JSON formatting is valid
 - Verify paths in role configs
 
 **Generation is slow:**
+
 - PDF generation takes time
 - Use dry-run mode to skip PDF
 
