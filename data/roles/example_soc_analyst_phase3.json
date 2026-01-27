@@ -1,0 +1,202 @@
+{
+  "personal_info": {
+    "name": "Violet Figueroa",
+    "email": "violet.figueroa@email.com",
+    "phone": "+1 (555) 123-4567",
+    "location": "Vancouver, British Columbia"
+  },
+  
+  "role_title": "SOC Analyst II",
+  "specialization": "SIEM & Threat Detection",
+  "years_experience": 3,
+  
+  "job_description": """Join SecureOps, a fast-growing cybersecurity startup founded in 2015. We are committed to protecting enterprise infrastructure through advanced threat detection and rapid incident response.
+  
+  Position: SOC Analyst II
+  Location: Remote (Vancouver, BC preferred)
+  Salary: $75K-$95K
+  
+  About the Role:
+  We are seeking an experienced SOC Analyst II to join our Security Operations Center. In this role, you will monitor our Splunk SIEM infrastructure, conduct daily threat hunting, and respond to security incidents with a target MTTD of <30 minutes.
+  
+  Key Responsibilities:
+  - Monitor and maintain Splunk SIEM infrastructure processing 10,000+ alerts daily
+  - Conduct proactive threat hunting using MITRE ATT&CK framework
+  - Respond to security incidents with <30 minute MTTD
+  - Train and mentor junior analysts on forensic techniques
+  - Coordinate with incident response team during high-severity incidents
+  - Document findings and maintain playbooks
+  - Participate in 24/7 on-call rotation
+  
+  Required Skills:
+  - 2+ years of hands-on SOC experience
+  - Expert-level Splunk knowledge
+  - Threat hunting capabilities
+  - Strong incident response experience
+  - Team mentoring and communication
+  - Security+, CEH, or GIAC certification preferred
+  
+  Nice to Have:
+  - MITRE ATT&CK framework experience
+  - Python or Bash scripting
+  - Kubernetes or cloud infrastructure knowledge
+  - Experience with alert tuning and false positive reduction
+  
+  What We Offer:
+  - Competitive salary and comprehensive benefits
+  - Work with cutting-edge security technology
+  - Opportunity to grow your security expertise
+  - Supportive team culture focused on continuous learning
+  - 4 weeks vacation + professional development budget
+  """,
+  
+  "profile": {
+    "summary_variants": {
+      "soc": "SOC analyst with 3 years of hands-on experience in Splunk SIEM monitoring, threat hunting, and incident response. Proven track record of reducing incident response times through automation and process optimization. Strong background in MITRE ATT&CK framework and forensic analysis. Certified Security+.",
+      "technical": "Security professional with deep expertise in SIEM technology, log analysis, and threat detection. Implemented and optimized Splunk infrastructure supporting enterprise-scale security operations. Skilled in security automation, alert tuning, and KQL queries. Passionate about continuous improvement and knowledge sharing.",
+      "leadership": "Security operations leader with 3 years of SOC experience and strong mentoring background. Demonstrated ability to develop junior analysts, establish team processes, and coordinate incident response efforts. Committed to building high-performing security teams through training and collaboration."
+    },
+    
+    "skills_ordered_by_relevance": [
+      "Splunk SIEM",
+      "Threat Hunting",
+      "Log Analysis",
+      "Incident Response",
+      "MITRE ATT&CK Framework",
+      "Wireshark",
+      "Security+",
+      "Python",
+      "Bash",
+      "KQL Queries",
+      "Alert Tuning",
+      "Forensic Analysis",
+      "Team Mentoring",
+      "Process Documentation"
+    ]
+  },
+  
+  "achievements_with_metrics": [
+    {
+      "title": "Splunk SIEM Infrastructure Management",
+      "description": "Implemented and maintained Splunk SIEM infrastructure processing 10,000+ alerts daily across enterprise infrastructure",
+      "metrics": {
+        "alerts_processed_daily": "10,000+",
+        "infrastructure_endpoints": "500+",
+        "uptime": "99.9%",
+        "mttd_achievement": "<30 minutes"
+      }
+    },
+    {
+      "title": "Incident Response & Investigation",
+      "description": "Led forensic investigations and incident response for 50+ security incidents, maintaining detailed documentation and establishing response playbooks",
+      "metrics": {
+        "incidents_resolved": "50+",
+        "mttd_improvement": "65%",
+        "containment_rate": "95%",
+        "false_positive_reduction": "85%"
+      }
+    },
+    {
+      "title": "Threat Hunting & Detection",
+      "description": "Conducted proactive threat hunting using MITRE ATT&CK framework, identifying advanced threats before detection by automated rules",
+      "metrics": {
+        "threats_identified": "200+",
+        "new_detection_rules": "25+",
+        "hunt_efficiency": "8 hours per week automated",
+        "threat_accuracy": "92%"
+      }
+    },
+    {
+      "title": "Team Development & Mentoring",
+      "description": "Trained 8 junior analysts on forensic investigation, SIEM operations, and incident response, with 75% certification rate",
+      "metrics": {
+        "analysts_trained": 8,
+        "certification_rate": "75%",
+        "response_time_improvement": "50%",
+        "team_retention": "100%"
+      }
+    },
+    {
+      "title": "Process Optimization & Automation",
+      "description": "Automated alert processing and incident triage workflows using Splunk automation, reducing manual work significantly",
+      "metrics": {
+        "automation_coverage": "95%",
+        "time_saved": "10 hours per week",
+        "alert_accuracy": "98%",
+        "roi_multiplier": "4.2x"
+      }
+    },
+    {
+      "title": "Alert Tuning & False Positive Reduction",
+      "description": "Implemented alert tuning strategy reducing false positives by 85% while maintaining detection accuracy",
+      "metrics": {
+        "false_positive_reduction": "85%",
+        "detection_accuracy": "99.2%",
+        "alert_reduction": "from 500 daily to 75 daily",
+        "analyst_productivity_gain": "60%"
+      }
+    }
+  ],
+  
+  "job_requirements_extracted": [
+    "SIEM monitoring (Splunk)",
+    "Threat hunting",
+    "Incident response",
+    "Team mentoring",
+    "Forensic analysis",
+    "Log analysis",
+    "MITRE ATT&CK knowledge",
+    "Alert tuning",
+    "Process documentation",
+    "24/7 availability"
+  ],
+  
+  "company_analysis": {
+    "company_name": "SecureOps",
+    "company_size": "startup",
+    "industry": "cybersecurity",
+    "location": "Remote",
+    "founded": "2015",
+    "values": ["innovation", "security", "teamwork", "growth"],
+    "tone": "enthusiastic"
+  },
+  
+  "cover_letter_config": {
+    "tone": "enthusiastic",
+    "opening_style": "enthusiastic",
+    "body_style": "achievement",
+    "closing_style": "enthusiastic",
+    "include_company_research": true,
+    "emphasize_values": ["innovation", "security"],
+    "highlight_achievements": [
+      "Splunk SIEM Infrastructure Management",
+      "Incident Response & Investigation",
+      "Team Development & Mentoring"
+    ]
+  },
+  
+  "phase_1_output": {
+    "generated_headline": "SOC Analyst II | SIEM & Threat Hunting | Splunk Expert",
+    "skills_reordered": true,
+    "summary_selected": "soc"
+  },
+  
+  "phase_2_output": {
+    "recommended_angle": "security",
+    "achievement_bullets": [
+      "Implemented Splunk SIEM infrastructure processing 10,000+ alerts daily, reducing incident response time by 65% and achieving <30min MTTD on 50+ monthly incidents.",
+      "Conducted proactive threat hunting using MITRE ATT&CK framework, identifying 200+ advanced threats and creating 25+ new detection rules.",
+      "Trained 8 junior analysts on forensic investigation and incident response, achieving 75% certification rate and improving team MTTD by 50%."
+    ]
+  },
+  
+  "phase_3_config": {
+    "name": "Violet Figueroa",
+    "job_title": "SOC Analyst II",
+    "years_experience": 3,
+    "primary_skill": "Splunk SIEM",
+    "domain": "Threat Detection & Incident Response",
+    "variants_to_generate": ["enthusiastic", "professional", "achievement"],
+    "selected_variant": "enthusiastic"
+  }
+}
