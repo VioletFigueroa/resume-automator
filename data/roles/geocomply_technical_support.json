@@ -1,0 +1,37 @@
+{
+  "role_title": "Technical Support Associate",
+  "specialization": "Geolocation & Cybersecurity Solutions",
+  "company_focus": "geolocation, cybersecurity, and anti-fraud technology with compliance-grade solutions",
+  "job_description": "As our Technical Support Associate, you are responsible for providing exceptional support for our geolocation and cybersecurity solutions. This technical role requires analytical thinking, attention to detail, and the ability to learn complex systems. You will investigate technical issues, work with APIs and databases, analyze data, and serve as a technical resource for both internal teams and external clients. Assist GeoComply and end-user customers with their technical requests, investigations, and questions through our ticketing systems: Salesforce, Jira, and Slack. Troubleshoot technical issues, including solution integrations, geolocation accuracy, network configurations, and system performance. Support investigations by reviewing data tables and logs (e.g., in Grafana, Kibana) and creating reports using pre-configured scripts and in-house solutions. Complete configuration changes or escalate internally with a clear technical context. Monitor performance alerts and communicate any valid issues immediately to our affected clients and Incident teams. Communicate and coordinate with Customer Success Managers to manage clients and escalations. Collaborate with Engineering and Product teams by providing detailed technical information and observations, or suggestions for improvement. Actively contribute to our knowledge base by creating and refining troubleshooting documentation and user guides for internal and external use. Technical background: Education or experience in Computer Science, IT, Data, Engineering, or related technical field. At least two years of experience providing technical support by email, live chat, social media, and/or phone. Technical fundamentals: Understanding of concepts like APIs, databases, networking basics, and technical troubleshooting methodology. Fluent English (written and verbal). Constant Learner, Solutions-Focused, Strong communication skills, Detail-oriented, Pragmatic, Flexible.",
+  "recipient": {
+    "name": "Hiring Manager",
+    "company": "GeoComply",
+    "address": "Global"
+  },
+  "project_ids": [
+    "homelab",
+    "p1",
+    "p2"
+  ],
+  "skills_emphasis": [
+    "Technical Troubleshooting",
+    "APIs",
+    "Databases",
+    "Networking",
+    "Ticketing Systems",
+    "Data Analysis",
+    "Documentation",
+    "Customer Support",
+    "Grafana",
+    "Kibana",
+    "Salesforce",
+    "Jira"
+  ],
+  "experience_emphasis": [
+    "Technical Support",
+    "IT Support",
+    "Customer Service",
+    "System Administration",
+    "Network Configuration"
+  ]
+}

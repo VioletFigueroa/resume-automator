@@ -107,8 +107,10 @@ def tailor_data(profile_data: Dict[str, Any], config: Dict[str, Any]) -> Dict[st
             config['job_description'],
             max_skills=12
         )
+        # Keep skills as a dict, but create a reordered version for alternate display
         tailored['skills_reordered'] = reordered_skills
-        tailored['skills'] = reordered_skills  # Replace original skill order
+        # For template compatibility, keep the original categorized format
+        # but we can use skills_reordered in templates if needed
     
     # 4. Generate Resume Headline
     if 'job_description' in config:
