@@ -11,7 +11,7 @@
   },
   "summaries": {
     "general": "CompTIA Security+ certified cybersecurity analyst with 1.5 years of hands-on expertise in incident response, digital forensics, and vulnerability management. Proven ability to communicate technical findings to diverse audiences and drive measurable security improvements. Skilled in Splunk, Wireshark, MITRE ATT&CK, and NIST 800-53. Seeking analyst or SOC roles in dynamic, high-impact environments focused on proactive threat hunting and cross-functional security communication.",
-    "appsec": "Full-stack developer turned security analyst with a strong foundation in secure coding practices (OWASP Top 10). Experienced in building secure web applications using Node.js, React, and PostgreSQL. Combines development expertise with security knowledge to bridge the gap between DevOps and SecOps, ensuring applications are secure by design.",
+    "appsec": "Technical support specialist and security analyst with a strong foundation in secure coding practices (OWASP Top 10). Experienced in troubleshooting complex systems, analyzing network data, and supporting secure infrastructure. Combines support expertise with security knowledge to bridge user support and infrastructure security. Excited to support geolocation and cybersecurity products in a high-volume, client-facing environment.",
     "healthcare": "Results-driven Cybersecurity Professional with strong healthcare and cloud security expertise. Passionate about access control, user record management, compliance (HIPAA/PIPEDA), and implementing secure, scalable Epic solutions for healthcare teams.",
     "prs_canada": "Cybersecurity specialist with hands-on expertise in forensic data destruction, chain of custody procedures, and IT asset management security. CompTIA Security+ certified with proven experience implementing secure data-wiping protocols, conducting forensic analysis, and ensuring environmental compliance. Skilled in Autopsy, Volatility, Wireshark, and Python scripting for security automation. Passionate about environmental sustainability and data privacy, with demonstrated commitment to ensuring secure, responsible handling of sensitive information throughout the asset lifecycle."
   },
@@ -44,12 +44,10 @@
       "Express",
       "React",
       "PostgreSQL",
+      "APIs (REST/JSON)",
       "Git",
       "Docker",
-      "Linux (Debian/Kali)",
-      "Jinja2 Templating",
-      "WeasyPrint (PDF Generation)",
-      "TypeScript"
+      "Linux (Debian/Kali)"
     ],
     "analysis": [
       "Vulnerability Assessment",
