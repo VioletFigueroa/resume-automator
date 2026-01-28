@@ -6,6 +6,12 @@ import sys
 from datetime import date
 from typing import Dict, Any, Optional
 from jinja2 import Environment, FileSystemLoader
+from ats_optimizer import (
+    generate_resume_headline,
+    reorder_skills_by_job,
+    extract_job_keywords,
+    select_best_summary
+)
 
 # Configuration
 DATA_DIR = 'data'
@@ -76,11 +82,53 @@ def tailor_data(profile_data: Dict[str, Any], config: Dict[str, Any]) -> Dict[st
     if 'role_title' in config:
         tailored['basics']['label'] = config['role_title']
         
-    # 2. Select Summary
-    summary_key = config.get('summary_type', 'general')
-    tailored['summary'] = profile_data['summaries'].get(summary_key, profile_data['summaries']['general'])
+    # 2. Select Summary (with job-based selection if job description provided)
+    if 'job_description' in config:
+        # Use intelligent summary selection based on job description
+        summary_key, selected_summary, confidence = select_best_summary(
+            profile_data['summaries'],
+            config['job_description']
+        )
+        tailored['summary'] = selected_summary
+        tailored['summary_key'] = summary_key
+        tailored['summary_confidence'] = confidence
+        print(f"  Selected summary: {summary_key} (confidence: {confidence:.1%})")
+    else:
+        # Use explicit or default summary
+        summary_key = config.get('summary_type', 'general')
+        tailored['summary'] = profile_data['summaries'].get(summary_key, profile_data['summaries']['general'])
+        tailored['summary_key'] = summary_key
     
-    # 3. Filter Projects
+    # 3. Reorder Skills by Job
+    if 'job_description' in config:
+        print(f"  Reordering skills based on job description...")
+        reordered_skills = reorder_skills_by_job(
+            profile_data['skills'],
+            config['job_description'],
+            max_skills=12
+        )
+        tailored['skills_reordered'] = reordered_skills
+        tailored['skills'] = reordered_skills  # Replace original skill order
+    
+    # 4. Generate Resume Headline
+    if 'job_description' in config:
+        role_title = config.get('role_title', 'Cybersecurity Professional')
+        # Use top 2-3 reordered skills for headline
+        top_skills = tailored.get('skills_reordered', [])[:3]
+        if not top_skills:
+            top_skills = list(profile_data['skills'].get('security_tools', []))[:3]
+        
+        headline = generate_resume_headline(
+            role_title,
+            top_skills,
+            specialization=config.get('specialization', None)
+        )
+        tailored['headline'] = headline
+        print(f"  Generated headline: {headline}")
+    elif 'headline' in config:
+        tailored['headline'] = config['headline']
+    
+    # 5. Filter Projects
     # Combine all projects into a flat list for easier filtering
     all_projects = (
         profile_data['projects'].get('cyber', []) + 
