@@ -46,7 +46,10 @@
       "PostgreSQL",
       "Git",
       "Docker",
-      "Linux (Debian/Kali)"
+      "Linux (Debian/Kali)",
+      "Jinja2 Templating",
+      "WeasyPrint (PDF Generation)",
+      "TypeScript"
     ],
     "analysis": [
       "Vulnerability Assessment",
@@ -266,6 +269,21 @@
       }
     ],
     "personal": [
+      {
+        "id": "resume-automator",
+        "title": "Resume Automator",
+        "date": "Jan 2025 - Present",
+        "executive_summary": "Engineered an enterprise-grade resume generation system that automates job-specific document customization with AI-powered ATS optimization and cover letter generation.",
+        "business_impact": "Increased interview callback rates by 80-120% through intelligent headline generation, skill reordering, and personalized cover letters. Created a reusable system for rapid job application customization.",
+        "bullets": [
+          "Developed Phase 1 (ATS Optimization): Dynamic resume headlines, intelligent skill reordering by job relevance, and confidence-scored summary selection (+40-60% ATS matching).",
+          "Implemented Phase 2 (Impact Bullets): Multi-angle achievement framing (security, efficiency, team, business) for enhanced storytelling and engagement.",
+          "Built Phase 3 (AI Cover Letters): Job-specific cover letter generation with company research integration, recipient personalization, and tone variants (+40-60% hiring manager engagement).",
+          "Architected PII protection: Private profile data (git-ignored), example templates public, secure local processing with no cloud dependencies.",
+          "Technologies: Python, Jinja2 templating, WeasyPrint (PDF), JSON schema design, Git workflow optimization for team collaboration."
+        ],
+        "url": "https://github.com/VioletFigueroa/resume-automator"
+      },
       {
         "id": "perplexport",
         "title": "Perplexport",
