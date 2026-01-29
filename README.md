@@ -11,6 +11,25 @@ Generate tailored resumes and cover letters from a single profile database.
 - ✅ Fast generation
 - ✅ Template-based
 
+## Development Approach
+
+This project was developed using a hybrid approach combining human expertise with AI-assisted tooling.
+
+### LLM Usage (~50% of implementation)
+- **Templates & Document Structure**: Jinja2 template patterns, HTML/CSS resume layouts, and markdown formatting
+- **Documentation**: README structure, inline comments, and usage examples
+- **Boilerplate Code**: Configuration handling, file I/O patterns, and error handling frameworks
+- **ATS Optimization Research**: Keyword analysis and resume parsing best practices
+
+### Human-Led Components (~50% of implementation)
+- **Core Architecture**: Data model design, security approach (PII separation), and file organization strategy
+- **Business Logic**: Profile-to-resume transformation algorithms, role-based filtering logic
+- **Security Implementation**: Private data isolation, .gitignore strategy, and secure workflow design
+- **Testing & Validation**: All testing strategies, edge case identification, and quality assurance
+
+### Development Philosophy
+I use LLMs strategically for high-ROI tasks like templates and documentation while maintaining direct control over architecture, security, and core business logic. All LLM-generated code undergoes thorough review, testing, and validation before integration.
+
 ## Quick Start
 
 ```bash
