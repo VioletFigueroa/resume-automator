@@ -1,0 +1,36 @@
+{
+  "role_title": "Threat Analyst I",
+  "summary_type": "general",
+  "specialization": "Managed Threat Response (MDR)",
+  "job_description": "As a Threat Analyst 1 on our Managed Threat Response (MDR) team, you will provide best-in-class monitoring, detection, and response services to proactively defend customer environments before attacks prevail. You will work alongside and contribute to a team of cyber threat hunters, incident response analysts, engineers, and ethical hackers by using enterprise log analysis and endpoint collection systems to facilitate investigations, identification, and neutralization of cyber threats. Shift: 8-5pm ET. Investigate and analyze logs and security-related events via Sophos tooling. Identify and respond to cyber threats occurring within customer environments. Communicate and document findings to various customer audiences including technical and executive teams. Follow up with customers through to issue resolution and drive continuous improvement by providing detailed recommendations to minimize risk in customer environments. Acknowledge and satisfy inbound customer requests and interact with customers through various mediums. Collaborate and assist with core security and threat response teams. Actively research emerging Indicators of Compromise/Attack, exploits and vulnerabilities with the intent of operationalizing findings to better protect our customers. Willingness to work outside of standard business hours, including weekends and holidays. Excellent troubleshooting and analytical skills, strong customer service orientation, and ability to thrive in team and individual settings. Minimum 2+ years of experience in SOC or security team. Experience with threat hunting, endpoint and network security monitoring, Windows OS administration and one of Apple or Linux OS. Knowledge of MITRE ATT&CK, incident response, TCP/IP, routing, switching, and Windows event log analysis. Plus: SQL query construction, OSQuery, SIEM experience, and PowerShell.",
+  "project_ids": [
+    "p3",
+    "capstone",
+    "p10",
+    "p1",
+    "homelab"
+  ],
+  "skills_emphasis": [
+    "SIEM",
+    "Log Analysis",
+    "Threat Hunting",
+    "Incident Response",
+    "MITRE ATT&CK",
+    "Endpoint Security",
+    "Network Monitoring",
+    "Windows Event Logs",
+    "TCP/IP",
+    "PowerShell",
+    "SQL",
+    "OSQuery"
+  ],
+  "experience_emphasis": [
+    "SOC",
+    "Incident Response",
+    "Threat Detection",
+    "Customer Communication",
+    "Security Monitoring",
+    "Windows Administration",
+    "Linux Administration"
+  ]
+}

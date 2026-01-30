@@ -149,6 +149,10 @@
 
         <p>{{ summary }}</p>
 
+        {% if program_eligibility is defined and program_eligibility.workbc_wage_subsidy_line %}
+        <p>{{ program_eligibility.workbc_wage_subsidy_line }}</p>
+        {% endif %}
+
         {% if summary_type == 'prs_canada' or company_focus %}
         <h3>Why {{ recipient.company or 'your company' }}?</h3>
         {% if summary_type == 'prs_canada' %}

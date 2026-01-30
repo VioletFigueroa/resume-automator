@@ -23,6 +23,10 @@ I am writing to express my strong interest in the {{ role_title }} position. As 
 
 {{ summary }}
 
+{% if program_eligibility is defined and program_eligibility.workbc_wage_subsidy_line %}
+{{ program_eligibility.workbc_wage_subsidy_line }}
+{% endif %}
+
 {% if summary_type == 'prs_canada' or company_focus %}
 **Why {{ recipient.company or 'your company' }}?**
 
