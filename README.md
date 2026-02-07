@@ -38,7 +38,7 @@ As a security professional, this shows I can:
 ```mermaid
 graph TB
     subgraph "Input Layer"
-        A[main_profile.json<br/>Personal Data<br/>PII Protected] --> B[Profile Loader]
+        A[private/main_profile.json<br/>Personal Data<br/>PII Protected] --> B[Profile Loader]
         C[data/roles/<br/>Role Definitions] --> B
         D[Job Description<br/>Company Info] --> B
     end
@@ -161,7 +161,7 @@ pip install jinja2 weasyprint
 
 # 2. Setup private data
 mkdir private
-cp data/main_profile.json private/main_profile.json
+cp data/main_profile.template.json private/main_profile.json
 
 # 3. Edit with your details
 # Edit private/main_profile.json
@@ -206,7 +206,7 @@ pip install -r requirements.txt
 
 # Configure
 mkdir private
-cp data/main_profile.json private/main_profile.json
+cp data/main_profile.template.json private/main_profile.json
 # Edit private/main_profile.json with your real details
 ```
 
@@ -228,10 +228,10 @@ python3 src/generate.py
 ```
 resume-automator/
 ├── data/                    # Public example data
-│   ├── main_profile.json   # Profile template
+│   ├── main_profile.template.json   # Profile template
 │   └── roles/              # Role configurations
 ├── private/                # Private data (git-ignored)
-│   └── main_profile.json   # Your real profile
+│   └── main_profile.json   # Your real profile (git-ignored)
 ├── templates/              # Jinja2 templates
 │   ├── resume.md
 │   ├── resume.html
@@ -248,7 +248,7 @@ resume-automator/
 
 ### Profile Format
 
-`data/main_profile.json`:
+`data/main_profile.template.json`:
 
 ```json
 {

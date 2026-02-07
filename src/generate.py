@@ -164,8 +164,8 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
         print(f"Using private data from {private_data_path}")
         profile_data = load_json(private_data_path)
     else:
-        print(f"Using example data from {os.path.join(DATA_DIR, 'main_profile.json')}")
-        profile_data = load_json(os.path.join(DATA_DIR, 'main_profile.json'))
+        print(f"Using example data from {os.path.join(DATA_DIR, 'main_profile.template.json')}")
+        profile_data = load_json(os.path.join(DATA_DIR, 'main_profile.template.json'))
     
     if not profile_data:
         print("Error: Could not load main profile data. Aborting.")

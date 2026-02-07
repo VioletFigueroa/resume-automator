@@ -21,7 +21,7 @@ pip install jinja2 weasyprint
 
 # 2. Setup private data folder
 mkdir private
-cp data/main_profile.json private/main_profile.json
+cp data/main_profile.template.json private/main_profile.json
 
 # 3. Edit your data
 # Edit private/main_profile.json with your real details
