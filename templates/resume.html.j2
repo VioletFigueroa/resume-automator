@@ -230,7 +230,7 @@
                 <div class="entry-title">{{ job.role }} | {{ job.company }}</div>
                 <div class="entry-date">{{ job.date }}</div>
             </div>
-            <div class="entry-subtitle">{{ job.location }}</div>
+            <div class="entry-subtitle">{{ job.location }}{% if job.employment_type %} | {{ job.employment_type }}{% endif %}{% if job.hours_per_week %} | {{ job.hours_per_week }} hrs/week{% endif %}</div>
             <div class="entry-summary">{{ job.summary }}</div>
             <ul>
                 {% for bullet in job.bullets %}
@@ -272,7 +272,7 @@
                 <div class="entry-title">{{ edu.program }}</div>
                 <div class="entry-date">{{ edu.date }}</div>
             </div>
-            <div class="entry-subtitle">{{ edu.institution }}</div>
+            <div class="entry-subtitle">{{ edu.institution }}{% if edu.location %} | {{ edu.location }}{% endif %}{% if edu.award_date %} | Awarded/Expected: {{ edu.award_date }}{% endif %}</div>
             <ul>
                 {% for bullet in edu.bullets %}
                 <li>{{ bullet }}</li>

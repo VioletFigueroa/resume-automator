@@ -1,0 +1,68 @@
+# {{ basics.name }}
+{{ basics.location }} | {{ basics.email }}
+[LinkedIn]({{ basics.linkedin }}) | [GitHub]({{ basics.github }}) | [Portfolio]({{ basics.portfolio }})
+
+---
+
+**Date:** {{ date }}
+
+**Re:** Application for {{ posting_title or role_title }}{% if reference_number %} (Reference {{ reference_number }}){% endif %}
+
+**To:** {{ recipient.name }}{% if recipient.title %}, {{ recipient.title }}{% endif %}
+{% if recipient.company %}{{ recipient.company }}
+{% endif %}{% if recipient.address %}{{ recipient.address }}
+{% endif %}
+
+Dear {{ recipient.name }},
+
+I am submitting my application to the {{ recipient.company or 'CSE' }} general inventory for cybersecurity analyst opportunities as they arise. I am motivated by your mission in foreign signals intelligence, cyber operations, and cyber security, and I value your focus on equity, diversity, and inclusion.
+
+{% if interest_points %}
+**Interest**
+{% for point in interest_points -%}
+- {{ point }}
+{% endfor %}
+{% endif %}
+
+{% if requirements or public_sector is defined -%}
+**How I meet the requirements**
+{% for item in requirements -%}
+- {{ item }}
+{% endfor -%}
+{% if public_sector is defined -%}
+- Citizenship: {{ public_sector.citizenship }}
+- Official language: {{ public_sector.language_profile }}
+- Security clearance: {{ public_sector.clearance }}
+- Location: {{ public_sector.relocation }}
+{% endif -%}
+{% endif %}
+
+{% if assets %}
+**Assets and added value**
+{% for item in assets -%}
+- {{ item }}
+{% endfor %}
+{% endif %}
+
+{% if projects %}
+**Selected evidence**
+{% for project in projects[:2] -%}
+- **{% if project.url %}[{{ project.title }}]({{ project.url }}){% else %}{{ project.title }}{% endif %}:** {{ project.bullets[0] }}
+{% endfor %}
+{% endif %}
+
+{{ summary }}
+
+{% if program_eligibility is defined and program_eligibility.workbc_wage_subsidy_line %}
+{{ program_eligibility.workbc_wage_subsidy_line }}
+{% endif %}
+
+{% if public_sector is defined and public_sector.equity_statement %}
+{{ public_sector.equity_statement }}
+{% endif %}
+
+Thank you for your time and consideration. I welcome the opportunity to discuss where my background aligns with your current and upcoming needs.
+
+Sincerely,
+
+{{ basics.name }}

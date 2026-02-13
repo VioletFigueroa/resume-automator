@@ -187,6 +187,11 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
         context['company_focus'] = role_config.get('company_focus', '')
         context['prospective_outreach'] = role_config.get('prospective_outreach', False)
         context['sanitization_standard'] = role_config.get('sanitization_standard', 'NIST 800-88')
+        context['posting_title'] = role_config.get('posting_title')
+        context['reference_number'] = role_config.get('reference_number')
+        context['interest_points'] = role_config.get('interest_points', [])
+        context['requirements'] = role_config.get('requirements', [])
+        context['assets'] = role_config.get('assets', [])
     recipient = role_config.get('recipient', {}) if role_config else {}
     context['recipient'] = {
         'name': recipient.get('name', 'Hiring Manager'),

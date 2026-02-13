@@ -1,0 +1,38 @@
+{
+  "role_title": "Cyber Security Analyst",
+  "summary_type": "general",
+  "posting_title": "General Inventory - Other (General Application)",
+  "reference_number": "",
+  "recipient": {
+    "name": "Hiring Manager",
+    "company": "Communications Security Establishment (CSE)",
+    "address": "Ottawa, ON"
+  },
+  "interest_points": [
+    "Motivated by CSE's mission in foreign signals intelligence, cyber operations, and cyber security.",
+    "Committed to discreet, professional handling of sensitive information and strong security culture.",
+    "Aligned with your focus on equity, diversity, inclusion, and accessible workplaces."
+  ],
+  "requirements": [
+    "Hands-on incident response, digital forensics, and vulnerability management experience across real-world and lab environments.",
+    "Strong log analysis and network troubleshooting using tools like Splunk, Wireshark, and Nmap.",
+    "Documented security controls and communicated technical findings to diverse audiences.",
+    "Diploma in Cybersecurity (Lighthouse Labs), with ongoing professional training and certifications.",
+    "Comfortable with operational requirements including overtime and standby when needed."
+  ],
+  "assets": [
+    "Experience with MITRE ATT&CK and NIST 800-53 aligned practices.",
+    "Background in secure systems administration across Windows, macOS, and Linux environments.",
+    "Accessibility-focused security training and documentation for diverse teams."
+  ],
+  "project_ids": [
+    "capstone",
+    "p10",
+    "p9",
+    "p11",
+    "p6",
+    "p2"
+  ],
+  "cover_letter_template": "cover_letter_public_sector.md.j2",
+  "cover_letter_html_template": "cover_letter_public_sector.html.j2"
+}

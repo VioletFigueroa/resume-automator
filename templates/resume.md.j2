@@ -20,7 +20,7 @@
 ## Work Experience
 {% for job in experience %}
 ### {{ job.role }} | {{ job.company }}
-*{{ job.location }} | {{ job.date }}*
+*{{ job.location }} | {{ job.date }}{% if job.employment_type %} | {{ job.employment_type }}{% endif %}{% if job.hours_per_week %} | {{ job.hours_per_week }} hrs/week{% endif %}*
 {{ job.summary }}
 {% for bullet in job.bullets %}
 - {{ bullet }}
@@ -38,7 +38,7 @@
 ## Education
 {% for edu in education %}
 ### {{ edu.program }} | {{ edu.institution }}
-*{{ edu.date }}*
+*{% if edu.location %}{{ edu.location }} | {% endif %}{{ edu.date }}{% if edu.award_date %} | Awarded/Expected: {{ edu.award_date }}{% endif %}*
 {% for bullet in edu.bullets %}
 - {{ bullet }}
 {% endfor %}

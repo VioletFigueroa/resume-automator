@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ basics.name }} - Cover Letter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: Letter;
+            margin: 0.75in;
+        }
+
+        :root {
+            --primary-color: #6A1B9A;
+            --text-color: #333333;
+            --light-text: #666666;
+            --link-color: #7B1FA2;
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            font-size: 10pt;
+            line-height: 1.5;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        .header {
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.2em;
+            margin: 0;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.05em;
+            margin: 18px 0 8px;
+            color: var(--primary-color);
+        }
+
+        .contact-info {
+            font-family: 'Roboto', sans-serif;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: var(--light-text);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .contact-separator {
+            margin: 0 8px;
+            color: #ccc;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            word-break: keep-all;
+        }
+
+        .meta-info {
+            margin-bottom: 30px;
+        }
+
+        .date {
+            margin-bottom: 15px;
+        }
+
+        .recipient {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .subject {
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-decoration: underline;
+        }
+
+        .content p {
+            margin-bottom: 12px;
+            text-align: left;
+        }
+
+        .content ul {
+            margin-bottom: 12px;
+        }
+
+        .signature {
+            margin-top: 36px;
+        }
+
+        .signature-name {
+            font-weight: bold;
+            margin-top: 10px;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ basics.name }}</h1>
+        <div class="contact-info">
+            {{ basics.location }}
+            <span class="contact-separator">|</span>
+            <a href="mailto:{{ basics.email }}">{{ basics.email }}</a>
+        </div>
+        <div class="contact-info">
+            <a href="https://{{ basics.linkedin }}">LinkedIn</a>
+            <span class="contact-separator">|</span>
+            <a href="https://{{ basics.github }}">GitHub</a>
+        </div>
+    </div>
+
+    <div class="meta-info">
+        <div class="date">{{ date }}</div>
+        <div class="recipient">
+            {{ recipient.name }}
+            {% if recipient.title %}<br>{{ recipient.title }}{% endif %}
+            {% if recipient.company %}<br>{{ recipient.company }}{% endif %}
+            {% if recipient.address %}<br>{{ recipient.address }}{% endif %}
+        </div>
+        <div class="subject">Re: Application for {{ posting_title or role_title }}{% if reference_number %} (Reference {{ reference_number }}){% endif %}</div>
+    </div>
+
+    <div class="content">
+        <p>Dear {{ recipient.name }},</p>
+
+        <p>I am submitting my application to the {{ recipient.company or 'CSE' }} general inventory for cybersecurity analyst opportunities as they arise. I am motivated by your mission in foreign signals intelligence, cyber operations, and cyber security, and I value your focus on equity, diversity, and inclusion.</p>
+
+        {% if interest_points %}
+        <h3>Interest</h3>
+        <ul>
+            {% for point in interest_points %}
+            <li>{{ point }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if requirements or public_sector is defined %}
+        <h3>How I Meet the Requirements</h3>
+        <ul>
+            {% for item in requirements %}
+            <li>{{ item }}</li>
+            {% endfor %}
+            {% if public_sector is defined %}
+            <li>Citizenship: {{ public_sector.citizenship }}</li>
+            <li>Official language: {{ public_sector.language_profile }}</li>
+            <li>Security clearance: {{ public_sector.clearance }}</li>
+            <li>Location: {{ public_sector.relocation }}</li>
+            {% endif %}
+        </ul>
+        {% endif %}
+
+        {% if assets %}
+        <h3>Assets and Added Value</h3>
+        <ul>
+            {% for item in assets %}
+            <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if projects %}
+        <h3>Selected Evidence</h3>
+        <ul>
+            {% for project in projects[:2] %}
+            <li>
+                <strong>
+                    {% if project.url %}
+                    <a href="{{ project.url }}" target="_blank">{{ project.title }}</a>
+                    {% else %}
+                    {{ project.title }}
+                    {% endif %}
+                </strong>: {{ project.bullets[0] }}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <p>{{ summary }}</p>
+
+        {% if program_eligibility is defined and program_eligibility.workbc_wage_subsidy_line %}
+        <p>{{ program_eligibility.workbc_wage_subsidy_line }}</p>
+        {% endif %}
+
+        {% if public_sector is defined and public_sector.equity_statement %}
+        <p>{{ public_sector.equity_statement }}</p>
+        {% endif %}
+
+        <p>Thank you for your time and consideration. I welcome the opportunity to discuss where my background aligns with your current and upcoming needs.</p>
+    </div>
+
+    <div class="signature">
+        <p>Sincerely,</p>
+        <div class="signature-name">{{ basics.name }}</div>
+    </div>
+</body>
+</html>
