@@ -82,9 +82,20 @@ def tailor_data(profile_data: Dict[str, Any], config: Dict[str, Any]) -> Dict[st
     if 'role_title' in config:
         tailored['basics']['label'] = config['role_title']
         
-    # 2. Select Summary (with job-based selection if job description provided)
-    if 'job_description' in config:
-        # Use intelligent summary selection based on job description
+    # 2. Select Summary
+    # Priority order: summary_text (verbatim override) > summary_type (explicit key) > auto-select from job_description > 'general'
+    if 'summary_text' in config:
+        # Fully custom summary provided directly in the role config
+        tailored['summary'] = config['summary_text']
+        tailored['summary_key'] = 'custom'
+        print(f"  Using custom summary_text from role config.")
+    elif 'summary_type' in config:
+        summary_key = config['summary_type']
+        tailored['summary'] = profile_data['summaries'].get(summary_key, profile_data['summaries']['general'])
+        tailored['summary_key'] = summary_key
+        print(f"  Using explicit summary: {summary_key}")
+    elif 'job_description' in config:
+        # Auto-select based on job description when no explicit type given
         summary_key, selected_summary, confidence = select_best_summary(
             profile_data['summaries'],
             config['job_description']
@@ -92,10 +103,9 @@ def tailor_data(profile_data: Dict[str, Any], config: Dict[str, Any]) -> Dict[st
         tailored['summary'] = selected_summary
         tailored['summary_key'] = summary_key
         tailored['summary_confidence'] = confidence
-        print(f"  Selected summary: {summary_key} (confidence: {confidence:.1%})")
+        print(f"  Auto-selected summary: {summary_key} (confidence: {confidence:.1%})")
     else:
-        # Use explicit or default summary
-        summary_key = config.get('summary_type', 'general')
+        summary_key = 'general'
         tailored['summary'] = profile_data['summaries'].get(summary_key, profile_data['summaries']['general'])
         tailored['summary_key'] = summary_key
     
@@ -113,7 +123,12 @@ def tailor_data(profile_data: Dict[str, Any], config: Dict[str, Any]) -> Dict[st
         # but we can use skills_reordered in templates if needed
     
     # 4. Generate Resume Headline
-    if 'job_description' in config:
+    # If headline is explicitly set in the role config, use it verbatim.
+    # Otherwise, auto-generate from the job description and top reordered skills.
+    if 'headline' in config:
+        tailored['headline'] = config['headline']
+        print(f"  Using explicit headline: {config['headline']}")
+    elif 'job_description' in config:
         role_title = config.get('role_title', 'Cybersecurity Professional')
         # Use top 2-3 reordered skills for headline
         top_skills = tailored.get('skills_reordered', [])[:3]
@@ -127,8 +142,6 @@ def tailor_data(profile_data: Dict[str, Any], config: Dict[str, Any]) -> Dict[st
         )
         tailored['headline'] = headline
         print(f"  Generated headline: {headline}")
-    elif 'headline' in config:
-        tailored['headline'] = config['headline']
     
     # 5. Filter Projects
     # Combine all projects into a flat list for easier filtering
@@ -192,6 +205,13 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
         context['interest_points'] = role_config.get('interest_points', [])
         context['requirements'] = role_config.get('requirements', [])
         context['assets'] = role_config.get('assets', [])
+        context['organization_mission'] = role_config.get('organization_mission')
+        context['output_label'] = role_config.get('output_label')
+        public_sector = context.get('public_sector', {}).copy()
+        public_sector_overrides = role_config.get('public_sector_overrides', {})
+        if public_sector_overrides:
+            public_sector.update(public_sector_overrides)
+            context['public_sector'] = public_sector
     recipient = role_config.get('recipient', {}) if role_config else {}
     context['recipient'] = {
         'name': recipient.get('name', 'Hiring Manager'),
@@ -217,7 +237,11 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
     # 5. Save Resume Output
     candidate_name = context['basics']['name']
     role_title = context['basics']['label']
-    base_filename_resume = f"{candidate_name} - {role_title} - Resume"
+    output_label = context.get('output_label')
+    if output_label:
+        base_filename_resume = f"{candidate_name} - {role_title} - {output_label} - Resume"
+    else:
+        base_filename_resume = f"{candidate_name} - {role_title} - Resume"
     
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     
@@ -265,7 +289,10 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
             cl_html_template = env.get_template(cl_html_template_name)
             cl_html_content = cl_html_template.render(context)
             
-            base_filename_cl = f"{candidate_name} - {role_title} - Cover Letter"
+            if output_label:
+                base_filename_cl = f"{candidate_name} - {role_title} - {output_label} - Cover Letter"
+            else:
+                base_filename_cl = f"{candidate_name} - {role_title} - Cover Letter"
             
             cl_file = os.path.join(OUTPUT_DIR, f'{base_filename_cl}.md')
             with open(cl_file, 'w', encoding='utf-8') as f:

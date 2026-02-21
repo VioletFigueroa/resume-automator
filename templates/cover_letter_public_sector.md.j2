@@ -15,8 +15,11 @@
 
 Dear {{ recipient.name }},
 
-I am submitting my application to the {{ recipient.company or 'CSE' }} general inventory for cybersecurity analyst opportunities as they arise. I am motivated by your mission in foreign signals intelligence, cyber operations, and cyber security, and I value your focus on equity, diversity, and inclusion.
+I am submitting my application to the {{ recipient.company or 'CSE' }} for the {{ posting_title or role_title }}. I am focusing on cybersecurity analyst opportunities as they arise, and I am motivated by {{ organization_mission or 'your mission in cybersecurity and public service' }}. I value your focus on equity, diversity, and inclusion.
 
+{% if cover_letter_context %}{{ cover_letter_context }}
+
+{% endif %}
 {% if interest_points %}
 **Interest**
 {% for point in interest_points -%}
@@ -49,16 +52,6 @@ I am submitting my application to the {{ recipient.company or 'CSE' }} general i
 {% for project in projects[:2] -%}
 - **{% if project.url %}[{{ project.title }}]({{ project.url }}){% else %}{{ project.title }}{% endif %}:** {{ project.bullets[0] }}
 {% endfor %}
-{% endif %}
-
-{{ summary }}
-
-{% if program_eligibility is defined and program_eligibility.workbc_wage_subsidy_line %}
-{{ program_eligibility.workbc_wage_subsidy_line }}
-{% endif %}
-
-{% if public_sector is defined and public_sector.equity_statement %}
-{{ public_sector.equity_statement }}
 {% endif %}
 
 Thank you for your time and consideration. I welcome the opportunity to discuss where my background aligns with your current and upcoming needs.

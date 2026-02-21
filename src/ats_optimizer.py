@@ -97,6 +97,48 @@ IMPACT_TEMPLATES = {
 }
 
 
+def _is_quantifiable_metric(value: Any) -> bool:
+    if isinstance(value, (int, float)):
+        return True
+    if isinstance(value, str) and re.search(r"\d", value):
+        return True
+    return False
+
+
+def _format_generic_metric(value: Any) -> str:
+    if isinstance(value, float):
+        if 0 < value < 1:
+            return f"{int(value * 100)}%"
+        if value.is_integer():
+            return str(int(value))
+        return str(value)
+    if isinstance(value, int):
+        return str(value)
+    return str(value)
+
+
+def extract_quantifiable_metrics(metrics: Dict[str, Any]) -> List[Tuple[str, str]]:
+    prioritized_keys = [
+        'incidents_reduced', 'risks_mitigated', 'vulnerabilities',
+        'time_saved', 'hours_saved', 'automation_percent',
+        'team_size', 'people_trained',
+        'cost_savings', 'revenue', 'value', 'roi'
+    ]
+
+    results: List[Tuple[str, str]] = []
+    for key in prioritized_keys:
+        if key in metrics and _is_quantifiable_metric(metrics[key]):
+            results.append((key, _format_generic_metric(metrics[key])))
+
+    for key, value in metrics.items():
+        if key in prioritized_keys:
+            continue
+        if _is_quantifiable_metric(value):
+            results.append((key, _format_generic_metric(value)))
+
+    return results
+
+
 def extract_job_keywords(job_description: str, domain: str = None) -> Dict[str, List[str]]:
     """
     Extract relevant keywords from a job description.
@@ -298,6 +340,14 @@ def generate_impact_variants(
     """
     metrics = metrics or {}
     job_lower = (job_description or '').lower()
+    quantifiable_metrics = extract_quantifiable_metrics(metrics)
+    fallback_metric = quantifiable_metrics[0][1] if quantifiable_metrics else 'X%'
+
+    def pick_metric(keys: List[str], default_value: str) -> str:
+        for key in keys:
+            if key in metrics and _is_quantifiable_metric(metrics[key]):
+                return _format_generic_metric(metrics[key])
+        return default_value
     
     # Determine which angles are most relevant
     angles_to_generate = ['security', 'efficiency', 'team', 'business']
@@ -307,7 +357,10 @@ def generate_impact_variants(
     
     # SECURITY ANGLE
     if 'incidents' in metrics or 'risks' in metrics or 'vulnerabilities' in metrics or 'incident' in job_lower:
-        incidents = metrics.get('incidents_reduced', metrics.get('risks_mitigated', 'X%'))
+        incidents = pick_metric(
+            ['incidents_reduced', 'risks_mitigated', 'vulnerabilities'],
+            fallback_metric
+        )
         scope = metrics.get('scope', metrics.get('endpoints', 'systems'))
         verb = ACTION_VERBS_BY_IMPACT['security'][0]
         bullet = f"{verb} {responsibility} affecting {scope}, reducing security incidents by {incidents}."
@@ -316,9 +369,15 @@ def generate_impact_variants(
     
     # EFFICIENCY ANGLE
     if 'time_saved' in metrics or 'automated' in job_lower or 'automation' in responsibility.lower():
-        time_saved = metrics.get('time_saved', 'X hours')
+        time_saved = pick_metric(
+            ['time_saved', 'hours_saved', 'time_reduced'],
+            fallback_metric
+        )
         scope = metrics.get('scope', 'operations')
-        percent = metrics.get('automation_percent', metrics.get('efficiency_gain', 'X%'))
+        percent = pick_metric(
+            ['automation_percent', 'efficiency_gain'],
+            fallback_metric
+        )
         verb = ACTION_VERBS_BY_IMPACT['efficiency'][0]
         bullet = f"{verb} {responsibility} across {scope}, reducing manual work by {time_saved} per week."
         variants['efficiency'] = bullet
@@ -326,8 +385,8 @@ def generate_impact_variants(
     
     # TEAM IMPACT ANGLE
     if 'team_size' in metrics or 'people_trained' in metrics or 'trained' in responsibility.lower():
-        team = metrics.get('team_size', metrics.get('people_trained', 'X'))
-        awareness = metrics.get('awareness_improvement', metrics.get('knowledge_gain', 'X%'))
+        team = pick_metric(['team_size', 'people_trained'], 'X')
+        awareness = pick_metric(['awareness_improvement', 'knowledge_gain'], fallback_metric)
         topic = context or responsibility.split()[2:] if len(responsibility.split()) > 2 else 'security practices'
         verb = ACTION_VERBS_BY_IMPACT['team'][0]
         bullet = f"{verb} {team} team members on {responsibility}, increasing awareness by {awareness}."
@@ -336,7 +395,7 @@ def generate_impact_variants(
     
     # BUSINESS/VALUE ANGLE
     if any(k in metrics for k in ['cost_savings', 'revenue', 'value', 'roi']):
-        value = metrics.get('cost_savings', metrics.get('revenue', 'X'))
+        value = pick_metric(['cost_savings', 'revenue', 'value', 'roi'], fallback_metric)
         outcome = metrics.get('outcome', 'business value')
         verb = ACTION_VERBS_BY_IMPACT['business'][0]
         bullet = f"{verb} {responsibility}, delivering {value} in {outcome}."
@@ -451,34 +510,77 @@ def select_best_summary(
     """
     job_lower = job_description.lower()
     scores = {}
-    
+
+    # Domain-specific signal keywords mapped to expected summary keys
+    SUMMARY_SIGNALS = {
+        'appsec': [
+            'application security', 'appsec', 'secure sdlc', 'sast', 'dast',
+            'secure code review', 'web application', 'api security', 'owasp',
+            'developer', 'software engineer', 'full[- ]stack'
+        ],
+        'ymca_network_security': [
+            'siem', 'soc', 'threat hunting', 'incident response',
+            'vulnerability management', 'network monitoring', 'endpoint',
+            'firewall', 'ids', 'ips', 'wireshark', 'splunk', 'qradar',
+            'enterprise environment', 'security operations', 'nist',
+            'cloud security', 'iam', 'identity', 'patch management',
+            'supply chain', 'third.party risk', 'data loss prevention',
+            'digital forensics', 'threat intelligence'
+        ],
+        'healthcare': [
+            'healthcare', 'hipaa', 'pipeda', 'epic', 'ehr', 'clinical',
+            'hospital', 'medical', 'health information'
+        ],
+        'prs_canada': [
+            'data destruction', 'data sanitization', 'chain of custody',
+            'asset disposal', 'nist 800.88', 'dod 5220', 'recycling', 'refurbishment'
+        ],
+        'general': [
+            'government', 'public sector', 'federal', 'crown', 'agency',
+            'compliance', 'governance', 'risk', 'audit', 'policy', 'regulatory'
+        ],
+        'it_support': [
+            'it support', 'helpdesk', 'help desk', 'desktop support',
+            'service desk', 'level 1', 'level 2', 'tier 1', 'tier 2',
+            'end user', 'hardware', 'troubleshooting', 'technical support'
+        ],
+    }
+
+    import re as _re
+
     for summary_key, summary_text in profile_summaries.items():
         summary_lower = summary_text.lower()
-        score = 0
-        
-        # Check for keyword matches
-        keywords = ['splunk', 'siem', 'threat hunting', 'incident response',
-                   'appsec', 'web', 'secure', 'application', 'healthcare',
-                   'network', 'cloud', 'compliance']
-        
-        for keyword in keywords:
-            if keyword in summary_lower and keyword in job_lower:
-                score += 1
-        
-        # Boost certain summaries for known job types
-        if 'soc' in summary_key.lower() and any(x in job_lower for x in ['soc', 'siem', 'monitoring']):
-            score += 2
-        if 'appsec' in summary_key.lower() and any(x in job_lower for x in ['security', 'developer', 'web', 'api']):
-            score += 2
-        if 'incident' in job_lower and any(x in summary_key.lower() for x in ['incident', 'response']):
-            score += 2
-        
+        score = 0.0
+
+        # Score based on which domain's signals appear in the job description
+        for sig_key, signals in SUMMARY_SIGNALS.items():
+            for signal in signals:
+                # Use regex for flexibility (handles phrases and optional hyphens)
+                if _re.search(signal, job_lower):
+                    if sig_key == summary_key:
+                        # Job description mentions this summary's domain directly
+                        score += 2.0
+                    # Cross-penalise: if the signal matches a different domain
+                    # strongly, reduce the score for other summaries slightly
+                    break  # count each signal group once per summary_key pass
+
+        # Also score by how many job-description keywords appear in the summary itself
+        broad_keywords = [
+            'splunk', 'siem', 'threat hunting', 'incident response',
+            'vulnerability', 'network', 'cloud', 'compliance', 'nist',
+            'iam', 'identity', 'endpoint', 'monitoring', 'forensic',
+            'government', 'federal', 'enterprise', 'secure', 'firewall'
+        ]
+        for kw in broad_keywords:
+            if kw in summary_lower and kw in job_lower:
+                score += 0.5
+
         scores[summary_key] = score
-    
+
     # Get best match
     best_key = max(scores, key=scores.get)
     best_score = scores[best_key]
     total_score = sum(scores.values())
     confidence = best_score / total_score if total_score > 0 else 0
-    
+
     return best_key, profile_summaries[best_key], confidence

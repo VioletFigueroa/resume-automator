@@ -1,0 +1,46 @@
+{
+  "role_title": "Cyber Security Analyst",
+  "posting_title": "Inventory: Cyber Security Analyst, Senior Analyst, and Specialist",
+  "reference_number": "JR100246",
+  "output_label": "OSFI_JR100246",
+  "summary_type": "ymca_network_security",
+  "summary_text": "CompTIA Security+ certified cybersecurity professional with bootcamp training in incident response, digital forensics, and vulnerability assessment (Splunk, QRadar, Wireshark, Volatility — lab environments). Practical IT and security experience from a small business role: endpoint protection deployment, password management migration, firewall configuration, and PIPEDA-aligned policy creation. Full-stack web development background (Node.js, React, WordPress/WooCommerce) provides application security perspective. VanLUG board member committed to open-source advocacy and inclusive security practices. Seeking to grow into enterprise security operations and contribute to OSFI's mission of protecting Canada's financial infrastructure.",
+  "cover_letter_template": "cover_letter_public_sector.md.j2",
+  "cover_letter_html_template": "cover_letter_public_sector.html.j2",
+  "headline": "CompTIA Security+ | Incident Response · Vulnerability Management · Cloud & Endpoint Security",
+  "job_description": "Office of the Superintendent of Financial Institutions (OSFI) hiring multiple Cyber Security positions (RE-04, RE-05, RE-06) across domains including Incident Response, DLP, IAM, Application/Cloud/Endpoint Security, Vulnerability Management, Supply Chain Risk, Threat Intelligence, and GRC. Positions are hybrid (Ottawa/Toronto/Montreal/Vancouver), require Canadian residency/citizenship for some clearances, and emphasize experience in enterprise environments. Essential education: degree or diploma in computer science, computer engineering, cyber security, information security, or related field. Experience levels vary by classification: RE-04 (2–4 years), RE-05 (5–6 years), RE-06 (7+ years). Key competencies include critical thinking, collaboration, and results orientation. Asset qualifications: graduate degree and certifications (CISSP, CISA, CISM, CEH). Candidates must be able to obtain Secret or Top Secret clearance where required.",
+  "organization_mission": "OSFI's mandate to protect Canada's financial system — ensuring the stability of over 400 federally regulated financial institutions and 1,200 pension plans — through rigorous regulation, supervision, and risk-based cybersecurity controls",
+  "interest_points": [
+    "OSFI's cyber division covers domains I've trained in — Incident Response, Vulnerability Management, Cloud & Application Security, IAM, and Endpoint/Network Monitoring — making this a strong domain match for growing my skills.",
+    "Protecting financial infrastructure and federally regulated institutions is mission-critical work that aligns with my commitment to security as a public good.",
+    "The hybrid, multi-city model (Ottawa/Toronto/Vancouver/Montreal) supports my preference for remote-flexible work while being willing to travel and work on-site as required.",
+    "OSFI's commitment to equity, diversity, and inclusion resonates with my identity as a person with disabilities who self-identifies under employment equity provisions."
+  ],
+  "requirements": [
+    "Education: Diploma in Cybersecurity (Lighthouse Labs, May 2025) plus prior post-secondary studies (SFU, incomplete).",
+    "Incident Response & Digital Forensics: Hands-on bootcamp labs using NIST IR framework, Volatility (memory forensics), Autopsy (disk forensics), Splunk (log analysis), and Wireshark (network analysis). Capstone DFIR investigation with MITRE ATT&CK mapping. Lab experience only — no production IR.",
+    "Vulnerability Assessment: OpenVAS scanning in lab environments. Informal security reviews at a small business using self-directed checklists. No production vulnerability management program experience.",
+    "Endpoint & Network Security: Deployed Malwarebytes endpoint protection and configured Windows Firewall at a small business. SIEM alert triage (Splunk, QRadar) in bootcamp labs only.",
+    "Application Security: OWASP Top 10 awareness, BurpSuite in lab. Full-stack web development background (Node.js, React, WordPress/WooCommerce) provides developer perspective on web app security.",
+    "IAM: Configured MFA and migrated to Bitwarden password manager at a small business.",
+    "GRC: Applied NIST 800-53 and MITRE ATT&CK in coursework. Created PIPEDA-aligned privacy policies for small ecommerce business.",
+    "Communication: Authored technical reports in coursework. Translated security concepts for non-technical small business team."
+  ],
+  "assets": [
+    "CompTIA Security+ (SY0-701) — industry-recognized certification directly listed in the posting's asset qualifications.",
+    "Actively pursuing additional certifications (Google Cybersecurity Specialization in progress).",
+    "Lab experience with Splunk SIEM and log monitoring in bootcamp environments.",
+    "Self-identifies as a person with disabilities under Employment Equity — OSFI specifically encourages applications from this group."
+  ],
+  "recipient": {
+    "name": "OSFI Staffing Team",
+    "title": "Cyber Security Division",
+    "company": "Office of the Superintendent of Financial Institutions (OSFI)",
+    "address": "Ottawa / Toronto / Montreal / Vancouver"
+  },
+  "cover_letter_context": "OSFI's mandate to rigorously regulate and supervise Canada's financial institutions is exactly the kind of mission-critical environment where I want to grow my security career. While my formal experience is from bootcamp training and a small business IT/security role, I bring strong foundational knowledge across incident response, vulnerability assessment, and compliance frameworks, along with genuine motivation to learn enterprise security operations. I am prepared to obtain and maintain the required security clearance, I am bilingual-eligible for English essential positions, and I self-identify under Employment Equity provisions as a person with disabilities.",
+  "public_sector_overrides": {
+    "clearance": "Willing to obtain and maintain Secret or Top Secret clearance as required by the specific position.",
+    "relocation": "Based in Vancouver, BC; open to remote work from Vancouver and willing to travel within Canada for in-person requirements at Ottawa, Toronto, Montreal, or Vancouver offices."
+  }
+}

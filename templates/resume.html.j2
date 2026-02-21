@@ -192,6 +192,9 @@
     <div class="header">
         <h1>{{ basics.name }}</h1>
         <div class="role-title">{{ basics.label }}</div>
+        {% if headline %}
+        <div class="role-title" style="font-size:0.85em;color:var(--light-text);font-style:italic;margin-top:2px;">{{ headline }}</div>
+        {% endif %}
         <div class="contact-info">
             {{ basics.location }}
             <span class="contact-separator">|</span>
@@ -215,16 +218,16 @@
     <div class="section">
         <h2>Technical Skills</h2>
         <div class="skills-grid">
-            {% for category, skills in skills.items() %}
+            {% for category, skills in skills.items() %}{% if skills is iterable and skills is not string %}
             <div class="skill-category">{{ category|replace('_', ' ')|title }}:</div>
             <div class="skill-list">{{ skills|join(', ') }}</div>
-            {% endfor %}
+            {% endif %}{% endfor %}
         </div>
     </div>
 
     <div class="section">
         <h2>Work Experience</h2>
-        {% for job in experience %}
+        {% for job in experience %}{% if job.employment_type != 'Volunteer' %}
         <div class="entry">
             <div class="entry-header">
                 <div class="entry-title">{{ job.role }} | {{ job.company }}</div>
@@ -238,8 +241,29 @@
                 {% endfor %}
             </ul>
         </div>
+        {% endif %}{% endfor %}
+    </div>
+
+    {% set volunteers = [] %}{% for job in experience %}{% if job.employment_type == 'Volunteer' %}{% if volunteers.append(job) %}{% endif %}{% endif %}{% endfor %}{% if volunteers %}
+    <div class="section">
+        <h2>Community Involvement</h2>
+        {% for job in volunteers %}
+        <div class="entry">
+            <div class="entry-header">
+                <div class="entry-title">{{ job.role }} | {{ job.company }}</div>
+                <div class="entry-date">{{ job.date }}</div>
+            </div>
+            <div class="entry-subtitle">{{ job.location }}</div>
+            <div class="entry-summary">{{ job.summary }}</div>
+            <ul>
+                {% for bullet in job.bullets %}
+                <li>{{ bullet }}</li>
+                {% endfor %}
+            </ul>
+        </div>
         {% endfor %}
     </div>
+    {% endif %}
 
     <div class="section">
         <h2>Projects</h2>
@@ -272,7 +296,7 @@
                 <div class="entry-title">{{ edu.program }}</div>
                 <div class="entry-date">{{ edu.date }}</div>
             </div>
-            <div class="entry-subtitle">{{ edu.institution }}{% if edu.location %} | {{ edu.location }}{% endif %}{% if edu.award_date %} | Awarded/Expected: {{ edu.award_date }}{% endif %}</div>
+            <div class="entry-subtitle">{{ edu.institution }}{% if edu.location %} | {{ edu.location }}{% endif %}{% if edu.award_date %} | Awarded: {{ edu.award_date }}{% endif %}</div>
             <ul>
                 {% for bullet in edu.bullets %}
                 <li>{{ bullet }}</li>
@@ -290,5 +314,16 @@
             {% endfor %}
         </ul>
     </div>
+    {% if public_sector is defined %}
+    <div class="section" style="border-top:1px solid var(--border-color);padding-top:10px;margin-top:10px;font-size:0.85em;color:var(--light-text);">
+        <p><strong>Eligibility:</strong>
+        {{ public_sector.citizenship }}
+        {{ public_sector.language_profile }}
+        {{ public_sector.clearance }}
+        {{ public_sector.relocation }}
+        {% if public_sector.equity_statement %}{{ public_sector.equity_statement }}{% endif %}
+        </p>
+    </div>
+    {% endif %}
 </body>
 </html>

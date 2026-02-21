@@ -144,7 +144,11 @@
     <div class="content">
         <p>Dear {{ recipient.name }},</p>
 
-        <p>I am submitting my application to the {{ recipient.company or 'CSE' }} general inventory for cybersecurity analyst opportunities as they arise. I am motivated by your mission in foreign signals intelligence, cyber operations, and cyber security, and I value your focus on equity, diversity, and inclusion.</p>
+        <p>I am submitting my application to the {{ recipient.company or 'CSE' }} for the {{ posting_title or role_title }}. I am focusing on cybersecurity analyst opportunities as they arise, and I am motivated by {{ organization_mission or 'your mission in cybersecurity and public service' }}. I value your focus on equity, diversity, and inclusion.</p>
+
+        {% if cover_letter_context %}
+        <p>{{ cover_letter_context }}</p>
+        {% endif %}
 
         {% if interest_points %}
         <h3>Interest</h3>
@@ -194,16 +198,6 @@
             </li>
             {% endfor %}
         </ul>
-        {% endif %}
-
-        <p>{{ summary }}</p>
-
-        {% if program_eligibility is defined and program_eligibility.workbc_wage_subsidy_line %}
-        <p>{{ program_eligibility.workbc_wage_subsidy_line }}</p>
-        {% endif %}
-
-        {% if public_sector is defined and public_sector.equity_statement %}
-        <p>{{ public_sector.equity_statement }}</p>
         {% endif %}
 
         <p>Thank you for your time and consideration. I welcome the opportunity to discuss where my background aligns with your current and upcoming needs.</p>

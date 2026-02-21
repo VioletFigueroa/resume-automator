@@ -1,39 +1,41 @@
 {
   "role_title": "Cyber Security Analyst",
   "summary_type": "general",
-  "posting_title": "General Inventory - Other (General Application)",
+  "posting_title": "Persons with Disabilities Internship (Inventory) (20535)",
   "reference_number": "",
-  "organization_mission": "your mission in foreign signals intelligence, cyber operations, and cybersecurity",
-  "output_label": "CSE Inventory",
+    "organization_mission": "your mission to advance science and innovation for Canada",
+    "output_label": "NRC Inventory",
   "recipient": {
     "name": "Hiring Manager",
-    "company": "Communications Security Establishment (CSE)",
+    "company": "National Research Council of Canada",
     "address": "Ottawa, ON"
   },
   "interest_points": [
-    "Motivated by CSE's mission in foreign signals intelligence, cyber operations, and cyber security.",
-    "Committed to discreet, professional handling of sensitive information and strong security culture.",
-    "Aligned with your focus on equity, diversity, inclusion, and accessible workplaces."
+    "Interested in mission-driven public research and protecting the systems that enable scientific and engineering innovation.",
+    "Motivated by NRC's inclusive hiring initiatives and commitment to accessible workplaces.",
+    "Eager to apply practical security operations experience in support of research environments."
   ],
   "requirements": [
     "Hands-on incident response, digital forensics, and vulnerability management experience across real-world and lab environments.",
     "Strong log analysis and network troubleshooting using tools like Splunk, Wireshark, and Nmap.",
     "Documented security controls and communicated technical findings to diverse audiences.",
-    "Diploma in Cybersecurity (Lighthouse Labs), with ongoing professional training and certifications.",
-    "Comfortable with operational requirements including overtime and standby when needed."
+    "Diploma in Cybersecurity (Lighthouse Labs), with ongoing professional training and certifications."
   ],
   "assets": [
     "Experience with MITRE ATT&CK and NIST 800-53 aligned practices.",
     "Background in secure systems administration across Windows, macOS, and Linux environments.",
     "Accessibility-focused security training and documentation for diverse teams."
   ],
+  "public_sector_overrides": {
+    "clearance": "Willing to obtain and maintain required security clearance if applicable."
+  },
   "project_ids": [
     "capstone",
     "p10",
-    "p9",
     "p11",
     "p6",
-    "p2"
+    "p2",
+    "p3"
   ],
   "cover_letter_template": "cover_letter_public_sector.md.j2",
   "cover_letter_html_template": "cover_letter_public_sector.html.j2"

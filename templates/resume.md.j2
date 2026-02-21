@@ -1,6 +1,7 @@
 # {{ basics.name }}
 **{{ basics.label }}**
-{{ basics.location }} | {{ basics.email }}
+{% if headline %}*{{ headline }}*
+{% endif %}{{ basics.location }} | {{ basics.email }}
 [LinkedIn]({{ basics.linkedin }}) | [GitHub]({{ basics.github }}) | [Portfolio]({{ basics.portfolio }})
 
 ---
@@ -13,19 +14,29 @@
 {% endif %}
 
 ## Technical Skills
-{% for category, skills in skills.items() %}
-**{{ category|title }}:** {{ skills|join(', ') }}
-{% endfor %}
+{% for category, skills_list in skills.items() %}{% if skills_list is iterable and skills_list is not string %}
+**{{ category|replace('_', ' ')|title }}:** {{ skills_list|join(', ') }}
+{% endif %}{% endfor %}
 
 ## Work Experience
-{% for job in experience %}
+{% for job in experience %}{% if job.employment_type != 'Volunteer' %}
 ### {{ job.role }} | {{ job.company }}
 *{{ job.location }} | {{ job.date }}{% if job.employment_type %} | {{ job.employment_type }}{% endif %}{% if job.hours_per_week %} | {{ job.hours_per_week }} hrs/week{% endif %}*
 {{ job.summary }}
 {% for bullet in job.bullets %}
 - {{ bullet }}
 {% endfor %}
+{% endif %}{% endfor %}
+{% set volunteers = [] %}{% for job in experience %}{% if job.employment_type == 'Volunteer' %}{% if volunteers.append(job) %}{% endif %}{% endif %}{% endfor %}{% if volunteers %}
+## Community Involvement
+{% for job in volunteers %}
+### {{ job.role }} | {{ job.company }}
+*{{ job.location }} | {{ job.date }}*
+{{ job.summary }}
+{% for bullet in job.bullets %}
+- {{ bullet }}
 {% endfor %}
+{% endfor %}{% endif %}
 
 ## Projects
 {% for project in projects %}
@@ -38,7 +49,7 @@
 ## Education
 {% for edu in education %}
 ### {{ edu.program }} | {{ edu.institution }}
-*{% if edu.location %}{{ edu.location }} | {% endif %}{{ edu.date }}{% if edu.award_date %} | Awarded/Expected: {{ edu.award_date }}{% endif %}*
+*{% if edu.location %}{{ edu.location }} | {% endif %}{{ edu.date }}{% if edu.award_date %} | Awarded: {{ edu.award_date }}{% endif %}*
 {% for bullet in edu.bullets %}
 - {{ bullet }}
 {% endfor %}
@@ -48,3 +59,8 @@
 {% for cert in certifications %}
 - {{ cert }}
 {% endfor %}
+{% if public_sector is defined %}
+
+---
+*Eligibility note: {{ public_sector.citizenship }} {{ public_sector.language_profile }} {{ public_sector.clearance }} {{ public_sector.relocation }}{% if public_sector.equity_statement %} {{ public_sector.equity_statement }}{% endif %}*
+{% endif %}
