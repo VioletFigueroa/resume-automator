@@ -21,7 +21,7 @@ This project demonstrates I don't just understand security in theory—I build p
 - **Problem identification**: Recognized job search inefficiency (2-3 hours per application)
 - **System design**: Architected scalable, maintainable solution
 - **Security-first**: Built-in PII protection and secure workflow from day one
-- **Measurable results**: 80-120% increase in interview callbacks through intelligent customization
+- **Measurable results**: Reduced per-application time from 2-3 hours to ~15 minutes through automated customization
 - **Production mindset**: Testing, documentation, and user-friendly design
 
 As a security professional, this shows I can:
@@ -31,7 +31,7 @@ As a security professional, this shows I can:
 - Build tools that solve business problems
 - Work independently on complex projects
 
-**Results:** Reduced application time by 88% while improving quality and callback rates.
+**Results:** Reduced application time by ~88% (from 2-3 hours to ~15 minutes per application).
 
 ## System Architecture
 
@@ -130,7 +130,7 @@ I use LLMs strategically for high-ROI tasks like templates and documentation whi
 - **Dynamic Resume Headlines**: Automatically generate job-specific headlines that highlight relevant experience
 - **Intelligent Skill Reordering**: Prioritize skills based on job description keywords and requirements
 - **Confidence-Scored Summary Selection**: Choose the best professional summary variant for each role
-- **Impact**: +40-60% improvement in ATS keyword matching scores
+- **Impact**: Improved ATS keyword alignment through automated skill reordering and headline generation
 
 ### Phase 2: Impact Bullets (Jan 2025)
 **Goal**: Enhance storytelling and demonstrate multi-dimensional value
@@ -146,12 +146,12 @@ I use LLMs strategically for high-ROI tasks like templates and documentation whi
 - **Company Research Integration**: Incorporate company values and mission into cover letter narrative
 - **Recipient Personalization**: Address hiring managers by name when available
 - **Tone Variants**: Support different communication styles (formal, conversational, technical)
-- **Impact**: +40-60% increase in hiring manager engagement and interview callback rates
+- **Impact**: Automated personalized cover letter generation, reducing manual writing time
 
 ### Overall Impact
-- **Interview Callback Rate**: Increased by 80-120% through intelligent customization
 - **Application Speed**: Reduced from 2-3 hours per application to ~15 minutes
 - **Consistency**: Eliminated errors and formatting inconsistencies across applications
+- **Early Results**: 25 applications submitted, 2 interview callbacks (~8% callback rate); project is ongoing
 
 ## Quick Start
 
