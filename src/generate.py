@@ -108,12 +108,37 @@ def tailor_data(profile_data: Dict[str, Any], config: Dict[str, Any]) -> Dict[st
         summary_key = 'general'
         tailored['summary'] = profile_data['summaries'].get(summary_key, profile_data['summaries']['general'])
         tailored['summary_key'] = summary_key
+
+    # 2.5 Optional Experience Filtering
+    # Allows role-specific omission of employers (e.g., sensitive or non-targeted short tenures)
+    # 2.5 Override or Filter Experience
+    if 'experience' in config:
+        tailored['experience'] = config['experience']
+        print(f"  Using custom experience list from config.")
+    elif 'exclude_companies' in config and isinstance(profile_data.get('experience'), list):
+        exclude_set = {
+            company.strip().lower()
+            for company in config.get('exclude_companies', [])
+            if isinstance(company, str) and company.strip()
+        }
+        if exclude_set:
+            original_count = len(profile_data['experience'])
+            tailored['experience'] = [
+                job for job in profile_data['experience']
+                if job.get('company', '').strip().lower() not in exclude_set
+            ]
+            filtered_count = len(tailored['experience'])
+            if filtered_count != original_count:
+                print(f"  Filtered experience entries: {original_count - filtered_count} excluded by company rule.")
     
     # 3. Reorder Skills by Job
+    if 'skills' in config:
+        tailored['skills'] = config['skills']
+        print(f"  Using custom skills list from config.")
     if 'job_description' in config:
         print(f"  Reordering skills based on job description...")
         reordered_skills = reorder_skills_by_job(
-            profile_data['skills'],
+            tailored['skills'],
             config['job_description'],
             max_skills=12
         )
@@ -198,6 +223,8 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
     if role_config_path:
         context['summary_type'] = role_config.get('summary_type', 'general')
         context['company_focus'] = role_config.get('company_focus', '')
+        context['proximity_note'] = role_config.get('proximity_note', '')
+        context['custom_cover_letter_body'] = role_config.get('custom_cover_letter_body', '')
         context['prospective_outreach'] = role_config.get('prospective_outreach', False)
         context['sanitization_standard'] = role_config.get('sanitization_standard', 'NIST 800-88')
         context['posting_title'] = role_config.get('posting_title')
@@ -272,6 +299,8 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
             context['background_context'] = "full-stack development and application security"
         elif summary_type == 'healthcare':
             context['background_context'] = "healthcare compliance and secure system administration"
+        elif summary_type == 'it_support':
+            context['background_context'] = "IT service desk support, endpoint troubleshooting, and user training across Windows/macOS/Linux environments"
         elif summary_type == 'prs_canada':
             context['background_context'] = "forensic data destruction, chain of custody, and IT asset security"
         elif summary_type == 'ymca_network_security':

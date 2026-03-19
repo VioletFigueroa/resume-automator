@@ -1,0 +1,105 @@
+[
+  {
+    "company": "Self-Employed",
+    "role": "Freelance IT Support Technician",
+    "location": "Greater Vancouver Area",
+    "date": "2012 - Present",
+    "employment_type": "Part-time, self-employed",
+    "hours_per_week": "15-20",
+    "summary": "Providing on-site and remote technical support to seniors, families, and community members for Windows/macOS systems, home networking, and mobile device troubleshooting.",
+    "executive_summary": "Established a long-running freelance IT support practice, building strong customer relationships through reliable, patient technical assistance across diverse systems and environments.",
+    "business_impact": "Built a reputation-based practice over 10+ years, demonstrating consistent technical problem-solving, user education, and professional customer service.",
+    "bullets": [
+      "Install and configure operating systems, perform hardware upgrades, diagnose and resolve system failures, and remove malware and optimize system performance for end users.",
+      "Set up and troubleshoot home routers, Wi-Fi networks, printers, and peripherals; establish backup solutions and educate users on digital hygiene and device maintenance.",
+      "Deliver clear technical explanations using non-technical language; maintain professional support standards and customer satisfaction."
+    ]
+  },
+  {
+    "company": "Accessible Places",
+    "role": "Web Developer & IT Support",
+    "location": "Remote, Greater Vancouver Area",
+    "date": "Sept 2022 - Jan 2024",
+    "employment_type": "Part-time",
+    "hours_per_week": "21",
+    "summary": "Served as the sole technical resource for a small assistive-device ecommerce business (~5 people), handling web development, IT support, security hardening, social media management, and accessibility advocacy.",
+    "executive_summary": "Sole technical resource for an accessibility-focused small business, responsible for all IT, web, security, and social media operations.",
+    "business_impact": "Improved the organization's security posture from plaintext password storage to managed credentials, deployed anti-malware tools, and maintained the WooCommerce storefront.",
+    "actual_scope_note": "Originally hired as web developer; role expanded organically to cover IT support, security hardening, social media (9+ platforms), policy writing, open-source tool migration, and EVAC+ chair accessibility advocacy. Security work was self-directed using LLM guidance prior to formal Lighthouse Labs training.",
+    "bullets": [
+      "Managed WooCommerce e-commerce storefront, product listings, and WordPress site maintenance for assistive-device business.",
+      "Migrated organization from plaintext password storage to Bitwarden password manager; deployed Malwarebytes anti-malware across devices.",
+      "Configured Windows firewall rules on business endpoints; set up multi-factor authentication on business accounts.",
+      "Conducted security reviews of website, business operations, and social media accounts using LLM-guided checklists (pre-formal training).",
+      "Led open-source migration initiative: replaced Chrome with Waterfox/Brave, MS Office with LibreOffice, Evernote with Obsidian.",
+      "Managed social media presence across 9+ platforms (LinkedIn, Instagram, Facebook, Twitter, Pinterest, Alignable, Bark, YouTube, Amazon).",
+      "Set up remote access (RustDesk, RealVNC) for technical support of owner's devices; performed hardware upgrades including RAM and Linux installations on secondary laptops.",
+      "Created business policies (shipping, returns, privacy, cookies) and training materials for team members.",
+      "Coordinated EVAC+ chair accessibility advocacy, including building audits and promotional outreach to Vancouver buildings."
+    ]
+  },
+  {
+    "company": "Shopify",
+    "role": "Junior Support Advisor",
+    "location": "Remote",
+    "date": "Oct 2020 - Nov 2020",
+    "employment_type": "Full-time, contract (3-month term with 1-month training)",
+    "hours_per_week": "40",
+    "summary": "Provided remote customer support via live chat for Shopify merchants. Terminated after approximately 5 weeks following an autistic meltdown triggered by sensory overload from simultaneous multi-chat and voice requirements.",
+    "executive_summary": "Brief tenure as remote support advisor at Shopify, ended by discriminatory termination following disclosure of autism/mental health conditions.",
+    "business_impact": "N/A \u2014 role ended before completing training period.",
+    "departure_context": {
+      "reason": "Terminated without cause after disclosing autism and having a meltdown at work due to sensory overload (handling 3 simultaneous customer chats + voice chat with supervisor).",
+      "discrimination_notes": "Shopify attempted to have Violet sign separation papers containing a clause requiring her to declare no discrimination had occurred. Violet refused to sign. Shopify offered $1,600 severance for ~2.5 weeks of remaining contract pay, which was less than government income support (CRB) for the same period. Violet contacted WorkBC (YWCA), Disability Alliance BC, and a therapist for support.",
+      "clarification": "Shopify was explicitly trans-friendly \u2014 discrimination was specifically related to mental health/autism, not gender identity. The issue was with individual actors (supervisor and HR), not company-wide policy.",
+      "key_contacts": "Courtney Bamford (Talent Business Partner), Stephanie Segaric (recruiter), Dallas Frazer (offer coordination). Yvette Kim (WorkBC/YWCA job developer) was contacted for support."
+    },
+    "bullets": [
+      "Hired as remote Junior Support Advisor providing technical and merchant support via live chat.",
+      "Terminated after ~5 weeks following an autistic meltdown caused by sensory overload from simultaneous multi-channel support demands.",
+      "Refused to sign separation agreement containing a clause denying discrimination had occurred.",
+      "Contacted WorkBC, Disability Alliance BC, and support networks regarding discriminatory termination."
+    ],
+    "relevance_notes": "While brief and ending poorly, this role demonstrates: (1) ability to pass Shopify's competitive hiring process, (2) real-world remote customer support experience, (3) lived experience with workplace ableism that informs advocacy work, (4) integrity in refusing to sign away legal rights under pressure. Include on career timelines for completeness; typically omit from targeted resumes unless relevant to disability advocacy or union-protection narratives."
+  },
+  {
+    "company": "Compass Group Canada (SFU Dining Hall)",
+    "role": "Service Cashier",
+    "location": "Simon Fraser University, Burnaby, BC",
+    "date": "2015 - Aug 2021",
+    "employment_type": "Part-time (during studies), transitioning to more hours post-studies",
+    "hours_per_week": "24-40 (variable; 24-32 during studies, up to 40 after)",
+    "union": "UNITE HERE Local 40",
+    "summary": "Worked as a cashier at the SFU Burnaby campus all-you-care-to-eat buffet dining hall, handling sales transactions, customer service, and facility maintenance during high-volume shifts including graveyard hours.",
+    "executive_summary": "Long-tenure food service cashier in a unionized university dining hall, demonstrating resilience through extremely challenging working conditions concurrent with full-time studies and multiple health issues.",
+    "business_impact": "Maintained reliable service across 6 years in a high-stress, high-volume campus food service environment.",
+    "departure_context": {
+      "reason": "Role ended due to cumulative health issues (physical and mental). Had taken medical leave twice during SFU studies. Experienced burnout from overwork (24-32 hours/week + 3-4 classes/semester with no summer breaks). Also experienced gender dysphoria from dress code requirements (masculine clothing, hairnet, no makeup/jewelry) and constant misgendering due to voice.",
+      "working_conditions": "Frequently worked graveyard shifts as the sole cashier, responsible for the entire dining hall solo. Regularly dealt with 200-400 intoxicated students at 3am attempting to steal food, with only a grill cook and dishwasher on shift. Often denied legally required breaks because no one could cover the register. Had WorkSafeBC involvement at some point.",
+      "health_impact": "The combination of overwork, hostile working conditions, gender dysphoria, and managing multiple health issues (physical and mental) while studying full-time contributed to crashing after 60 credits at SFU."
+    },
+    "bullets": [
+      "Processed sales transactions and provided customer service in a high-volume university buffet dining hall serving hundreds of students per shift.",
+      "Worked graveyard shifts as sole cashier, managing facility operations and food security independently.",
+      "Operated within a UNITE HERE Local 40 unionized environment, gaining firsthand experience with collective agreements and union workplace culture.",
+      "Coordinated duties with kitchen staff in a fast-paced, high-pressure food service setting."
+    ],
+    "relevance_notes": "While not directly relevant to cybersecurity, this role provides: (1) evidence of 6 years of consistent employment demonstrating reliability, (2) unionized work experience valuable for union-role applications (UNITE HERE Local 40), (3) customer service and high-pressure environment skills, (4) personal connection to WorkSafeBC (useful in applications to that organization), (5) context for career timeline completeness. Best mentioned briefly on resumes or highlighted in cover letters for union-based roles."
+  },
+  {
+    "company": "VanLUG (Vancouver Linux Users Group)",
+    "role": "Board Member & Volunteer",
+    "location": "Vancouver, BC",
+    "date": "Nov 2025 - Present",
+    "employment_type": "Volunteer",
+    "summary": "Board member (elected Dec 2025) supporting open-source education, right-to-repair advocacy, and sustainable technology practices for a 2,200+ member community.",
+    "executive_summary": "Board member of one of Canada's largest Linux user groups, contributing to strategic planning for 2026 expansion and community event organization.",
+    "business_impact": "Helping organize educational sessions and advocate practices that keep hardware in use longer and protect user privacy.",
+    "bullets": [
+      "Elected to board of directors at December 2025 AGM; attending monthly board meetings and contributing to 2026 strategic planning.",
+      "Organizing and supporting community meetups on Linux, privacy, and sustainable hardware reuse.",
+      "Advocating right-to-repair principles and contributing to open-source education initiatives.",
+      "Promoting privacy-first tooling and secure operating practices across community members."
+    ]
+  }
+]
