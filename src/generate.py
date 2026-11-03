@@ -18,6 +18,7 @@ DATA_DIR = 'data'
 TEMPLATE_DIR = 'templates'
 OUTPUT_DIR = 'output'
 PRIVATE_DIR = 'private'
+PHONE_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'phonenumber.env'))
 
 def load_json(filepath: str) -> Dict[str, Any]:
     """
@@ -43,6 +44,110 @@ def load_json(filepath: str) -> Dict[str, Any]:
         print(f"Error reading {filepath}: {e}")
         return {}
 
+def load_phone_number(filepath: str = PHONE_FILE) -> str:
+    """Load a phone number from a raw value or PHONE_NUMBER= entry."""
+    if not os.path.exists(filepath):
+        return ''
+    try:
+        with open(filepath, 'r', encoding='utf-8') as file:
+            for line in file:
+                value = line.strip()
+                if not value or value.startswith('#'):
+                    continue
+                if '=' in value:
+                    key, value = value.split('=', 1)
+                    if key.strip().lower() not in {'phone', 'phone_number', 'phonenumber'}:
+                        continue
+                return value.strip().strip('"\'')
+    except OSError as error:
+        print(f"Warning: Could not read phone number file: {error}")
+    return ''
+
+def resume_bullet(value: str) -> str:
+    """Keep resume bullets in the coursework-required point-form style."""
+    return value.rstrip().rstrip('.;:')
+
+def normalize_profile(profile_data: Dict[str, Any]) -> Dict[str, Any]:
+    """Add compatibility aliases for the current main profile schema."""
+    basics = profile_data.get('basics', {})
+    basics.setdefault('linkedin', basics.get('linkedin_url', ''))
+    basics.setdefault('github', basics.get('github_url', ''))
+    basics.setdefault('portfolio', basics.get('portfolio_url', ''))
+    phone_number = load_phone_number()
+    if phone_number:
+        basics['phone'] = phone_number
+    profile_data['basics'] = basics
+
+    for education in profile_data.get('education', []):
+        if education.get('bullets'):
+            continue
+        bullets = []
+        if education.get('resume_bullet'):
+            bullets.append(education['resume_bullet'])
+        elif education.get('credential_status'):
+            bullets.append(education['credential_status'])
+        elif education.get('course_code_correction'):
+            bullets.append(education['course_code_correction'])
+        education['bullets'] = bullets
+
+    return profile_data
+
+def normalize_role_config(config: Dict[str, Any]) -> Dict[str, Any]:
+    """Support nested target configs while retaining the legacy renderer contract."""
+    if 'resume' not in config and 'cover_letter' not in config:
+        return config
+
+    resume = config.get('resume', {})
+    cover_letter = config.get('cover_letter', {})
+    normalized = dict(config)
+    normalized.update({
+        'role_title': 'Software Developer Intern',
+        'output_label': 'IBM C3 EXPE 2300',
+        'headline': 'Software Development | Python, JavaScript, React, Node.js',
+        'summary_type': 'general',
+        'exclude_companies': ['Shopify', 'Compass Group Canada (SFU Dining Hall)'],
+        'targeted_resume': True,
+        'project_ids': [
+            'tinyapp', 'tweeter', 'lightbnb', 'scheduler', 'scheduler-api',
+            'lotide', 'resume-automator', 'conversation-to-logseq',
+            'perplexport', 'homelab'
+        ],
+        'recipient': {
+            'name': 'Hiring Committee',
+            'company': 'IBM Canada Ltd.',
+            'address': cover_letter.get('employer_address', '')
+        },
+        'background_context': 'full-stack software development and security-first engineering',
+        'cover_letter_template': 'cover_letter.md.j2',
+        'cover_letter_html_template': 'cover_letter.html.j2'
+    })
+
+    highlights = resume.get('highlights_order_mirrors_posting', [])
+    normalized['job_description'] = ' '.join(highlights)
+    normalized['highlights_order_mirrors_posting'] = highlights
+    normalized['cover_letter_context'] = cover_letter.get('paragraph_plan', [])
+    normalized['custom_cover_letter_body'] = (
+        "I am writing to express my interest in the Software Developer Intern pipeline "
+        "opportunity with IBM Canada Ltd., identified through the Langara C3 job board.\n\n"
+        "As a current Langara College Computer Studies student, I am "
+        "building on coursework in web development and programming with hands-on projects "
+        "using Python, JavaScript, React, Node.js, Express, PostgreSQL, SQL, REST APIs, "
+        "and Git. My academic work includes a URL shortener, a React scheduling application, "
+        "a database-backed rental platform, and a JavaScript utility library built from scratch.\n\n"
+        "I also bring a security-first perspective through CompTIA Security+ certification, "
+        "documented testing, and practical software and automation projects published on GitHub. "
+        "My Debian and Docker Compose homelab gives me a concrete environment for developing "
+        "cloud and container skills, while my cybersecurity training has strengthened my "
+        "analytical thinking and attention to reliable implementation.\n\n"
+        "I am available for a full 12-16 month work term and would welcome consideration for "
+        "IBM's Software Developer Intern pipeline. Thank you for your time and consideration."
+    )
+    normalized['role_config_source'] = {
+        'resume': resume,
+        'cover_letter': cover_letter
+    }
+    return normalized
+
 def convert_to_pdf(html_file: str) -> None:
     """
     Converts an HTML file to PDF using WeasyPrint.
@@ -54,7 +159,7 @@ def convert_to_pdf(html_file: str) -> None:
     try:
         # Use WeasyPrint via command line
         subprocess.run(
-            ['weasyprint', html_file, pdf_file], 
+            [sys.executable, '-m', 'weasyprint', html_file, pdf_file],
             check=True,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.PIPE
@@ -186,9 +291,34 @@ def tailor_data(profile_data: Dict[str, Any], config: Dict[str, Any]) -> Dict[st
         # Default: Show top 5 cyber projects if no config provided
         tailored['projects'] = profile_data['projects'].get('cyber', [])[:5]
 
+    selected_ids = {project.get('id') for project in tailored.get('projects', [])}
+    tailored['academic_projects'] = [
+        project for project in profile_data['projects'].get('web', [])
+        if not selected_ids or project.get('id') in selected_ids
+    ]
+    tailored['personal_projects'] = [
+        project for project in profile_data['projects'].get('personal', [])
+        if not selected_ids or project.get('id') in selected_ids
+    ]
+    tailored['highlights'] = config.get('highlights_order_mirrors_posting', [])
+    volunteer_experience = profile_data.get('volunteer_experience', [])
+    tailored['volunteer_experience'] = (
+        volunteer_experience if isinstance(volunteer_experience, list)
+        else [volunteer_experience] if volunteer_experience else []
+    )
+
+    if config.get('targeted_resume'):
+        tailored['education'] = profile_data.get('education', [])[:2]
+        tailored['skills'] = {
+            'programming': profile_data.get('skills', {}).get('programming', [])[:12],
+            'web_and_apis': ['React', 'Node.js', 'Express', 'PostgreSQL', 'REST/JSON APIs'],
+            'development_tools': ['Git', 'GitHub', 'Docker Compose', 'Linux/Debian', 'Jest', 'Cypress'],
+            'security_and_systems': ['Secure coding', 'Input validation', 'Authentication', 'Parameterized queries']
+        }
+
     return tailored
 
-def generate_resume(role_config_path: Optional[str] = None) -> None:
+def generate_resume(role_config_path: Optional[str] = None, profile_path: Optional[str] = None) -> None:
     """
     Generates a resume and cover letter based on the provided role configuration.
     
@@ -197,7 +327,7 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
     """
     # 1. Load Main Data
     # Check for private data first, otherwise use example data
-    private_data_path = os.path.join(PRIVATE_DIR, 'main_profile.json')
+    private_data_path = profile_path or os.path.join(PRIVATE_DIR, 'main_profile.json')
     if os.path.exists(private_data_path):
         print(f"Using private data from {private_data_path}")
         profile_data = load_json(private_data_path)
@@ -208,6 +338,7 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
     if not profile_data:
         print("Error: Could not load main profile data. Aborting.")
         return
+    profile_data = normalize_profile(profile_data)
 
     # 2. Load Role Config (if provided)
     role_config = {}
@@ -216,6 +347,7 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
         if not role_config:
              print(f"Error: Could not load role config from {role_config_path}. Skipping.")
              return
+        role_config = normalize_role_config(role_config)
     
     # 3. Tailor Data
     context = tailor_data(profile_data, role_config)
@@ -249,6 +381,7 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
     
     # 4. Render Resume Template
     env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))
+    env.filters['resume_bullet'] = resume_bullet
     try:
         # Markdown
         resume_template = env.get_template('resume.md.j2')
@@ -340,6 +473,7 @@ def generate_resume(role_config_path: Optional[str] = None) -> None:
 def main():
     parser = argparse.ArgumentParser(description="Generate tailored resumes and cover letters.")
     parser.add_argument('--role', help="Generate for a specific role configuration file (e.g., 'soc_analyst.json').")
+    parser.add_argument('--profile', help="Path to the main profile JSON file.")
     args = parser.parse_args()
 
     if args.role:
@@ -352,13 +486,13 @@ def main():
             
         if os.path.exists(config_path):
             print(f"Generating resume for config: {config_path}...")
-            generate_resume(config_path)
+            generate_resume(config_path, args.profile)
         else:
             print(f"Error: Role configuration file '{args.role}' not found.")
     else:
         # 1. Generate General Resume
         print("--- Generating General Resume ---")
-        generate_resume()
+        generate_resume(profile_path=args.profile)
 
         # 2. Generate Tailored Resumes from roles directory
         roles_dir = os.path.join(DATA_DIR, 'roles')
@@ -368,7 +502,7 @@ def main():
                 if filename.endswith('.json'):
                     config_path = os.path.join(roles_dir, filename)
                     print(f"Processing: {filename}")
-                    generate_resume(config_path)
+                    generate_resume(config_path, args.profile)
                     print("-" * 30)
 
 if __name__ == "__main__":

@@ -2,239 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ basics.name }} - Cover Letter</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <style>
-        @page {
-            size: Letter;
-            margin: 0.75in;
-        }
-
-        :root {
-            --primary-color: #6A1B9A; /* Violet Highlight */
-            --text-color: #333333;
-            --light-text: #666666;
-            --link-color: #7B1FA2;
-        }
-
-        body {
-            font-family: 'Merriweather', serif;
-            font-size: 10pt;
-            line-height: 1.5;
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            background-color: #ffffff;
-        }
-
-        /* Header / Letterhead */
-        .header {
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 15px;
-            margin-bottom: 30px;
-        }
-
-        h1 {
-            font-family: 'Roboto', sans-serif;
-            font-size: 2.2em;
-            margin: 0;
-            color: var(--primary-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 700;
-        }
-
-        .contact-info {
-            font-family: 'Roboto', sans-serif;
-            margin-top: 10px;
-            font-size: 0.95em;
-            color: var(--light-text);
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            align-items: center;
-            white-space: nowrap; /* prevent breaking email/links */
-        }
-
-        .contact-separator {
-            margin: 0 8px;
-            color: #ccc;
-        }
-
-        a {
-            color: var(--link-color);
-            text-decoration: none;
-            word-break: keep-all; /* avoid breaking addresses */
-        }
-
-        /* Letter Content */
-        .meta-info {
-            margin-bottom: 30px;
-        }
-
-        .date {
-            margin-bottom: 15px;
-        }
-
-        .recipient {
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .subject {
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-decoration: underline;
-        }
-
-        .content p {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        .content ul {
-            margin-bottom: 15px;
-        }
-
-        .signature {
-            margin-top: 40px;
-        }
-
-        .signature-name {
-            font-weight: bold;
-            margin-top: 10px;
-            color: var(--primary-color);
-        }
+        @page { size: Letter; margin: 0.72in 0.78in; }
+        :root { --ink: #171717; }
+        * { box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; font-size: 10.5pt; line-height: 1.45; color: var(--ink); margin: 0; }
+        .header { text-align: center; margin-bottom: 15pt; }
+        h1 { font-family: Georgia, serif; font-size: 22pt; margin: 0 0 2pt; font-weight: bold; }
+        .role-title { font-size: 11pt; font-weight: bold; margin-bottom: 5pt; }
+        .contact-info { font-size: 8.8pt; line-height: 1.45; }
+        a { color: var(--ink); text-decoration: none; }
+        .date, .recipient, .subject { margin-bottom: 16pt; }
+        .subject { font-weight: bold; }
+        .content p { margin: 0 0 13pt; }
+        .signature { margin-top: 21pt; }
+        .signature-name { margin-top: 28pt; font-weight: bold; }
     </style>
 </head>
 <body>
-    <div class="header">
+    <header class="header">
         <h1>{{ basics.name }}</h1>
-        <div class="contact-info">
-            {{ basics.location }}
-            <span class="contact-separator">|</span>
-            <a href="mailto:{{ basics.email }}">{{ basics.email }}</a>
-        </div>
-        <div class="contact-info">
-            <a href="https://{{ basics.linkedin }}">LinkedIn</a>
-            <span class="contact-separator">|</span>
-            <a href="https://{{ basics.github }}">GitHub</a>
-        </div>
-    </div>
-
-    <div class="meta-info">
-        <div class="date">{{ date }}</div>
-        <div class="recipient">
-            {{ recipient.name }}
-            {% if recipient.title %}<br>{{ recipient.title }}{% endif %}
-            {% if recipient.company %}<br>{{ recipient.company }}{% endif %}
-            {% if recipient.address %}<br>{{ recipient.address }}{% endif %}
-        </div>
-        <div class="subject">{% if prospective_outreach %}Re: Exploring Opportunities in {{ role_title }}{% else %}Re: Application for {{ role_title }} Position{% endif %}</div>
-    </div>
-
+        <div class="role-title">{{ basics.label }}</div>
+        {% if headline %}<div>{{ headline }}</div>{% endif %}
+        <div class="contact-info">{{ basics.location }} | {{ basics.phone }} | <a href="mailto:{{ basics.email }}">{{ basics.email }}</a></div>
+        <div class="contact-info"><a href="{{ basics.linkedin }}">LinkedIn: {{ basics.linkedin|replace('https://', '')|replace('http://', '')|trim('/') }}</a> | <a href="{{ basics.github }}">GitHub: {{ basics.github|replace('https://', '')|replace('http://', '')|trim('/') }}</a> | <a href="{{ basics.portfolio }}">Portfolio: {{ basics.portfolio|replace('https://', '')|replace('http://', '')|trim('/') }}</a></div>
+    </header>
+    <div class="date">{{ date }}</div>
+    <div class="recipient">{{ recipient.name }}{% if recipient.title %}<br>{{ recipient.title }}{% endif %}{% if recipient.company %}<br>{{ recipient.company }}{% endif %}{% if recipient.address %}<br>{{ recipient.address }}{% endif %}</div>
+    <div class="subject">Re: Application for {{ role_title }} Position</div>
     <div class="content">
-        <p>Dear {{ recipient.name }},<
-{% if custom_cover_letter_body %}
-{{ custom_cover_letter_body }}
-{% else %}
-/p>
-
-        {% if prospective_outreach %}
-        <p>I’m reaching out to express interest in upcoming opportunities at {{ recipient.company or 'your organization' }}. As a {{ basics.label }} and a PRS customer, I value your commitment to {{ company_focus or 'secure operations and environmental stewardship' }}. I’d welcome a brief conversation to explore where my background in forensic data handling and chain‑of‑custody could support your team.</p>
-        {% else %}
-        {% if summary_type == 'it_support' %}
-        <p>I am writing to express my strong interest in the {{ role_title }} position. As a {{ basics.label }} with a background in {{ background_context }}, I am excited about the opportunity to provide empathetic, efficient support to students and faculty during high-pressure academic periods.</p>
-        {% else %}
-        <p>I am writing to express my strong interest in the {{ role_title }} position. As a {{ basics.label }} with a background in {{ background_context }}, I am excited about the opportunity to contribute to your team's security posture.</p>
-        {% endif %}
-        {% endif %}
-
+        <p>Dear {{ recipient.name }},</p>
+        {% if custom_cover_letter_body %}{% for paragraph in custom_cover_letter_body.split('\n\n') %}<p>{{ paragraph }}</p>{% endfor %}{% else %}
+        <p>I am writing to express my strong interest in the {{ role_title }} position. As a {{ basics.label }} with a background in {{ background_context }}, I am excited about the opportunity to contribute to your team.</p>
         <p>{{ summary }}</p>
-
-        {% if program_eligibility is defined and program_eligibility.workbc_wage_subsidy_line %}
-        <p>{{ program_eligibility.workbc_wage_subsidy_line }}</p>
-        {% endif %}
-
-        {% if summary_type == 'prs_canada' or company_focus %}
-        <h3>Why {{ recipient.company or 'your company' }}?</h3>
-        {% if summary_type == 'prs_canada' %}
-        <p>Your company's commitment to {{ company_focus or 'secure operations and responsible technology practices' }} directly aligns with my experience in forensic data handling, {{ sanitization_standard }}‑aligned data‑wiping protocols, and chain‑of‑custody procedures. I value environmentally responsible asset remarketing and privacy‑first data practices, and I am eager to support these priorities.</p>
-
-        <h3>How I Can Help</h3>
-        <ul>
-            <li>Codify documented, auditable {{ sanitization_standard }}‑aligned sanitization SOPs and verification checklists.</li>
-            <li>Tighten chain‑of‑custody logging with clearer handoff points and tamper‑evident documentation.</li>
-            <li>Create simple client‑facing destruction/remarketing reports (before/after device state, certs, wipe IDs).</li>
-            <li>Produce short privacy/sustainability explainer content for customers and partners.</li>
-        </ul>
-
-        <h3>Relevant Expertise</h3>
-        <ul>
-            <li><strong>Forensic Data Handling & Security Analysis:</strong> Experienced with {{ skills.security_tools[:3]|join(', ') }} and reporting practices that protect confidentiality and integrity.</li>
-            <li><strong>Certified Data Wiping & Chain of Custody:</strong> Hands‑on work with verification, documentation, and lifecycle controls to ensure secure sanitization throughout asset handling.</li>
-            {% if 'Shopify' in skills.programming %}
-            <li><strong>Ecommerce/Web Security:</strong> Full‑stack experience ({{ (skills.programming|select('in', ['Node.js','React','PostgreSQL','Shopify'])|list)|join(', ') }}) with OWASP‑aligned secure coding, including SQL injection prevention and XSS protection.</li>
-            {% endif %}
-        </ul>
-        {% elif summary_type == 'ymca_network_security' %}
-        <p>YMCA BC's mission to strengthen community foundations through health equity and belonging resonates deeply with my commitment to security as an enabler—not a barrier—to organizational success. I'm drawn to your collaborative, mission-driven culture and excited to help safeguard the systems that support vital community services.</p>
-
-        <h3>How I Can Contribute</h3>
-        <ul>
-            <li>Monitor and maintain network infrastructure (firewalls, VPN, wireless, cloud) ensuring uptime and performance</li>
-            <li>Proactively detect and respond to security incidents using SIEM tools and threat intelligence</li>
-            <li>Perform regular vulnerability assessments and implement remediation strategies aligned with CIS/NIST frameworks</li>
-            <li>Maintain clear documentation and communicate security findings to technical and non-technical stakeholders</li>
-            <li>Support compliance initiatives (PCI-DSS, regulatory requirements) while enabling operational flexibility</li>
-        </ul>
-        {% elif summary_type == 'it_support' %}
-        <p>Your commitment to {{ company_focus or 'client-centered IT support' }} aligns with my experience providing practical troubleshooting, clear communication, and user-focused technical support in fast-moving environments. {% if proximity_note %} {{ proximity_note }}{% endif %}</p>
-        {% else %}
-        <p>Your company's commitment to {{ company_focus }} directly aligns with my experience in security operations, risk management, and building robust security controls.</p>
-        {% endif %}
-        {% endif %}
-
-        {% if summary_type == 'it_support' %}
-        <p>In my recent work, I have focused heavily on practical, client-facing technical support and operations:</p>
-        {% else %}
-        <p>In my recent work, I have focused heavily on practical, hands-on security operations:</p>
-        {% endif %}
-        <ul>
-            {% for project in projects[:2] %}
-            <li>
-                <strong>
-                    {% if project.url %}
-                    <a href="{{ project.url }}" target="_blank">{{ project.title }}</a>
-                    {% else %}
-                    {{ project.title }}
-                    {% endif %}
-                </strong>: {{ project.bullets[0] }}
-            </li>
-            {% endfor %}
-        </ul>
-
-        {% if summary_type == 'it_support' %}
-        <p>My technical foundation in {{ skills.networking[:3]|join(', ') }} and {{ skills.support_tools_and_platforms[:2]|join(', ') }} helps me resolve issues efficiently while keeping communication clear and supportive for end users.</p>
-        {% else %}
-        <p>My technical foundation in {{ skills.security_tools[:3]|join(', ') }} and {{ skills.programming[:2]|join(', ') }} allows me to bridge the gap between theoretical security concepts and real‑world implementation.</p>
-        {% endif %}
-
-        {% if prospective_outreach %}
-        <p>If helpful, I’m available for a 15–20 minute chat this week or next. Thank you for your time—I’m excited about {{ recipient.company or 'your organization' }}’s mission and how I can contribute.</p>
-        {% else %}
-        <p>I would welcome the opportunity to discuss how my skills and experience align with your needs. Thank you for your time and consideration.</p>
-        {% endif %}
+        <p>My technical foundation in {{ skills.programming[:4]|join(', ') }} supports careful implementation, testing, and documentation. I would welcome the opportunity to discuss how my experience aligns with your needs.</p>
+        <p>Thank you for your time and consideration.</p>{% endif %}
     </div>
-
-    <div class="signature">
-        <p>
-{% endif %}
-Sincerely,</p>
-        <div class="signature-name">{{ basics.name }}</div>
-    </div>
+    <div class="signature">Sincerely,<div class="signature-name">{{ basics.name }}</div></div>
 </body>
 </html>

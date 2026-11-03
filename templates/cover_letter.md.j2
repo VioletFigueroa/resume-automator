@@ -1,6 +1,6 @@
 # Violet Figueroa
-{{ basics.location }} | {{ basics.email }}
-[LinkedIn]({{ basics.linkedin }}) | [GitHub]({{ basics.github }}) | [Portfolio]({{ basics.portfolio }})
+{{ basics.location }} | {{ basics.phone }} | {{ basics.email }}
+[LinkedIn: {{ basics.linkedin|replace('https://', '')|replace('http://', '')|trim('/') }}]({{ basics.linkedin }}) | [GitHub: {{ basics.github|replace('https://', '')|replace('http://', '')|trim('/') }}]({{ basics.github }}) | [Portfolio: {{ basics.portfolio|replace('https://', '')|replace('http://', '')|trim('/') }}]({{ basics.portfolio }})
 
 ---
 
